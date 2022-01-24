@@ -1,18 +1,23 @@
 import './App.css';
+import MainContainer from './components/MainContainer';
+import SideBar from './components/SideBar';
 import { useEffect, useState } from 'react';
-import ExampleComponent from './ExampleComponent';
+// import ExampleComponent from './ExampleComponent';
 
 function App() {
 
   const [videoIds, setVideoIds] = useState([]);
-  
+  const [defaultVideo, setDefaultVideo] = useState({});
   // getVideos() function has been provided to you free of charge.
   // You can log the data to see what it looks like or look at 
   // the react dev tools to observe the stored information.
+
   const getVideos = async () => {
-    const response = await fetch('http://localhost:3001/videos');
+    const response = await fetch('https://youtube-api-smartcoding-2022.herokuapp.com/videos');
     const data = await response.json();
     setVideoIds(data);
+    setDefaultVideo(data.videos[0]);
+ 
   }
   
   // NOTES: A component can have more than one useEffect hook
@@ -20,19 +25,16 @@ function App() {
     getVideos();
   }, []);
 
+
   
   return (
     <div className="App">
-
-      {/* Remove code below, the data of interest uses a `videoId`, iframes a way for Youtube to enable people load and show videos on a website. 
-      Below is an example of an iframe of you on the page. Feel free to open the ExampleComponent. 
-
-      When submitting your project, remove this component and replace it with your solution.
-      */}
-      <ExampleComponent/>
-       
+      <MainContainer defaultVideo={defaultVideo} />
+      <SideBar defaultVideo={defaultVideo} videoList={videoIds}/>
     </div>
   );
 }
 
 export default App;
+
+
