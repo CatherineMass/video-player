@@ -1,9 +1,21 @@
-import React from 'react';
-import heart from '../heart.svg';
+import React, { useState } from 'react';
+import { FaHeart } from 'react-icons/fa';
+// import redHeart from '../redHeart.svg';
+// import heart from '../heart.svg';
 
 const HeartIcon = () => {
+  const [clickedHeart, setClickedHeart] = useState(false);
+  const clickHeart = () => setClickedHeart(!clickedHeart);
+
   return (
-    <img src={heart} alt='heart-favorite' style={{width: '20px', height: '20px'}}/>
+    <button 
+      type='button' 
+      alt='heart-favorite' 
+      style={{paddingTop:'.3em', width: '30px', height: '20px', border:'none', backgroundColor:'white'}}
+      onClick={clickHeart}
+    >
+      {clickedHeart ? <FaHeart color='red'/> : <FaHeart color='grey'/>}
+    </button>
   );
 };
 
