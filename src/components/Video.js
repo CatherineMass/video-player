@@ -4,7 +4,7 @@ const Video = ({ video }) => {
 
     return (
       <iframe 
-        style={{border: '5px solid red', justifyContent: 'center'}}
+        style={{border: '5px solid red', display: 'flex', justifyContent: 'center'}}
         width="500" height="300" 
         src={`https://www.youtube.com/embed/${youtubeVideoId}`} 
         title="YouTube video player" 
