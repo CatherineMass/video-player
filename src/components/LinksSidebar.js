@@ -2,7 +2,7 @@ import React from 'react';
 import BtnAllVideos from './BtnAllVideos';
 import BtnFavorites from './BtnFavorites';
 
-const LinksSidebar = ({ onClickAllVideos }) => {
+const LinksSidebar = ({ onClickAllVideos, onClickFav }) => {
   return (
     <div 
       className='sidebar-links' 
@@ -13,7 +13,7 @@ const LinksSidebar = ({ onClickAllVideos }) => {
         marginTop: '2em'
       }}
     >
-    <BtnFavorites />
+    <BtnFavorites onClickFav={onClickFav} />
     <BtnAllVideos onClickAllVideos={onClickAllVideos} />
   </div>
   );

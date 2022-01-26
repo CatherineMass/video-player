@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaHeart } from 'react-icons/fa';
 // import redHeart from '../redHeart.svg';
 // import heart from '../heart.svg';
 
-const HeartIcon = () => {
-  const [clickedHeart, setClickedHeart] = useState(false);
-  const clickHeart = () => setClickedHeart(!clickedHeart);
+const HeartIcon = ({ setClickedHeart, clickedHeart, videoId }) => {
+  const clickHeart = (videoId) => setClickedHeart(!clickedHeart);
 
   return (
     <button 
