@@ -7,15 +7,17 @@ import logo from '../logo.svg';
 
 const MainContainer = ({ defaultVideo, videoIds }) => {
   let [currentIndex, setCurrentIndex] = useState(0);
+  let currentVideo = videoIds[currentIndex];
 
   // Next Button
-  const nextClick = () => {setCurrentIndex(currentIndex + 1)}
-
+  const nextClick = () => {
+    currentIndex < videoIds.length - 1 ? setCurrentIndex(currentIndex + 1) : alert('This is the end of the playlist!')}
 
   // Previous Button
-  const prevClick = () => {setCurrentIndex(currentIndex - 1)}
-  console.log(currentIndex);
-  let currentVideo = videoIds[currentIndex];
+  const prevClick = () => {
+    currentIndex > 0 ? setCurrentIndex(currentIndex - 1) : alert('No more videos! Try clicking Next instead.')}
+
+
 
   return (
     <div className='main-container'>

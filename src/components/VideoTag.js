@@ -10,10 +10,10 @@ const VideoTag = ({ videoName, videoId, clickedHeart, setClickedHeart }) => {
     <div>
     <BtnVideoName videoName={videoName} videoId={videoId} />
     <button 
+      className='btn-heart'
       type='button' 
       alt='heart-favorite' 
       id={videoId}
-      style={{paddingTop:'.3em', width: '30px', height: '20px', border:'none', backgroundColor:'white'}}
       onClick={clickHeart}
     >
       {clickedHeart ? <FaHeart color='red'/> : <FaHeart color='grey'/>}

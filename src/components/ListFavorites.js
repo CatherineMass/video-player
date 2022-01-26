@@ -1,10 +1,9 @@
 import React from 'react';
-import BtnVideoName from './BtnVideoName';
-import HeartIcon from './HeartIcon';
+
 
 const ListFavorites = ({ clickHeart,clickedHeart }) => {
   return (
-    <div style={{color: 'red', fontWeight:'bold'}}>
+    <div className='list-favorites'>
       <h1>Favorites</h1>
     </div>
   );

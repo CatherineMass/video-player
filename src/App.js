@@ -26,8 +26,6 @@ function App() {
     getVideos();
   }, []);
 
-  // console.log(videoIds);
-
   // const arrayOfVideos = videoIds.videos;
   const arrayOfVideos = [
     {
@@ -76,9 +74,6 @@ function App() {
         }
     }
   ];
-  
-
-  // console.log(videoIds.videos);
   
   return (
     <div className="App">

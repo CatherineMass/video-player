@@ -3,7 +3,7 @@ import VideoTag from './VideoTag';
 
 const ListDefault = ({ defaultVideo, clickHeart,clickedHeart, setClickedHeart }) => {
   return (
-    <div className='list-all-videos'>
+    <div className='list-default'>
     <VideoTag 
       videoName={defaultVideo?.id?.name} 
       videoId={defaultVideo?.id?.videoId} 

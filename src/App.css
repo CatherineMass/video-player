@@ -78,3 +78,24 @@
   border: 2px solid black; 
   text-align: left;
 }
+
+.list-favorites {
+  color: red; 
+  font-weight: bold;
+}
+
+.btn-video-name {
+  width: 16rem; 
+  height: 2em; 
+  border: none; 
+  background-color: white; 
+  text-align: left;
+}
+
+.btn-heart {
+  padding-top: .3em; 
+  width: 30px; 
+  height: 20px; 
+  border:none; 
+  background-color: white;
+}

@@ -6,22 +6,7 @@ import ListDefault from './ListDefault';
 const ListOfVideosSidebar = ({ defaultVideo, videoIds, visibleAll, visibleFav, clickHeart,clickedHeart, setClickedHeart }) => {
   // console.log(arrayOfVideos)
   return (
-    <div       
-      className='list-of-videos-sidebar' 
-      style={{
-        display: 'flex',
-        flexDirection:'column',
-        justifyContent: 'left',
-        position: 'relative', 
-        width: '20em', 
-        height: '70vh', 
-        float: 'right', 
-        marginTop: '1em', 
-        padding: '0 .3em', 
-        border: '2px solid black', 
-        textAlign: 'left'
-      }}
-    >
+    <div className='list-of-videos-sidebar'>
       {visibleAll ? 
         <ListAllVideos 
           videoIds={videoIds} 
