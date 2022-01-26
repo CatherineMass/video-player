@@ -1,8 +1,11 @@
 import React from 'react';
 
-const NextBtn = () => {
+const NextBtn = ({ onNextClick }) => {
   return (
-      <button style={{marginTop: '2em', marginLeft: '8em'}}>Next</button>
+      <button 
+        onClick={onNextClick}
+        className='next-btn'
+      >Next</button>
   );
 };
 

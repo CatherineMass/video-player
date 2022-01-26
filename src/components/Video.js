@@ -1,10 +1,10 @@
 
-const Video = ({ video }) => {
-  const youtubeVideoId = video?.id?.videoId;
+const Video = ({ currentVideo }) => {
+  const youtubeVideoId = currentVideo?.id?.videoId;
 
     return (
       <iframe 
-        style={{border: '5px solid red', display: 'flex', justifyContent: 'center'}}
+        className="video"
         width="500" height="300" 
         src={`https://www.youtube.com/embed/${youtubeVideoId}`} 
         title="YouTube video player" 

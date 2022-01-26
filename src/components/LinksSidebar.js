@@ -4,15 +4,7 @@ import BtnFavorites from './BtnFavorites';
 
 const LinksSidebar = ({ onClickAllVideos, onClickFav }) => {
   return (
-    <div 
-      className='sidebar-links' 
-      style={{
-        display: 'flex', 
-        flexDirection: 'row', 
-        justifyContent:'space-evenly', 
-        marginTop: '2em'
-      }}
-    >
+    <div className='sidebar-links'>
     <BtnFavorites onClickFav={onClickFav} />
     <BtnAllVideos onClickAllVideos={onClickAllVideos} />
   </div>

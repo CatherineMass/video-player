@@ -1,14 +1,14 @@
 import React from 'react';
 import VideoTag from './VideoTag';
 
-const ListAllVideos = ({ arrayOfVideos, clickHeart,clickedHeart, setClickedHeart }) => {
+const ListAllVideos = ({ videoIds, clickHeart,clickedHeart, setClickedHeart }) => {
   // console.log(arrayOfVideos);
   // const videoName = defaultVideo?.id?.name;
   // const videoId = defaultVideo?.id?.videoId;
 
   return (
     <div className='list-all-videos'>
-    { arrayOfVideos.map(video => 
+    { videoIds.map(video => 
       <VideoTag 
         videoName={video?.id?.name} 
         videoId={video?.id?.videoId} 
@@ -16,13 +16,6 @@ const ListAllVideos = ({ arrayOfVideos, clickHeart,clickedHeart, setClickedHeart
         clickedHeart={clickedHeart}
         setClickedHeart={setClickedHeart}
       />) }
-      <VideoTag 
-        videoName={arrayOfVideos[1]?.id?.name} 
-        videoId={arrayOfVideos[1]?.id?.videoId} 
-        key={arrayOfVideos[1]?.id?.videoId} 
-        clickedHeart={clickedHeart}
-        setClickedHeart={setClickedHeart}
-      />
   </div>
   );
 };

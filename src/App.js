@@ -8,6 +8,7 @@ function App() {
 
   const [videoIds, setVideoIds] = useState([]);
   const [defaultVideo, setDefaultVideo] = useState({});
+
   // getVideos() function has been provided to you free of charge.
   // You can log the data to see what it looks like or look at 
   // the react dev tools to observe the stored information.
@@ -24,6 +25,8 @@ function App() {
   useEffect(() => {
     getVideos();
   }, []);
+
+  // console.log(videoIds);
 
   // const arrayOfVideos = videoIds.videos;
   const arrayOfVideos = [
@@ -73,12 +76,14 @@ function App() {
         }
     }
   ];
+  
+
   // console.log(videoIds.videos);
   
   return (
-    <div className="App" style={{display:'flex', flexDirection: 'row'}}>
-      <MainContainer defaultVideo={defaultVideo} />
-      <SideBar defaultVideo={defaultVideo} arrayOfVideos={arrayOfVideos}/>
+    <div className="App">
+      <MainContainer defaultVideo={defaultVideo} videoIds={arrayOfVideos} />
+      <SideBar defaultVideo={defaultVideo} videoIds={arrayOfVideos}/>
     </div>
   );
 }

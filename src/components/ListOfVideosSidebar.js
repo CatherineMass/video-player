@@ -2,9 +2,8 @@ import React from 'react';
 import ListAllVideos from './ListAllVideos';
 import ListFavorites from './ListFavorites';
 import ListDefault from './ListDefault';
-import VideoTag from './VideoTag';
 
-const ListOfVideosSidebar = ({ defaultVideo, arrayOfVideos, visibleAll, visibleFav, clickHeart,clickedHeart, setClickedHeart }) => {
+const ListOfVideosSidebar = ({ defaultVideo, videoIds, visibleAll, visibleFav, clickHeart,clickedHeart, setClickedHeart }) => {
   // console.log(arrayOfVideos)
   return (
     <div       
@@ -25,7 +24,7 @@ const ListOfVideosSidebar = ({ defaultVideo, arrayOfVideos, visibleAll, visibleF
     >
       {visibleAll ? 
         <ListAllVideos 
-          arrayOfVideos={arrayOfVideos} 
+          videoIds={videoIds} 
           setClickedHeart={setClickedHeart}
           clickedHeart={clickedHeart} 
         /> : 

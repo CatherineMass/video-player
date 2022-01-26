@@ -3,7 +3,7 @@ import ListOfVideosSidebar from './ListOfVideosSidebar';
 import LinksSidebar from './LinksSidebar';
 
 
-const SideBar = ({ arrayOfVideos, defaultVideo }) => {
+const SideBar = ({ videoIds, defaultVideo }) => {
   // Button All
   const [visibleAll, setVisibleAll] = useState(false);
   const onClickAllVideos = () => { 
@@ -22,14 +22,11 @@ const SideBar = ({ arrayOfVideos, defaultVideo }) => {
   const [clickedHeart, setClickedHeart] = useState(false);
     
   return (
-    <div 
-      className='side-bar-container' 
-      style={{border: '2px solid black', width: '20vw', height: '90vh', float: 'right', padding: '0 .3em'}}
-    >
+    <div className='side-bar-container'>
       <LinksSidebar onClickAllVideos={onClickAllVideos} onClickFav={onClickFav} />
       <ListOfVideosSidebar 
         defaultVideo={defaultVideo} 
-        arrayOfVideos={arrayOfVideos} 
+        videoIds={videoIds} 
         visibleAll={visibleAll} 
         visibleFav={visibleFav} 
         clickedHeart={clickedHeart}
