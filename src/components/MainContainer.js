@@ -8,21 +8,14 @@ import logo from '../logo.svg';
 const MainContainer = ({ defaultVideo, videoIds }) => {
   let [currentIndex, setCurrentIndex] = useState(0);
 
-  
-  // for (let i=1; i<=3;i++) {
-  //   currentIndex = currentIndex + 1;
-  //   setCurrentIndex(currentIndex);
-  //   console.log(currentIndex); 
-  // }
-  let currentVideo = videoIds[currentIndex];
-
   // Next Button
   const nextClick = () => {setCurrentIndex(currentIndex + 1)}
-    console.log(currentIndex);
 
-    // ==> setCurrentIndex is not a function...
-  //   console.log(currentVideo);
 
+  // Previous Button
+  const prevClick = () => {setCurrentIndex(currentIndex - 1)}
+  console.log(currentIndex);
+  let currentVideo = videoIds[currentIndex];
 
   return (
     <div className='main-container'>
@@ -30,7 +23,7 @@ const MainContainer = ({ defaultVideo, videoIds }) => {
       <SearchBar />
       <div className='video-and-btn-container'>
         <Video currentVideo={currentVideo} />
-        <BtnGroup onNextClick={nextClick} />
+        <BtnGroup onNextClick={nextClick} onPrevClick={prevClick} />
       </div>
     </div>
   );

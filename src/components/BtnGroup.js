@@ -2,10 +2,10 @@ import React from 'react';
 import PreviousBtn from './PreviousBtn';
 import NextBtn from './NextBtn';
 
-const BtnGroup = ({ onNextClick }) => {
+const BtnGroup = ({ onNextClick, onPrevClick }) => {
   return (
       <div className='btn-group'>
-        <PreviousBtn />
+        <PreviousBtn onPrevClick={onPrevClick} />
         <NextBtn onNextClick={onNextClick} />
       </div>
   );
