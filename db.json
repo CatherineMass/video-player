@@ -41,7 +41,8 @@
         "etag": "lw9CuIh2Zla8HqQdq78u4sTaVIk",
         "id": {
         "kind": "youtube#video",
-        "videoId": "pJuq8D1NGJQ"
+        "videoId": "pJuq8D1NGJQ",
+        "name": "encore another video"
         }
     }
     ]

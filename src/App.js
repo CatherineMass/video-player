@@ -25,12 +25,60 @@ function App() {
     getVideos();
   }, []);
 
-
+  // const arrayOfVideos = videoIds.videos;
+  const arrayOfVideos = [
+    {
+        "kind": "youtube#searchResult",
+        "etag": "tamwb8xWafaFK3WYUiRjWVPKOCM",
+        "id": {
+        "kind": "youtube#video",
+        "videoId": "_3ngiSxVCBs",
+        "name": "a nice video"
+        }
+    },
+    {
+        "kind": "youtube#searchResult",
+        "etag": "n9DniKGa4RMTCv9hs3aOcxsSzPY",
+        "id": {
+        "kind": "youtube#video",
+        "videoId": "3zTR4ayDG38",
+        "name": "a cool video"
+        }
+    },
+    {
+        "kind": "youtube#searchResult",
+        "etag": "I_vfY1pIPWvk49XZ_WWkBynL88U",
+        "id": {
+        "kind": "youtube#video",
+        "videoId": "aSJUS2tymZA",
+        "name": "a fantastic video"
+        }
+    },
+    {
+        "kind": "youtube#searchResult",
+        "etag": "fVwysHySGlQcaVwDLkjtP1DDWFk",
+        "id": {
+        "kind": "youtube#video",
+        "videoId": "6zEIvZqs0-Y",
+        "name": "yet another cool video"
+        }
+    },
+    {
+        "kind": "youtube#searchResult",
+        "etag": "lw9CuIh2Zla8HqQdq78u4sTaVIk",
+        "id": {
+        "kind": "youtube#video",
+        "videoId": "pJuq8D1NGJQ",
+        "name": "Encore another video"
+        }
+    }
+  ];
+  // console.log(videoIds.videos);
   
   return (
     <div className="App" style={{display:'flex', flexDirection: 'row'}}>
       <MainContainer defaultVideo={defaultVideo} />
-      <SideBar defaultVideo={defaultVideo} videoList={videoIds}/>
+      <SideBar defaultVideo={defaultVideo} arrayOfVideos={arrayOfVideos}/>
     </div>
   );
 }

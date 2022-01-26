@@ -1,13 +1,15 @@
 import React from 'react';
-import BtnVideoName from './BtnVideoName';
-import HeartIcon from './HeartIcon';
+import ListAllVideos from './ListAllVideos';
+import VideoTag from './VideoTag';
 
-const ListOfVideosSidebar = ({ defaultVideo }) => {
+const ListOfVideosSidebar = ({ defaultVideo, arrayOfVideos, visibleAll }) => {
+  // console.log(arrayOfVideos)
   return (
-    <div 
+    <div       
       className='list-of-videos-sidebar' 
       style={{
         display: 'flex',
+        flexDirection:'column',
         justifyContent: 'left',
         position: 'relative', 
         width: '20em', 
@@ -19,10 +21,10 @@ const ListOfVideosSidebar = ({ defaultVideo }) => {
         textAlign: 'left'
       }}
     >
-      <BtnVideoName defaultVideo={defaultVideo} />
-      <HeartIcon />
+      {visibleAll && <ListAllVideos arrayOfVideos={arrayOfVideos} />}
     </div>
   );
 };
 
 export default ListOfVideosSidebar;
+// <VideoTag defaultVideo={defaultVideo} />

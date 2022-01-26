@@ -2,7 +2,7 @@ import React from 'react';
 import BtnAllVideos from './BtnAllVideos';
 import BtnFavorites from './BtnFavorites';
 
-const LinksSidebar = () => {
+const LinksSidebar = ({ onClickAllVideos }) => {
   return (
     <div 
       className='sidebar-links' 
@@ -14,7 +14,7 @@ const LinksSidebar = () => {
       }}
     >
     <BtnFavorites />
-    <BtnAllVideos />
+    <BtnAllVideos onClickAllVideos={onClickAllVideos} />
   </div>
   );
 };

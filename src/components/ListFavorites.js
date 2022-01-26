@@ -3,7 +3,7 @@ import BtnVideoName from './BtnVideoName';
 import HeartIcon from './HeartIcon';
 
 const ListFavorites = () => {
-  return <div></div>;
+  return <div style={{color: 'red', fontWeight:'bold'}}>Favorites</div>;
 };
 
 export default ListFavorites;
