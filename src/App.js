@@ -27,6 +27,8 @@ function App() {
   }, []);
 
   // const arrayOfVideos = videoIds.videos;
+  
+  // The array below is needed for the code to work. No access to the data.
   const arrayOfVideos = [
     {
         "kind": "youtube#searchResult",
@@ -74,6 +76,12 @@ function App() {
         }
     }
   ];
+
+  // Click link on the sidebar
+  // currentVideo = videoIds.filter(video => video.id.videoId == videoId)
+  // setCurrentIndex(indexOf(currentVideo))
+  // 
+  // ==> need to lift previous and next functions up to update setCurrentIndex. Or UseContext?
   
   return (
     <div className="App">
