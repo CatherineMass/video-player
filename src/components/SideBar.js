@@ -19,14 +19,14 @@ const SideBar = ({ videoIds, defaultVideo }) => {
   }
 
   // Click heart
-  const [clickedHeart, setClickedHeart] = useState(false);
+  const [clickedHeart, setClickedHeart] = useState([]);
   // const clickedVideos = [];
 
-  const clickHeart = (key) => {
-    // clickedkeyeos.push()
-    console.log(key);
-    videoIds.map(video => video?.id?.videoId === key ? setClickedHeart(!clickedHeart) : setClickedHeart(clickedHeart)); 
+  const clickHeart = (id) => {
 
+    clickedHeart.find(video => video?.id?.videoId === id) === undefined ? setClickedHeart(clickedHeart.concat(id)) : setClickedHeart(clickedHeart.filter(video => video?.id?.videoId !== id)); 
+    console.log(clickedHeart);
+    // console.log(setClickedHeart);
   };
   
     
