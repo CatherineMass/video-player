@@ -3,7 +3,7 @@ import ListAllVideos from './ListAllVideos';
 import ListFavorites from './ListFavorites';
 import ListDefault from './ListDefault';
 
-const ListOfVideosSidebar = ({ defaultVideo, videoIds, visibleAll, visibleFav, clickHeart,clickedHeart, setClickedHeart }) => {
+const ListOfVideosSidebar = ({ defaultVideo, videoIds, visibleAll, visibleFav, clickHeart, clickedHeart, setClickedHeart }) => {
 
   return (
     <div className='list-of-videos-sidebar'>
@@ -12,6 +12,7 @@ const ListOfVideosSidebar = ({ defaultVideo, videoIds, visibleAll, visibleFav, c
           videoIds={videoIds} 
           setClickedHeart={setClickedHeart}
           clickedHeart={clickedHeart} 
+          clickHeart={clickHeart}
         /> : 
         visibleFav ? 
           <ListFavorites 
