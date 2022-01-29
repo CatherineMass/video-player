@@ -20,6 +20,11 @@ const SideBar = ({ videoIds, defaultVideo }) => {
 
   // Click heart
   const [clickedHeart, setClickedHeart] = useState(false);
+  const clickHeart = (id) => {
+    videoIds.map(video => video?.id?.videoId === id ? setClickedHeart(!clickedHeart) : setClickedHeart(clickedHeart)); 
+    console.log(clickedHeart);
+  };
+  
     
   return (
     <div className='side-bar-container'>
@@ -29,6 +34,7 @@ const SideBar = ({ videoIds, defaultVideo }) => {
         videoIds={videoIds} 
         visibleAll={visibleAll} 
         visibleFav={visibleFav} 
+        clickHeart={clickHeart}
         clickedHeart={clickedHeart}
         setClickedHeart={setClickedHeart}
       />

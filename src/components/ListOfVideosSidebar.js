@@ -4,7 +4,7 @@ import ListFavorites from './ListFavorites';
 import ListDefault from './ListDefault';
 
 const ListOfVideosSidebar = ({ defaultVideo, videoIds, visibleAll, visibleFav, clickHeart,clickedHeart, setClickedHeart }) => {
-  // console.log(arrayOfVideos)
+
   return (
     <div className='list-of-videos-sidebar'>
       {visibleAll ? 

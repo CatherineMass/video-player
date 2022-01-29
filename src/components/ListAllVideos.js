@@ -1,7 +1,8 @@
 import React from 'react';
 import VideoTag from './VideoTag';
 
-const ListAllVideos = ({ videoIds, clickHeart,clickedHeart, setClickedHeart }) => {
+const ListAllVideos = ({ videoIds, clickedHeart, clickHeart, setClickedHeart }) => {
+  
 
   return (
     <div className='list-all-videos'>
@@ -9,7 +10,8 @@ const ListAllVideos = ({ videoIds, clickHeart,clickedHeart, setClickedHeart }) =
       <VideoTag 
         videoName={video?.id?.name} 
         videoId={video?.id?.videoId} 
-        key={video?.id?.videoId} 
+        key={video?.id?.videoId}
+        clickHeart={clickHeart} 
         clickedHeart={clickedHeart}
         setClickedHeart={setClickedHeart}
       />) }
