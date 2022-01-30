@@ -2,7 +2,7 @@ import BtnVideoName from './BtnVideoName';
 import { FaHeart } from 'react-icons/fa';
 
 
-const VideoTag = ({ videoName, videoId, clickedHeart, setClickedHeart, clickHeart, key }) => {
+const VideoTag = ({ videoName, videoId, clickedHeart, setClickedHeart, clickHeart }) => {
 
 
   return (

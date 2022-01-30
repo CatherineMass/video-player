@@ -20,13 +20,26 @@ const SideBar = ({ videoIds, defaultVideo }) => {
 
   // Click heart
   const [clickedHeart, setClickedHeart] = useState([]);
-  // const clickedVideos = [];
+  const [clickedVideos, setClickedVideos] = useState(["_3ngiSxVCBs", "3zTR4ayDG38"]);
 
   const clickHeart = (id) => {
+    // console.log(id);
+    // videoIds.map(video => console.log(video.id.videoId));
 
-    clickedHeart.find(video => video?.id?.videoId === id) === undefined ? setClickedHeart(clickedHeart.concat(id)) : setClickedHeart(clickedHeart.filter(video => video?.id?.videoId !== id)); 
-    console.log(clickedHeart);
-    // console.log(setClickedHeart);
+    // clickedHeart.map(id => clickedHeart.includes(id) === false ? setClickedHeart(clickedHeart.push(id)) : setClickedHeart(clickedHeart.filter(video => video.id.videoId !== id))); 
+
+    // clickedHeart.map(videoId => videoId.includes(id) ? console.log(clickedHeart.indexOf(videoId)) : clickedHeart.concat(id)); 
+    // console.log(clickedHeart);
+    // => []
+
+    clickedVideos.forEach(videoId => videoId.includes(id) ? console.log(clickedVideos.indexOf(videoId)) : setClickedVideos(clickedVideos.concat(id))); 
+    console.log(clickedVideos);
+    // adds even the ones already in it. Plus delay (get the latest clicked only after clicking another time).
+
+    // clickedHeart.indexOf(id) < 0 ? setClickedHeart(clickedHeart.push(id)) : setClickedHeart(clickedHeart.filter(video => video.id.videoId !== id));
+    // console.log(clickedHeart); 
+    // => also just first time and not second.
+
   };
   
     
