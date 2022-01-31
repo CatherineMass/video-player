@@ -26,12 +26,14 @@ const ListOfVideosSidebar = ({
           videoIds={videoIds}
           clickedVideos={clickedVideos}
           favVideos={favVideos}
+          clickHeart={clickHeart}
         />
       ) : (
         <ListDefault
           defaultVideo={defaultVideo}
           videoIds={videoIds}
           clickedVideos={clickedVideos}
+          clickHeart={clickHeart}
         />
       )}
     </div>

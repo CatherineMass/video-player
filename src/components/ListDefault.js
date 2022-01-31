@@ -2,7 +2,7 @@
 import React from 'react';
 import VideoTag from './VideoTag';
 
-const ListDefault = ({ defaultVideo, clickedVideos, setClickedVideos }) => {
+const ListDefault = ({ defaultVideo, clickedVideos, clickHeart }) => {
   return (
     <div className='list-default'>
     <VideoTag 
@@ -10,7 +10,7 @@ const ListDefault = ({ defaultVideo, clickedVideos, setClickedVideos }) => {
       videoId={defaultVideo?.id?.videoId} 
       key={defaultVideo?.id?.videoId} 
       clickedVideos={clickedVideos}
-      setClickedVideos={setClickedVideos}
+      clickHeart={clickHeart}
     />
   </div>
   );

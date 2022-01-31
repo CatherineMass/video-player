@@ -29,15 +29,15 @@ const SideBar = ({ videoIds, defaultVideo }) => {
       setClickedVideos([...clickedVideos, id]);
     }
 
-     // Put favorite videos in an array
-     const fav = videoIds.filter(video => video.id.videoId === id);
-     setFavVideos([...favVideos, ...fav])
-     console.log(favVideos);
+    // Put favorite videos in an array
+
+    const fav = videoIds.filter((video) => video.id.videoId === id);
+    if (favVideos.includes(fav[0])) {
+      setFavVideos(favVideos.filter((video) => video !== fav[0]));
+    } else {
+      setFavVideos([...favVideos, ...fav]);
+    }
   };
-
-  
-
-  
 
   return (
     <div className="side-bar-container">
