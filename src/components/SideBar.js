@@ -1,66 +1,58 @@
-import React, { useState } from 'react';
-import ListOfVideosSidebar from './ListOfVideosSidebar';
-import LinksSidebar from './LinksSidebar';
-
+/* eslint-disable react/prop-types */
+import React, { useState } from "react";
+import ListOfVideosSidebar from "./ListOfVideosSidebar";
+import LinksSidebar from "./LinksSidebar";
 
 const SideBar = ({ videoIds, defaultVideo }) => {
   // Button All
   const [visibleAll, setVisibleAll] = useState(false);
-  const onClickAllVideos = () => { 
+  const onClickAllVideos = () => {
     setVisibleAll(!visibleAll);
     setVisibleFav(false);
-  }
+  };
 
   // Button Favorites
   const [visibleFav, setVisibleFav] = useState(false);
-  const onClickFav = () => { 
+  const onClickFav = () => {
     setVisibleFav(!visibleFav);
-    setVisibleAll(false); 
-  }
+    setVisibleAll(false);
+  };
 
   // Click heart
-  const [clickedHeart, setClickedHeart] = useState([]);
-  const [clickedVideos, setClickedVideos] = useState(["_3ngiSxVCBs", "3zTR4ayDG38"]);
+  const [clickedVideos, setClickedVideos] = useState([]);
+  const [favVideos, setFavVideos] = useState([]);
 
   const clickHeart = (id) => {
-    // console.log(id);
-    // videoIds.map(video => console.log(video.id.videoId));
+    if (clickedVideos.includes(id)) {
+      setClickedVideos(clickedVideos.filter((videoId) => videoId !== id));
+    } else {
+      setClickedVideos([...clickedVideos, id]);
+    }
 
-    // clickedHeart.map(id => clickedHeart.includes(id) === false ? setClickedHeart(clickedHeart.push(id)) : setClickedHeart(clickedHeart.filter(video => video.id.videoId !== id))); 
-
-    // clickedHeart.map(videoId => videoId.includes(id) ? console.log(clickedHeart.indexOf(videoId)) : clickedHeart.concat(id)); 
-    // console.log(clickedHeart);
-    // => []
-
-    clickedVideos.forEach(videoId => 
-      {if (videoId.includes(id)) {
-        console.log(videoId);
-        console.log(id);
-        setClickedVideos(clickedVideos.filter(videoId => videoId !== id)); // doesn't filter.
-      } else { 
-        setClickedVideos([...clickedVideos, id])
-      }}); 
-    console.log(clickedVideos);
-    // adds even the ones already in it.
-
-    // clickedHeart.indexOf(id) < 0 ? setClickedHeart(clickedHeart.push(id)) : setClickedHeart(clickedHeart.filter(video => video.id.videoId !== id));
-    // console.log(clickedHeart); 
-    // => also just first time and not second.
-
+     // Put favorite videos in an array
+     const fav = videoIds.filter(video => video.id.videoId === id);
+     setFavVideos([...favVideos, ...fav])
+     console.log(favVideos);
   };
+
   
-    
+
+  
+
   return (
-    <div className='side-bar-container'>
-      <LinksSidebar onClickAllVideos={onClickAllVideos} onClickFav={onClickFav} />
-      <ListOfVideosSidebar 
-        defaultVideo={defaultVideo} 
-        videoIds={videoIds} 
-        visibleAll={visibleAll} 
-        visibleFav={visibleFav} 
+    <div className="side-bar-container">
+      <LinksSidebar
+        onClickAllVideos={onClickAllVideos}
+        onClickFav={onClickFav}
+      />
+      <ListOfVideosSidebar
+        defaultVideo={defaultVideo}
+        videoIds={videoIds}
+        visibleAll={visibleAll}
+        visibleFav={visibleFav}
         clickHeart={clickHeart}
-        clickedHeart={clickedHeart}
-        setClickedHeart={setClickedHeart}
+        clickedVideos={clickedVideos}
+        favVideos={favVideos}
       />
     </div>
   );

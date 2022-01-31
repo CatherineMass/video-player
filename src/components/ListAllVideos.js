@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import VideoTag from './VideoTag';
 
-const ListAllVideos = ({ videoIds, clickedHeart, clickHeart, setClickedHeart }) => {
+const ListAllVideos = ({ videoIds, clickedVideos, clickHeart }) => {
   
 
   return (
@@ -12,8 +13,7 @@ const ListAllVideos = ({ videoIds, clickedHeart, clickHeart, setClickedHeart }) 
         videoId={video?.id?.videoId} 
         key={video?.id?.videoId}
         clickHeart={clickHeart} 
-        clickedHeart={clickedHeart}
-        setClickedHeart={setClickedHeart}
+        clickedVideos={clickedVideos}
       />) }
   </div>
   );

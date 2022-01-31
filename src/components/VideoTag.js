@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
+import React from 'react';
 import BtnVideoName from './BtnVideoName';
 import { FaHeart } from 'react-icons/fa';
 
 
-const VideoTag = ({ videoName, videoId, clickedHeart, setClickedHeart, clickHeart }) => {
+const VideoTag = ({ videoName, videoId, clickedVideos, clickHeart }) => {
 
 
   return (
@@ -15,7 +17,7 @@ const VideoTag = ({ videoName, videoId, clickedHeart, setClickedHeart, clickHear
       id= {videoId}
       onClick={() => clickHeart(videoId)}
     >
-      {clickedHeart ? <FaHeart color='red'/> : <FaHeart color='grey'/>}
+      {clickedVideos.includes(videoId) ? <FaHeart color='red'/> : <FaHeart color='grey'/>}
     </button>
   </div>
   );
