@@ -32,9 +32,16 @@ const SideBar = ({ videoIds, defaultVideo }) => {
     // console.log(clickedHeart);
     // => []
 
-    clickedVideos.forEach(videoId => videoId.includes(id) ? console.log(clickedVideos.indexOf(videoId)) : setClickedVideos(clickedVideos.concat(id))); 
+    clickedVideos.forEach(videoId => 
+      {if (videoId.includes(id)) {
+        console.log(videoId);
+        console.log(id);
+        setClickedVideos(clickedVideos.filter(videoId => videoId !== id)); // doesn't filter.
+      } else { 
+        setClickedVideos([...clickedVideos, id])
+      }}); 
     console.log(clickedVideos);
-    // adds even the ones already in it. Plus delay (get the latest clicked only after clicking another time).
+    // adds even the ones already in it.
 
     // clickedHeart.indexOf(id) < 0 ? setClickedHeart(clickedHeart.push(id)) : setClickedHeart(clickedHeart.filter(video => video.id.videoId !== id));
     // console.log(clickedHeart); 
