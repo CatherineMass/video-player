@@ -21,11 +21,14 @@ const SideBar = ({ videoIds, defaultVideo }) => {
   // Click heart function
     // Array of ids
   const [favoritesVideos, setFavoritesVideos] = useState(() => {
-    const localFavorites = localStorage.getItem('favoriteId');
-    return localFavorites ? JSON.parse(localFavorites) : [];
+    const localFavoritesId = localStorage.getItem('favoriteId');
+    return localFavoritesId ? JSON.parse(localFavoritesId) : [];
   });
     // Array of objects
-  const [favVideos, setFavVideos] = useState([]);
+  const [favVideos, setFavVideos] = useState(() => {
+    const localFavorites = localStorage.getItem('favoriteObj');
+    return localFavorites ? JSON.parse(localFavorites) : [];
+  });
 
   const clickHeart = (id) => {
     if (favoritesVideos.includes(id)) {
@@ -42,6 +45,10 @@ const SideBar = ({ videoIds, defaultVideo }) => {
       setFavVideos([...favVideos, fav]);
     }
   };
+  // Store favorite videos object in local storage
+  useEffect(() => {
+    localStorage.setItem('favoriteObj', JSON.stringify(favVideos))
+  }, [favVideos]);
 
   // Store favorite videos' ids in local storage
   useEffect(() => {

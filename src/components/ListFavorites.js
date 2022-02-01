@@ -4,7 +4,6 @@ import VideoTag from "./VideoTag";
 
 const ListFavorites = ({ clickHeart, favoritesVideos, favVideos }) => {
 
-  console.log(favVideos);
   return (
     <div className="list-favorites">
       {favVideos.map(video => (
