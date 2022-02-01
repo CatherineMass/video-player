@@ -4,7 +4,7 @@ import BtnVideoName from './BtnVideoName';
 import { FaHeart } from 'react-icons/fa';
 
 
-const VideoTag = ({ videoName, videoId, clickedVideos, clickHeart }) => {
+const VideoTag = ({ videoName, videoId, favoritesVideos, clickHeart }) => {
 
 
   return (
@@ -17,7 +17,7 @@ const VideoTag = ({ videoName, videoId, clickedVideos, clickHeart }) => {
       id= {videoId}
       onClick={() => clickHeart(videoId)}
     >
-      {clickedVideos.includes(videoId) ? <FaHeart color='red'/> : <FaHeart color='grey'/>}
+      {favoritesVideos.includes(videoId) ? <FaHeart color='red'/> : <FaHeart color='grey'/>}
     </button>
   </div>
   );

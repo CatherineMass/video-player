@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ListOfVideosSidebar from "./ListOfVideosSidebar";
 import LinksSidebar from "./LinksSidebar";
 
@@ -19,25 +19,32 @@ const SideBar = ({ videoIds, defaultVideo }) => {
   };
 
   // Click heart
-  const [clickedVideos, setClickedVideos] = useState([]);
-  const [favVideos, setFavVideos] = useState([]);
+  const [favoritesVideos, setFavoritesVideos] = useState([]);
+  const [favVideos, setFavVideos] = useState(() => {
+    const localFavorites = localStorage.getItem('favorites');
+    return localFavorites ? JSON.parse(localFavorites) : [];
+  });
 
   const clickHeart = (id) => {
-    if (clickedVideos.includes(id)) {
-      setClickedVideos(clickedVideos.filter((videoId) => videoId !== id));
+    if (favoritesVideos.includes(id)) {
+      setFavoritesVideos(favoritesVideos.filter((videoId) => videoId !== id));
     } else {
-      setClickedVideos([...clickedVideos, id]);
+      setFavoritesVideos([...favoritesVideos, id]);
     }
 
     // Put favorite videos in an array
-
-    const fav = videoIds.filter((video) => video.id.videoId === id);
-    if (favVideos.includes(fav[0])) {
-      setFavVideos(favVideos.filter((video) => video !== fav[0]));
+    const fav = videoIds.find((video) => video.id.videoId === id);
+    if (favVideos.includes(fav)) {
+      setFavVideos(favVideos.filter((video) => video !== fav));
     } else {
-      setFavVideos([...favVideos, ...fav]);
+      setFavVideos([...favVideos, fav]);
     }
   };
+
+  // Store favorite videos in local storage
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favVideos))
+  }, [favVideos]);
 
   return (
     <div className="side-bar-container">
@@ -51,7 +58,7 @@ const SideBar = ({ videoIds, defaultVideo }) => {
         visibleAll={visibleAll}
         visibleFav={visibleFav}
         clickHeart={clickHeart}
-        clickedVideos={clickedVideos}
+        favoritesVideos={favoritesVideos}
         favVideos={favVideos}
       />
     </div>

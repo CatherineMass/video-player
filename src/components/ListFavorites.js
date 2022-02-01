@@ -2,7 +2,7 @@
 import React from "react";
 import VideoTag from "./VideoTag";
 
-const ListFavorites = ({ clickHeart, clickedVideos, favVideos }) => {
+const ListFavorites = ({ clickHeart, favoritesVideos, favVideos }) => {
 
   console.log(favVideos);
   return (
@@ -13,7 +13,7 @@ const ListFavorites = ({ clickHeart, clickedVideos, favVideos }) => {
           videoId={video?.id?.videoId}
           key={video?.id?.videoId}
           clickHeart={clickHeart}
-          clickedVideos={clickedVideos}
+          favoritesVideos={favoritesVideos}
         />
       ))}
     </div>

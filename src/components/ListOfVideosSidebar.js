@@ -10,7 +10,7 @@ const ListOfVideosSidebar = ({
   visibleAll,
   visibleFav,
   clickHeart,
-  clickedVideos,
+  favoritesVideos,
   favVideos,
 }) => {
   return (
@@ -18,13 +18,13 @@ const ListOfVideosSidebar = ({
       {visibleAll ? (
         <ListAllVideos
           videoIds={videoIds}
-          clickedVideos={clickedVideos}
+          favoritesVideos={favoritesVideos}
           clickHeart={clickHeart}
         />
       ) : visibleFav ? (
         <ListFavorites
           videoIds={videoIds}
-          clickedVideos={clickedVideos}
+          favoritesVideos={favoritesVideos}
           favVideos={favVideos}
           clickHeart={clickHeart}
         />
@@ -32,7 +32,7 @@ const ListOfVideosSidebar = ({
         <ListDefault
           defaultVideo={defaultVideo}
           videoIds={videoIds}
-          clickedVideos={clickedVideos}
+          favoritesVideos={favoritesVideos}
           clickHeart={clickHeart}
         />
       )}
