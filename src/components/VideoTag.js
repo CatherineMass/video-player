@@ -6,6 +6,11 @@ import { FaHeart } from 'react-icons/fa';
 
 const VideoTag = ({ videoName, videoId, favoritesVideos, clickHeart }) => {
 
+  // Get array from localStorage
+  const localFavorites = localStorage.getItem('favorites');
+  JSON.parse(localFavorites);
+  console.log(localFavorites);
+  
 
   return (
     <div>

@@ -12,6 +12,7 @@ const ListOfVideosSidebar = ({
   clickHeart,
   favoritesVideos,
   favVideos,
+  heartColor,
 }) => {
   return (
     <div className="list-of-videos-sidebar">
