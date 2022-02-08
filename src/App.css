@@ -29,8 +29,27 @@
   display: flex;
 }
 
-.input-search-bar {
+.search-bar__input {
+  height: 30px;
+}
+
+.search-bar__drop-down {
+  display: flex;
+  flex-direction: column;
   margin-left: 5em;
+  width: 400px;
+}
+
+.drop-down__list {
+  width: 400px;
+  height: 200px;
+  border: 2px solid black;
+  color: black;
+  background: none;
+}
+
+.search-button {
+  height: 35px;
 }
 
 .video {

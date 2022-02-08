@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 // Putting it on line didn't work, got error saying return statement is missing.
