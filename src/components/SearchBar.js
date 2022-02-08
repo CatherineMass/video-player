@@ -1,8 +1,13 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState } from "react";
 import DropDown from "./DropDown";
 
 const SearchBar = ({ videoIds }) => {
+
+  const [focus, setFocus] = useState(false);
+  const handleDropMenuOn = (e) => {e.target === "input.search-bar__input" ? setFocus(true) : setFocus(false)};
+  // {e.target === input.search-bar__input ? setFocus(true) : setFocus(false)}
+  // const handleDropMenuOff = () => setFocus(false);
 
   const options = videoIds.map((video) => {
     const container = {};
@@ -20,9 +25,10 @@ const SearchBar = ({ videoIds }) => {
           options={options}
           className="search-bar__input"
           placeholder="Search a video"
-          // onChange={() => handleSearch())}
+          onClick={(e) => handleDropMenuOn(e)}
+          // onUnfocus={handleDropMenuOff}
         />
-        <DropDown options={options} />
+        {focus ? <DropDown options={options} /> : null}
       </div>
       <button className="search-button" type="button">
         Search
