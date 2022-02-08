@@ -31,6 +31,7 @@
 
 .search-bar__input {
   height: 30px;
+  font-size: 1.2em;
 }
 
 .search-bar__drop-down {
@@ -46,10 +47,22 @@
   border: 2px solid black;
   color: black;
   background: none;
+  display: flex;
+  flex-direction: column;
 }
+
+.drop-down__btn-video {
+  text-align: left;
+  text-transform: capitalize;
+  background-color: white;
+  border: none;
+  padding: .3em;
+  font-size: 1.2em;
+} 
 
 .search-button {
   height: 35px;
+  font-size: 1.2em;
 }
 
 .video {
@@ -60,11 +73,13 @@
 .next-btn {
   margin-top: 2em; 
   margin-left: 8em;
+  font-size: 1.2em;
 }
 
 .previous-btn {
   margin-top: 2em;
   margin-right: 8em;
+  font-size: 1.2em;
 }
 
 .side-bar-container {
@@ -86,8 +101,8 @@
   flex-direction: column;
   justify-content: left;
   position: relative; 
-  width: 20em; 
-  height: 70vh; 
+  width: 24em; 
+  height: 80vh; 
   float: right; 
   margin-top: 1em; 
   padding: 0 .3em; 
@@ -100,12 +115,22 @@
   font-weight: bold;
 }
 
+.btn-favorites {
+  font-size: 1.2em;
+  background-color: white;
+}
+
+.btn-all-videos {
+  font-size: 1.2em;
+}
+
 .btn-video-name {
-  width: 16rem; 
+  width: 22rem; 
   height: 2em; 
   border: none; 
   background-color: white; 
   text-align: left;
+  font-size: 1.2em;
 }
 
 .btn-heart {

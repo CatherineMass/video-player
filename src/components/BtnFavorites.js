@@ -6,7 +6,6 @@ const BtnFavorites = ({ onClickFav }) => {
     <button 
     className="btn-favorites" 
     type="button" 
-    style={{width: '7rem', height: '2em', backgroundColor: 'white', textAlign: 'center'}}
     onClick={onClickFav}
   >
     My Favorites
