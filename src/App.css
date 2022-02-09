@@ -69,6 +69,10 @@
   font-size: 1.2em;
 } 
 
+.drop-down__btn-video:hover {
+  background-color: lightgrey;
+}
+
 .search-button {
   height: 35px;
   font-size: 1.2em;
