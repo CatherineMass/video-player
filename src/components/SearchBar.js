@@ -1,13 +1,9 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
-import DropDown from "./DropDown";
+import React from "react";
+// import DropDown from "./DropDown";
+import { BiSearchAlt } from "react-icons/bi";
 
 const SearchBar = ({ videoIds }) => {
-
-  const [focus, setFocus] = useState(false);
-  const handleDropMenuOn = (e) => {e.target === "input.search-bar__input" ? setFocus(true) : setFocus(false)};
-  // {e.target === input.search-bar__input ? setFocus(true) : setFocus(false)}
-  // const handleDropMenuOff = () => setFocus(false);
 
   const options = videoIds.map((video) => {
     const container = {};
@@ -20,20 +16,25 @@ const SearchBar = ({ videoIds }) => {
 
   return (
     <div className="search-bar">
-      <div className="search-bar__drop-down">
+      <div className="search-bar__input">
         <input
-          options={options}
-          className="search-bar__input"
+          type = "search"
+          name = "q"
+          className="search-bar__input-field"
           placeholder="Search a video"
-          onClick={(e) => handleDropMenuOn(e)}
-          // onUnfocus={handleDropMenuOff}
+          aria-label="Search a video"
         />
-        {focus ? <DropDown options={options} /> : null}
-      </div>
-      <button className="search-button" type="button">
-        Search
-      </button>
-      
+        <button className="search-button" type="button">
+          <BiSearchAlt />
+        </button>
+      </div>      
+      <div className="drop-down__list">
+      {options.map((option) => 
+        <button key={option.id} className="drop-down__btn-video">
+          {option.name}
+        </button>
+      )}
+    </div>
     </div>
   );
 };
