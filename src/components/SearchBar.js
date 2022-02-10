@@ -1,16 +1,9 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React from "react";
 import { BiSearchAlt } from "react-icons/bi";
 
-const SearchBar = ({ videoIds }) => {
-  const [filteredList, setFilteredList] = useState([]);
+const SearchBar = ({ videoIds, handleFilter, filteredList }) => {
 
-  const handleFilter = (e) => {
-    const searchWord = e.target.value;
-    const newFilter = videoIds.filter((video) => video?.id?.name.toLowerCase().includes(searchWord.toLowerCase()));
-
-    searchWord === "" ? setFilteredList([]) : setFilteredList(newFilter);
-  };
 
   return (
     <div className="search-bar">

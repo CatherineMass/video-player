@@ -84,9 +84,18 @@ function App() {
   // 
   // ==> need to lift previous and next functions up to update setCurrentIndex. Or UseContext?
   
+  const [filteredList, setFilteredList] = useState([]);
+
+  const handleFilter = (e) => {
+    const searchWord = e.target.value;
+    const newFilter = videoIds.filter((video) => video?.id?.name.toLowerCase().includes(searchWord.toLowerCase()));
+
+    searchWord === "" ? setFilteredList([]) : setFilteredList(newFilter);
+  };
+
   return (
     <div className="App">
-      <MainContainer defaultVideo={defaultVideo} videoIds={arrayOfVideos} />
+      <MainContainer defaultVideo={defaultVideo} videoIds={arrayOfVideos} handleFilter={handleFilter} filteredList={filteredList} />
       <SideBar defaultVideo={defaultVideo} videoIds={arrayOfVideos}/>
     </div>
   );
