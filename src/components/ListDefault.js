@@ -1,18 +1,26 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
-import VideoTag from './VideoTag';
+import React from "react";
+import VideoTag from "./VideoTag";
 
-const ListDefault = ({ defaultVideo, favoritesVideos, clickHeart }) => {
+const ListDefault = ({
+  defaultVideo,
+  listDefault,
+  favoritesVideos,
+  clickHeart,
+}) => {
   return (
-    <div className='list-default'>
-    <VideoTag 
-      videoName={defaultVideo?.id?.name} 
-      videoId={defaultVideo?.id?.videoId} 
-      key={defaultVideo?.id?.videoId} 
-      favoritesVideos={favoritesVideos}
-      clickHeart={clickHeart}
-    />
-  </div>
+    <div className="list-default">
+      {listDefault.length !== 0 &&
+        listDefault.map((video) => (
+          <VideoTag
+            videoName={video?.id?.name}
+            videoId={video?.id?.videoId}
+            key={video?.id?.videoId}
+            favoritesVideos={favoritesVideos}
+            clickHeart={clickHeart}
+          />
+        ))}
+    </div>
   );
 };
 

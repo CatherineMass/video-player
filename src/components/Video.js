@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
+
 const Video = ({ currentVideo }) => {
   const youtubeVideoId = currentVideo?.id?.videoId;
 

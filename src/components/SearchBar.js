@@ -2,7 +2,7 @@
 import React from "react";
 import { BiSearchAlt } from "react-icons/bi";
 
-const SearchBar = ({ videoIds, handleFilter, filteredList }) => {
+const SearchBar = ({ handleFilter, filteredList, handleSearch, placeholder }) => {
 
 
   return (
@@ -11,7 +11,7 @@ const SearchBar = ({ videoIds, handleFilter, filteredList }) => {
         <input
           type="text"
           className="search-bar__input-field"
-          placeholder="Search a video"
+          placeholder={placeholder}
           aria-label="Search a video"
           onChange={handleFilter}
         />
@@ -22,7 +22,7 @@ const SearchBar = ({ videoIds, handleFilter, filteredList }) => {
       {filteredList.length !== 0 && (
         <div className="drop-down__list">
           {filteredList.slice(0, 5).map((video) => (
-            <button key={video?.id?.videoId} className="drop-down__btn-video">
+            <button key={video?.id?.videoId} className="drop-down__btn-video" onClick={() => handleSearch(video.id.videoId, video.id.name)}>
               {video?.id?.name}
             </button>
           ))}

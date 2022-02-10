@@ -12,6 +12,7 @@ const ListOfVideosSidebar = ({
   clickHeart,
   favoritesVideos,
   favVideos,
+  listDefault
 }) => {
   return (
     <div className="list-of-videos-sidebar">
@@ -31,6 +32,7 @@ const ListOfVideosSidebar = ({
       ) : (
         <ListDefault
           defaultVideo={defaultVideo}
+          listDefault={listDefault}
           videoIds={videoIds}
           favoritesVideos={favoritesVideos}
           clickHeart={clickHeart}
