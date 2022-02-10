@@ -3,10 +3,10 @@ import React from "react";
 import VideoTag from "./VideoTag";
 
 const ListDefault = ({
-  defaultVideo,
   listDefault,
   favoritesVideos,
   clickHeart,
+  handleSidebarClick
 }) => {
   return (
     <div className="list-default">
@@ -18,6 +18,7 @@ const ListDefault = ({
             key={video?.id?.videoId}
             favoritesVideos={favoritesVideos}
             clickHeart={clickHeart}
+            handleSidebarClick={handleSidebarClick}
           />
         ))}
     </div>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import ListOfVideosSidebar from "./ListOfVideosSidebar";
 import LinksSidebar from "./LinksSidebar";
 
-const SideBar = ({ videoIds, defaultVideo, listDefault }) => {
+const SideBar = ({ videoIds, defaultVideo, listDefault, handleSidebarClick }) => {
   // Button All
   const [visibleAll, setVisibleAll] = useState(false);
   const onClickAllVideos = () => {
@@ -78,6 +78,7 @@ const SideBar = ({ videoIds, defaultVideo, listDefault }) => {
         clickHeart={clickHeart}
         favoritesVideos={favoritesVideos}
         favVideos={favVideos}
+        handleSidebarClick={handleSidebarClick}
       />
     </div>
   );

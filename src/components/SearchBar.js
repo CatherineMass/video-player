@@ -22,7 +22,7 @@ const SearchBar = ({ handleFilter, filteredList, handleSearch, placeholder }) =>
       {filteredList.length !== 0 && (
         <div className="drop-down__list">
           {filteredList.slice(0, 5).map((video) => (
-            <button key={video?.id?.videoId} className="drop-down__btn-video" onClick={() => handleSearch(video.id.videoId, video.id.name)}>
+            <button key={video?.id?.videoId} className="drop-down__btn-video" onClick={() => handleSearch(video.id.videoId)}>
               {video?.id?.name}
             </button>
           ))}

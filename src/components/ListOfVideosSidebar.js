@@ -12,7 +12,8 @@ const ListOfVideosSidebar = ({
   clickHeart,
   favoritesVideos,
   favVideos,
-  listDefault
+  listDefault,
+  handleSidebarClick
 }) => {
   return (
     <div className="list-of-videos-sidebar">
@@ -21,6 +22,7 @@ const ListOfVideosSidebar = ({
           videoIds={videoIds}
           favoritesVideos={favoritesVideos}
           clickHeart={clickHeart}
+          handleSidebarClick={handleSidebarClick}
         />
       ) : visibleFav ? (
         <ListFavorites
@@ -28,6 +30,7 @@ const ListOfVideosSidebar = ({
           favoritesVideos={favoritesVideos}
           favVideos={favVideos}
           clickHeart={clickHeart}
+          handleSidebarClick={handleSidebarClick}
         />
       ) : (
         <ListDefault
@@ -36,6 +39,7 @@ const ListOfVideosSidebar = ({
           videoIds={videoIds}
           favoritesVideos={favoritesVideos}
           clickHeart={clickHeart}
+          handleSidebarClick={handleSidebarClick}
         />
       )}
     </div>

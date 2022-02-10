@@ -121,10 +121,15 @@ function App() {
   // Sidebar default list:
   const [listDefault, setListDefault] = useState([]);
 
-  const handleSearch = (id, name) => {
+  const handleSearch = (id) => {
     const indexVideoSearched = arrayOfVideos.findIndex(video => video?.id?.videoId === id);
     setCurrentIndex(indexVideoSearched);
     setListDefault([...listDefault, currentVideo]);
+  };
+
+  const handleSidebarClick = (id) => {
+    const indexVideoSearched = arrayOfVideos.findIndex(video => video?.id?.videoId === id);
+    setCurrentIndex(indexVideoSearched);
   };
 
   return (
@@ -141,7 +146,7 @@ function App() {
         nextClick={nextClick}
         prevClick={prevClick}
       />
-      <SideBar defaultVideo={defaultVideo} listDefault={listDefault} videoIds={arrayOfVideos} />
+      <SideBar defaultVideo={defaultVideo} listDefault={listDefault} videoIds={arrayOfVideos} handleSidebarClick={handleSidebarClick} />
     </div>
   );
 }

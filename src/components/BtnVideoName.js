@@ -2,11 +2,11 @@
 import React from "react";
 
 
-const BtnVideoName = ({ videoName, videoId }) => {
+const BtnVideoName = ({ videoName, videoId, handleSidebarClick }) => {
 
 
   return (
-    <button className="btn-video-name" type="button">
+    <button className="btn-video-name" type="button" onClick={() => handleSidebarClick(videoId)}>
       {videoName} #{videoId}
     </button>
   );

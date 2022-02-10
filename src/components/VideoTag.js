@@ -4,11 +4,11 @@ import BtnVideoName from './BtnVideoName';
 import { FaHeart } from 'react-icons/fa';
 
 
-const VideoTag = ({ videoName, videoId, favoritesVideos, clickHeart }) => {
+const VideoTag = ({ videoName, videoId, favoritesVideos, clickHeart, handleSidebarClick }) => {
 
   return (
     <div>
-    <BtnVideoName videoName={videoName} videoId={videoId} />
+    <BtnVideoName videoName={videoName} videoId={videoId} handleSidebarClick={handleSidebarClick} />
     <button 
       className='btn-heart'
       type='button' 
