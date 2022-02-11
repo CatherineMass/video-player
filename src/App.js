@@ -122,13 +122,33 @@ function App() {
   const [listDefault, setListDefault] = useState([]);
 
   const handleSearch = (id) => {
-    const indexVideoSearched = arrayOfVideos.findIndex(video => video?.id?.videoId === id);
+    const indexVideoSearched = arrayOfVideos.findIndex(
+      (video) => video?.id?.videoId === id
+    );
     setCurrentIndex(indexVideoSearched);
-    setListDefault([...listDefault, currentVideo]);
+    listDefault.includes(id) === false &&
+      setListDefault([...listDefault, currentVideo]);
   };
 
+  // const fetchListDefault = async () => {
+  //   const res = await [...listDefault, currentVideo];
+  //   setListDefault(res);
+  // };
+
+  // useEffect(() => {
+  //   fetchListDefault(listDefault);
+  // }, [listDefault]);
+
+  // listDefault.includes(currentVideo)
+  // ? setListDefault([listDefault])
+  // : setListDefault([...listDefault, currentVideo]);
+
+  // setListDefault([...listDefault, currentVideo]);
+
   const handleSidebarClick = (id) => {
-    const indexVideoSearched = arrayOfVideos.findIndex(video => video?.id?.videoId === id);
+    const indexVideoSearched = arrayOfVideos.findIndex(
+      (video) => video?.id?.videoId === id
+    );
     setCurrentIndex(indexVideoSearched);
   };
 
@@ -146,7 +166,12 @@ function App() {
         nextClick={nextClick}
         prevClick={prevClick}
       />
-      <SideBar defaultVideo={defaultVideo} listDefault={listDefault} videoIds={arrayOfVideos} handleSidebarClick={handleSidebarClick} />
+      <SideBar
+        defaultVideo={defaultVideo}
+        listDefault={listDefault}
+        videoIds={arrayOfVideos}
+        handleSidebarClick={handleSidebarClick}
+      />
     </div>
   );
 }

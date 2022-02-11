@@ -13,7 +13,7 @@ const ListOfVideosSidebar = ({
   favoritesVideos,
   favVideos,
   listDefault,
-  handleSidebarClick
+  handleSidebarClick,
 }) => {
   return (
     <div className="list-of-videos-sidebar">

@@ -6,8 +6,10 @@ const ListDefault = ({
   listDefault,
   favoritesVideos,
   clickHeart,
-  handleSidebarClick
+  handleSidebarClick,
 }) => {
+
+  console.log(listDefault);
   return (
     <div className="list-default">
       {listDefault.length !== 0 &&
@@ -21,6 +23,7 @@ const ListDefault = ({
             handleSidebarClick={handleSidebarClick}
           />
         ))}
+      ;
     </div>
   );
 };
