@@ -9,7 +9,6 @@ const ListDefault = ({
   handleSidebarClick,
 }) => {
 
-  console.log(listDefault);
   return (
     <div className="list-default">
       {listDefault.length !== 0 &&

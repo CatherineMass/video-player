@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-const Video = ({ currentVideo }) => {
+const Video = ({ currentVideo, sendVideoToSidebar }) => {
   const youtubeVideoId = currentVideo?.id?.videoId;
+
 
     return (
       <iframe 
         className="video"
+        onLoad={() => sendVideoToSidebar(currentVideo)}
         width="500" height="300" 
         src={`https://www.youtube.com/embed/${youtubeVideoId}`} 
         title="YouTube video player" 

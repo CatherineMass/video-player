@@ -5,7 +5,7 @@ import Video from "./Video";
 import BtnGroup from "./BtnGroup";
 import logo from "../logo.svg";
 
-const MainContainer = ({ defaultVideo, handleFilter, filteredList, handleSearch, placeholder, currentVideo, nextClick, prevClick }) => {
+const MainContainer = ({ defaultVideo, handleFilter, filteredList, handleSearch, placeholder, currentVideo, nextClick, prevClick, sendVideoToSidebar }) => {
 
 
   return (
@@ -13,7 +13,7 @@ const MainContainer = ({ defaultVideo, handleFilter, filteredList, handleSearch,
       <img src={logo} alt="logo" className="logo" />
       <SearchBar handleFilter={handleFilter} filteredList={filteredList} handleSearch={handleSearch} placeholder={placeholder} />
       <div className="video-and-btn-container">
-        <Video currentVideo={currentVideo} defaultVideo={defaultVideo} />
+        <Video currentVideo={currentVideo} defaultVideo={defaultVideo} sendVideoToSidebar={sendVideoToSidebar} />
         <BtnGroup onNextClick={nextClick} onPrevClick={prevClick} />
       </div>
     </div>

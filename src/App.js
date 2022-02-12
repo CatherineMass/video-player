@@ -126,9 +126,13 @@ function App() {
       (video) => video?.id?.videoId === id
     );
     setCurrentIndex(indexVideoSearched);
-    listDefault.includes(id) === false &&
-      setListDefault([...listDefault, currentVideo]);
+    // setListDefault([...listDefault, currentVideo]); // ====> is fired before currentVideo has changed!! Need to wait for currentVideo's change before updating.
   };
+
+  const sendVideoToSidebar = (video) => {
+    setListDefault([...listDefault, video]);
+  }
+
 
   // const fetchListDefault = async () => {
   //   const res = await [...listDefault, currentVideo];
@@ -165,6 +169,7 @@ function App() {
         currentVideo={currentVideo}
         nextClick={nextClick}
         prevClick={prevClick}
+        sendVideoToSidebar={sendVideoToSidebar}
       />
       <SideBar
         defaultVideo={defaultVideo}
