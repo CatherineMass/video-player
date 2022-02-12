@@ -8,7 +8,6 @@ const ListDefault = ({
   clickHeart,
   handleSidebarClick,
 }) => {
-
   return (
     <div className="list-default">
       {listDefault.length !== 0 &&

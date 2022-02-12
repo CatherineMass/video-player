@@ -3,7 +3,12 @@ import React, { useState, useEffect } from "react";
 import ListOfVideosSidebar from "./ListOfVideosSidebar";
 import LinksSidebar from "./LinksSidebar";
 
-const SideBar = ({ videoIds, defaultVideo, listDefault, handleSidebarClick }) => {
+const SideBar = ({
+  videoIds,
+  defaultVideo,
+  listDefault,
+  handleSidebarClick,
+}) => {
   // Button All
   const [visibleAll, setVisibleAll] = useState(false);
   const onClickAllVideos = () => {
@@ -19,18 +24,16 @@ const SideBar = ({ videoIds, defaultVideo, listDefault, handleSidebarClick }) =>
   };
 
   // Click heart function
-    // Array of ids
+  // Array of ids
   const [favoritesVideos, setFavoritesVideos] = useState(() => {
-    const localFavoritesId = localStorage.getItem('favoriteId');
+    const localFavoritesId = localStorage.getItem("favoriteId");
     return localFavoritesId ? JSON.parse(localFavoritesId) : [];
   });
-    // Array of objects
+  // Array of objects
   const [favVideos, setFavVideos] = useState(() => {
-    const localFavorites = localStorage.getItem('favoriteObj');
+    const localFavorites = localStorage.getItem("favoriteObj");
     return localFavorites ? JSON.parse(localFavorites) : [];
   });
-
-
 
   const clickHeart = (id) => {
     const fav = videoIds.find((video) => video.id.videoId === id);
@@ -51,16 +54,16 @@ const SideBar = ({ videoIds, defaultVideo, listDefault, handleSidebarClick }) =>
     // }
 
     // let newFavorites = favoritesVideos.filter((videoId) => videoId !== id)) ;
-    // setFavoritesVideos(newFavorites); 
+    // setFavoritesVideos(newFavorites);
   };
   // Store favorite videos object in local storage
   useEffect(() => {
-    localStorage.setItem('favoriteObj', JSON.stringify(favVideos))
+    localStorage.setItem("favoriteObj", JSON.stringify(favVideos));
   }, [favVideos]);
 
   // Store favorite videos' ids in local storage
   useEffect(() => {
-    localStorage.setItem('favoriteId', JSON.stringify(favoritesVideos))
+    localStorage.setItem("favoriteId", JSON.stringify(favoritesVideos));
   }, [favoritesVideos]);
 
   return (

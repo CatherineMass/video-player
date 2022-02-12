@@ -6,28 +6,28 @@
 
 .main-container {
   width: 80vw;
-  height: 80vh;  
+  height: 80vh;
   padding-top: 5em;
 }
 
 .logo {
-  position: absolute; 
-  top: 0; 
-  left: 100vh; 
+  position: absolute;
+  top: 0;
+  left: 100vh;
   width: 60px;
   height: 59px;
 }
 
 .video-and-btn-container {
-  margin-top: 2em; 
-  display: flex; 
-  flex-direction: column; 
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
 .search-bar {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
 }
 
 .search-bar__input-field {
@@ -53,7 +53,8 @@
   margin-left: 5em;
   overflow: hidden;
   overflow-y: auto;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .drop-down__list::-webkit-scrollbar {
@@ -65,9 +66,9 @@
   text-transform: capitalize;
   background-color: white;
   border: none;
-  padding: .3em;
+  padding: 0.3em;
   font-size: 1.2em;
-} 
+}
 
 .drop-down__btn-video:hover {
   background-color: lightgrey;
@@ -79,12 +80,12 @@
 }
 
 .video {
-  display: flex; 
+  display: flex;
   justify-content: center;
 }
 
 .next-btn {
-  margin-top: 2em; 
+  margin-top: 2em;
   margin-left: 8em;
   font-size: 1.2em;
 }
@@ -96,16 +97,16 @@
 }
 
 .side-bar-container {
-  width: 20vw; 
-  height: 90vh; 
-  float: right; 
-  padding: 0 .3em;
+  width: 20vw;
+  height: 90vh;
+  float: right;
+  padding: 0 0.3em;
 }
 
 .sidebar-links {
-  display: flex; 
-  flex-direction: row; 
-  justify-content: space-evenly; 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   margin-top: 2em;
 }
 
@@ -113,18 +114,18 @@
   display: flex;
   flex-direction: column;
   justify-content: left;
-  position: relative; 
-  width: 24em; 
-  height: 80vh; 
-  float: right; 
-  margin-top: 1em; 
-  padding: 0 .3em; 
-  border: 2px solid black; 
+  position: relative;
+  width: 24em;
+  height: 80vh;
+  float: right;
+  margin-top: 1em;
+  padding: 0 0.3em;
+  border: 2px solid black;
   text-align: left;
 }
 
 .list-favorites {
-  color: red; 
+  color: red;
   font-weight: bold;
 }
 
@@ -138,18 +139,18 @@
 }
 
 .btn-video-name {
-  width: 22rem; 
-  height: 2em; 
-  border: none; 
-  background-color: white; 
+  width: 22rem;
+  height: 2em;
+  border: none;
+  background-color: white;
   text-align: left;
   font-size: 1.2em;
 }
 
 .btn-heart {
-  padding-top: .3em; 
-  width: 30px; 
-  height: 20px; 
-  border:none; 
+  padding-top: 0.3em;
+  width: 30px;
+  height: 20px;
+  border: none;
   background-color: white;
 }

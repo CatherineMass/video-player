@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import MainContainer from "./components/MainContainer";
 import SideBar from "./components/SideBar";
-import { useEffect, useState } from "react";
-// import ExampleComponent from './ExampleComponent';
 
 function App() {
   const [videoIds, setVideoIds] = useState([]);
@@ -78,12 +76,6 @@ function App() {
     },
   ];
 
-  // Click link on the sidebar
-  // currentVideo = videoIds.filter(video => video.id.videoId == videoId)
-  // setCurrentIndex(indexOf(currentVideo))
-  //
-  // ==> need to lift previous and next functions up to update setCurrentIndex. Or UseContext?
-
   // Previous and Next buttons:
   let [currentIndex, setCurrentIndex] = useState(0);
   let currentVideo = arrayOfVideos[currentIndex];
@@ -116,7 +108,6 @@ function App() {
   };
 
   // Handle search from suggestions
-  // const [placeholder, setPlaceholder] = useState("Search a video");
   const placeholder = "Search a video";
   // Sidebar default list:
   const [listDefault, setListDefault] = useState([]);
@@ -126,28 +117,11 @@ function App() {
       (video) => video?.id?.videoId === id
     );
     setCurrentIndex(indexVideoSearched);
-    // setListDefault([...listDefault, currentVideo]); // ====> is fired before currentVideo has changed!! Need to wait for currentVideo's change before updating.
   };
 
   const sendVideoToSidebar = (video) => {
     setListDefault([...listDefault, video]);
-  }
-
-
-  // const fetchListDefault = async () => {
-  //   const res = await [...listDefault, currentVideo];
-  //   setListDefault(res);
-  // };
-
-  // useEffect(() => {
-  //   fetchListDefault(listDefault);
-  // }, [listDefault]);
-
-  // listDefault.includes(currentVideo)
-  // ? setListDefault([listDefault])
-  // : setListDefault([...listDefault, currentVideo]);
-
-  // setListDefault([...listDefault, currentVideo]);
+  };
 
   const handleSidebarClick = (id) => {
     const indexVideoSearched = arrayOfVideos.findIndex(
