@@ -124,11 +124,6 @@
   text-align: left;
 }
 
-.list-favorites {
-  color: red;
-  font-weight: bold;
-}
-
 .btn-favorites {
   font-size: 1.2em;
   background-color: white;
@@ -136,6 +131,7 @@
 
 .btn-all-videos {
   font-size: 1.2em;
+  background-color: white;
 }
 
 .btn-video-name {

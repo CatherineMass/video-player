@@ -7,7 +7,7 @@ const Video = ({ currentVideo, sendVideoToSidebar }) => {
   return (
     <iframe
       className="video"
-      onLoad={() => sendVideoToSidebar(currentVideo)}
+      onLoad={() => sendVideoToSidebar(currentVideo, youtubeVideoId)}
       width="500"
       height="300"
       src={`https://www.youtube.com/embed/${youtubeVideoId}`}

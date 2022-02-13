@@ -111,6 +111,7 @@ function App() {
   const placeholder = "Search a video";
   // Sidebar default list:
   const [listDefault, setListDefault] = useState([]);
+  // const [defaultToDisplay, setDefaultToDisplay] = useState([]);
 
   const handleSearch = (id) => {
     const indexVideoSearched = arrayOfVideos.findIndex(
@@ -119,10 +120,19 @@ function App() {
     setCurrentIndex(indexVideoSearched);
   };
 
-  const sendVideoToSidebar = (video) => {
+  const sendVideoToSidebar = (video, id) => {
     setListDefault([...listDefault, video]);
+    // const setOfDefaultIds = [
+    //   ...new Set(listDefault.map((video) => video?.id?.videoId)),
+    // ];
+    // setOfDefaultIds.includes(id) 
   };
 
+
+
+  console.log(listDefault);
+
+  // When link sideBar clicked:
   const handleSidebarClick = (id) => {
     const indexVideoSearched = arrayOfVideos.findIndex(
       (video) => video?.id?.videoId === id
