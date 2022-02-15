@@ -121,16 +121,11 @@ function App() {
   };
 
   const sendVideoToSidebar = (video, id) => {
-    setListDefault([...listDefault, video]);
-    // const setOfDefaultIds = [
-    //   ...new Set(listDefault.map((video) => video?.id?.videoId)),
-    // ];
-    // setOfDefaultIds.includes(id) 
+    const stringListDef = listDefault.map(video => JSON.stringify(video));
+    !stringListDef.includes(JSON.stringify(video)) && setListDefault([...listDefault, video]);
   };
 
-
-
-  console.log(listDefault);
+  // console.log(listDefault);
 
   // When link sideBar clicked:
   const handleSidebarClick = (id) => {

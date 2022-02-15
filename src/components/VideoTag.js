@@ -10,8 +10,6 @@ const VideoTag = ({
   clickHeart,
   handleSidebarClick,
 }) => {
-  console.log('hey!');
-  console.log(videoId);
   return (
     <div>
       <BtnVideoName
