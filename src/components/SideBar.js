@@ -42,7 +42,6 @@ const SideBar = ({
     } else {
       setFavoritesVideos([...favoritesVideos, id]);
     }
-
     // Put favorite videos in an array
     const stringFavVideos = favVideos.map((vid) => JSON.stringify(vid));
     if (stringFavVideos.includes(JSON.stringify(fav))) {
@@ -73,15 +72,15 @@ const SideBar = ({
         onClickFav={onClickFav}
       />
       <ListOfVideosSidebar
+        clickHeart={clickHeart}
+        handleSidebarClick={handleSidebarClick}
         defaultVideo={defaultVideo}
         listDefault={listDefault}
         videoIds={videoIds}
         visibleAll={visibleAll}
         visibleFav={visibleFav}
-        clickHeart={clickHeart}
         favoritesVideos={favoritesVideos}
         favVideos={favVideos}
-        handleSidebarClick={handleSidebarClick}
       />
     </div>
   );

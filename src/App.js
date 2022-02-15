@@ -7,10 +7,6 @@ function App() {
   const [videoIds, setVideoIds] = useState([]);
   const [defaultVideo, setDefaultVideo] = useState({});
 
-  // getVideos() function has been provided to you free of charge.
-  // You can log the data to see what it looks like or look at
-  // the react dev tools to observe the stored information.
-
   const getVideos = async () => {
     const response = await fetch(
       "https://youtube-api-smartcoding-2022.herokuapp.com/videos"
@@ -20,7 +16,6 @@ function App() {
     setDefaultVideo(data.videos[0]);
   };
 
-  // NOTES: A component can have more than one useEffect hook
   useEffect(() => {
     getVideos();
   }, []);
@@ -60,8 +55,6 @@ function App() {
 
   // Handle search from suggestions
   const placeholder = "Search a video";
-  // Sidebar default list:
-  const [listDefault, setListDefault] = useState([]);
 
   const handleSearch = (id) => {
     const indexVideoSearched = arrayOfVideos.findIndex(
@@ -69,6 +62,9 @@ function App() {
     );
     setCurrentIndex(indexVideoSearched);
   };
+
+  // Sidebar default list:
+  const [listDefault, setListDefault] = useState([]);
 
   const sendVideoToSidebar = (video) => {
     const stringListDef = listDefault.map((vid) => JSON.stringify(vid));
@@ -87,23 +83,23 @@ function App() {
   return (
     <div className="App">
       <MainContainer
-        defaultVideo={defaultVideo}
-        videoIds={arrayOfVideos}
         handleFilter={handleFilter}
-        filteredList={filteredList}
         handleSearch={handleSearch}
-        placeholder={placeholder}
-        currentIndex={currentIndex}
-        currentVideo={currentVideo}
         nextClick={nextClick}
         prevClick={prevClick}
         sendVideoToSidebar={sendVideoToSidebar}
+        defaultVideo={defaultVideo}
+        videoIds={arrayOfVideos}
+        filteredList={filteredList}
+        placeholder={placeholder}
+        currentIndex={currentIndex}
+        currentVideo={currentVideo}
       />
       <SideBar
+        handleSidebarClick={handleSidebarClick}
         defaultVideo={defaultVideo}
         listDefault={listDefault}
         videoIds={arrayOfVideos}
-        handleSidebarClick={handleSidebarClick}
       />
     </div>
   );
