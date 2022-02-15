@@ -16,7 +16,7 @@ function App() {
       "https://youtube-api-smartcoding-2022.herokuapp.com/videos"
     );
     const data = await response.json();
-    setVideoIds(data);
+    setVideoIds(data.videos);
     setDefaultVideo(data.videos[0]);
   };
 
@@ -25,56 +25,7 @@ function App() {
     getVideos();
   }, []);
 
-  // const arrayOfVideos = videoIds.videos;
-
-  // The array below is needed for the code to work. No access to the data.
-  const arrayOfVideos = [
-    {
-      kind: "youtube#searchResult",
-      etag: "tamwb8xWafaFK3WYUiRjWVPKOCM",
-      id: {
-        kind: "youtube#video",
-        videoId: "_3ngiSxVCBs",
-        name: "a nice video",
-      },
-    },
-    {
-      kind: "youtube#searchResult",
-      etag: "n9DniKGa4RMTCv9hs3aOcxsSzPY",
-      id: {
-        kind: "youtube#video",
-        videoId: "3zTR4ayDG38",
-        name: "a cool video",
-      },
-    },
-    {
-      kind: "youtube#searchResult",
-      etag: "I_vfY1pIPWvk49XZ_WWkBynL88U",
-      id: {
-        kind: "youtube#video",
-        videoId: "aSJUS2tymZA",
-        name: "a fantastic video",
-      },
-    },
-    {
-      kind: "youtube#searchResult",
-      etag: "fVwysHySGlQcaVwDLkjtP1DDWFk",
-      id: {
-        kind: "youtube#video",
-        videoId: "6zEIvZqs0-Y",
-        name: "yet another cool video",
-      },
-    },
-    {
-      kind: "youtube#searchResult",
-      etag: "lw9CuIh2Zla8HqQdq78u4sTaVIk",
-      id: {
-        kind: "youtube#video",
-        videoId: "pJuq8D1NGJQ",
-        name: "Encore another video",
-      },
-    },
-  ];
+  const arrayOfVideos = videoIds;
 
   // Previous and Next buttons:
   let [currentIndex, setCurrentIndex] = useState(0);

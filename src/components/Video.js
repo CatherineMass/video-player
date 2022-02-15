@@ -10,7 +10,7 @@ const Video = ({ currentVideo, sendVideoToSidebar }) => {
       onLoad={() => sendVideoToSidebar(currentVideo, youtubeVideoId)}
       width="500"
       height="300"
-      src={`https://www.youtube.com/embed/${youtubeVideoId}`}
+      src={`https://www.youtube-nocookie.com/embed/${youtubeVideoId}`}
       title="YouTube video player"
       frameBorder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
