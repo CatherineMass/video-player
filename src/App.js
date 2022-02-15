@@ -20,15 +20,13 @@ function App() {
     getVideos();
   }, []);
 
-  const arrayOfVideos = videoIds;
-
   // Previous and Next buttons:
   let [currentIndex, setCurrentIndex] = useState(0);
-  let currentVideo = arrayOfVideos[currentIndex];
+  let currentVideo = videoIds[currentIndex];
 
   // Next Button
   const nextClick = () => {
-    currentIndex < arrayOfVideos.length - 1
+    currentIndex < videoIds.length - 1
       ? setCurrentIndex(currentIndex + 1)
       : alert("This is the end of the playlist!");
   };
@@ -46,35 +44,37 @@ function App() {
 
   const handleFilter = (e) => {
     searchWord = e.target.value;
-    const newFilter = arrayOfVideos.filter((video) =>
-      video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
+    const newFilter = videoIds.filter(
+      (video) =>
+        video?.id?.name !== undefined &&
+        video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
     );
-
     searchWord === "" ? setFilteredList([]) : setFilteredList(newFilter);
   };
 
   // Handle search from suggestions
   const placeholder = "Search a video";
 
-  const handleSearch = (id) => {
-    const indexVideoSearched = arrayOfVideos.findIndex(
+  const handleSearch = (id, video) => {
+    const indexVideoSearched = videoIds.findIndex(
       (video) => video?.id?.videoId === id
     );
     setCurrentIndex(indexVideoSearched);
+    sendVideoToSidebar(video);
   };
 
   // Sidebar default list:
   const [listDefault, setListDefault] = useState([]);
 
-  const sendVideoToSidebar = (video) => {
+  const sendVideoToSidebar = (viD) => {
     const stringListDef = listDefault.map((vid) => JSON.stringify(vid));
-    !stringListDef.includes(JSON.stringify(video)) &&
-      setListDefault([...listDefault, video]);
+    !stringListDef.includes(JSON.stringify(viD)) &&
+      setListDefault([...listDefault, viD]);
   };
 
   // When link sideBar clicked:
   const handleSidebarClick = (id) => {
-    const indexVideoSearched = arrayOfVideos.findIndex(
+    const indexVideoSearched = videoIds.findIndex(
       (video) => video?.id?.videoId === id
     );
     setCurrentIndex(indexVideoSearched);
@@ -89,7 +89,7 @@ function App() {
         prevClick={prevClick}
         sendVideoToSidebar={sendVideoToSidebar}
         defaultVideo={defaultVideo}
-        videoIds={arrayOfVideos}
+        videoIds={videoIds}
         filteredList={filteredList}
         placeholder={placeholder}
         currentIndex={currentIndex}
@@ -99,7 +99,7 @@ function App() {
         handleSidebarClick={handleSidebarClick}
         defaultVideo={defaultVideo}
         listDefault={listDefault}
-        videoIds={arrayOfVideos}
+        videoIds={videoIds}
       />
     </div>
   );

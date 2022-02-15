@@ -7,7 +7,7 @@ const Video = ({ currentVideo, sendVideoToSidebar }) => {
   return (
     <iframe
       className="video"
-      onLoad={() => sendVideoToSidebar(currentVideo, youtubeVideoId)}
+      onLoad={sendVideoToSidebar}
       width="500"
       height="300"
       src={`https://www.youtube-nocookie.com/embed/${youtubeVideoId}`}

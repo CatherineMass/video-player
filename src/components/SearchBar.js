@@ -28,7 +28,7 @@ const SearchBar = ({
             <button
               key={video?.id?.videoId}
               className="drop-down__btn-video"
-              onClick={() => handleSearch(video.id.videoId)}
+              onClick={() => handleSearch(video.id.videoId, video)}
             >
               {video?.id?.name}
             </button>
