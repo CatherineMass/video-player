@@ -8,22 +8,6 @@ const ListDefault = ({
   clickHeart,
   handleSidebarClick,
 }) => {
-  // const setOfDefaultIds = [
-  //   ...new Set(JSON.stringify(listDefault)),
-  // ];
-
-  const objectsMap = new Map();
-  listDefault.forEach((video) => {
-    objectsMap.set(video?.id?.videoId, video?.id?.name);
-  });
-
-  const kvArray = [...objectsMap];
-  // console.log(kvArray.length);
-
-  // kvArray.map((arr) => {
-  //   console.log(arr[0] + " " + arr[1]);
-  // });
-
   return (
     <div className="list-default">
       {listDefault.length !== 0 &&
@@ -42,13 +26,3 @@ const ListDefault = ({
 };
 
 export default ListDefault;
-
-// {kvArray.length !== 0 && kvArray.map(arr => {
-//   <VideoTag
-//     videoName={arr[1]}
-//     videoId={arr[0]}
-//     key={arr[0]}
-//     favoritesVideos={favoritesVideos}
-//     clickHeart={clickHeart}
-//     handleSidebarClick={handleSidebarClick}
-//   />})}

@@ -39,23 +39,23 @@ const SideBar = ({
     const fav = videoIds.find((video) => video.id.videoId === id);
     if (favoritesVideos.includes(id)) {
       setFavoritesVideos(favoritesVideos.filter((videoId) => videoId !== id));
-      setFavVideos(favVideos.filter((video) => video !== fav));
     } else {
       setFavoritesVideos([...favoritesVideos, id]);
-      setFavVideos([...favVideos, fav]);
     }
 
     // Put favorite videos in an array
-    // const fav = videoIds.find((video) => video.id.videoId === id);
-    // if (favVideos.includes(fav)) {
-    //   setFavVideos(favVideos.filter((video) => video !== fav));
-    // } else {
-    //   setFavVideos([...favVideos, fav]);
-    // }
-
-    // let newFavorites = favoritesVideos.filter((videoId) => videoId !== id)) ;
-    // setFavoritesVideos(newFavorites);
+    const stringFavVideos = favVideos.map((vid) => JSON.stringify(vid));
+    if (stringFavVideos.includes(JSON.stringify(fav))) {
+      setFavVideos(
+        favVideos.filter(
+          (video) => JSON.stringify(video) !== JSON.stringify(fav)
+        )
+      );
+    } else {
+      setFavVideos([...favVideos, fav]);
+    }
   };
+
   // Store favorite videos object in local storage
   useEffect(() => {
     localStorage.setItem("favoriteObj", JSON.stringify(favVideos));
