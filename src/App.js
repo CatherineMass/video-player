@@ -46,7 +46,7 @@ function App() {
     searchWord = e.target.value;
     const newFilter = videoIds.filter(
       (video) =>
-        video?.id?.name !== undefined &&
+        video?.id?.name &&
         video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
     );
     searchWord === "" ? setFilteredList([]) : setFilteredList(newFilter);
@@ -67,7 +67,9 @@ function App() {
   const [listDefault, setListDefault] = useState([]);
 
   const sendVideoToSidebar = (viD) => {
+    console.log(viD);
     const stringListDef = listDefault.map((vid) => JSON.stringify(vid));
+    
     !stringListDef.includes(JSON.stringify(viD)) &&
       setListDefault([...listDefault, viD]);
   };
