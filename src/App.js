@@ -67,9 +67,7 @@ function App() {
   const [listDefault, setListDefault] = useState([]);
 
   const sendVideoToSidebar = (viD) => {
-    console.log(viD);
     const stringListDef = listDefault.map((vid) => JSON.stringify(vid));
-    
     !stringListDef.includes(JSON.stringify(viD)) &&
       setListDefault([...listDefault, viD]);
   };
