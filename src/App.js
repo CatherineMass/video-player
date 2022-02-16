@@ -60,37 +60,17 @@ function App() {
       (video) => video?.id?.videoId === id
     );
     setCurrentIndex(indexVideoSearched);
-    sendVideoToSidebar(video);
+    sendVideoToSidebar(JSON.stringify(video), video);
   };
 
   // Sidebar default list:
   const [listDefault, setListDefault] = useState([]);
 
-  // const getCircularReplacer = () => {
-  //   const seen = new WeakSet();
-  //   return (key, value) => {
-  //     if (typeof value === "object" && value !== null) {
-  //       if (seen.has(value)) {
-  //         return;
-  //       }
-  //       seen.add(value);
-  //     }
-  //     return value;
-  //   };
-  // };
-
-  // console.log(listDefault)
-
-  // const sendVideoToSidebar = (viD) => {
-  //   const stringListDef = listDefault.map((vid) => JSON.stringify(vid, getCircularReplacer()));
-  //   !stringListDef.includes(JSON.stringify(viD, getCircularReplacer())) &&
-  //     setListDefault([...listDefault, viD]);
-  // };
-
-  const sendVideoToSidebar = (viD) => {
+  const sendVideoToSidebar = (stringifiedVid, video) => {
     const stringListDef = listDefault.map((vid) => JSON.stringify(vid));
-    !stringListDef.includes(JSON.stringify(viD)) &&
-      setListDefault([...listDefault, viD]);
+    video &&
+      !stringListDef.includes(stringifiedVid) &&
+      setListDefault([...listDefault, video]);
   };
 
   // When link sideBar clicked:
