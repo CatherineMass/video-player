@@ -1,7 +1,11 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 
-const NextBtn = ({ onNextClick }) => {
+type Props = {
+  onNextClick: MouseEventHandler;
+}
+
+const NextBtn = ({ onNextClick }: Props) => {
 	return (
 		<button onClick={onNextClick} className="next-btn">
       Next

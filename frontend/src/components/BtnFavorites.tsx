@@ -2,7 +2,7 @@
 import React, { MouseEventHandler } from 'react';
 
 type Props = {
-  onClickFav: MouseEventHandler,
+  onClickFav: MouseEventHandler;
 }
 
 const BtnFavorites = ({ onClickFav }: Props) => {

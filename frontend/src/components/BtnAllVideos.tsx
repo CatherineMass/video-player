@@ -1,7 +1,11 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 
-const BtnAllVideos = ({ onClickAllVideos }) => {
+type Props = {
+  onClickAllVideos: MouseEventHandler;
+}
+
+const BtnAllVideos = ({ onClickAllVideos }: Props) => {
 	return (
 		<button
 			className="btn-all-videos"
