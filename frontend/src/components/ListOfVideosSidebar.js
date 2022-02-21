@@ -1,49 +1,49 @@
 /* eslint-disable react/prop-types */
-import React from "react";
-import ListAllVideos from "./ListAllVideos";
-import ListFavorites from "./ListFavorites";
-import ListDefault from "./ListDefault";
+import React from 'react';
+import ListAllVideos from './ListAllVideos';
+import ListFavorites from './ListFavorites';
+import ListDefault from './ListDefault';
 
 const ListOfVideosSidebar = ({
-  defaultVideo,
-  videoIds,
-  visibleAll,
-  visibleFav,
-  clickHeart,
-  favoritesVideos,
-  favVideos,
-  listDefault,
-  handleSidebarClick,
+	defaultVideo,
+	videoIds,
+	visibleAll,
+	visibleFav,
+	clickHeart,
+	favoritesVideos,
+	favVideos,
+	listDefault,
+	handleSidebarClick,
 }) => {
-  return (
-    <div className="list-of-videos-sidebar">
-      {visibleAll ? (
-        <ListAllVideos
-          videoIds={videoIds}
-          favoritesVideos={favoritesVideos}
-          clickHeart={clickHeart}
-          handleSidebarClick={handleSidebarClick}
-        />
-      ) : visibleFav ? (
-        <ListFavorites
-          videoIds={videoIds}
-          favoritesVideos={favoritesVideos}
-          favVideos={favVideos}
-          clickHeart={clickHeart}
-          handleSidebarClick={handleSidebarClick}
-        />
-      ) : (
-        <ListDefault
-          defaultVideo={defaultVideo}
-          listDefault={listDefault}
-          videoIds={videoIds}
-          favoritesVideos={favoritesVideos}
-          clickHeart={clickHeart}
-          handleSidebarClick={handleSidebarClick}
-        />
-      )}
-    </div>
-  );
+	return (
+		<div className="list-of-videos-sidebar">
+			{visibleAll ? (
+				<ListAllVideos
+					videoIds={videoIds}
+					favoritesVideos={favoritesVideos}
+					clickHeart={clickHeart}
+					handleSidebarClick={handleSidebarClick}
+				/>
+			) : visibleFav ? (
+				<ListFavorites
+					videoIds={videoIds}
+					favoritesVideos={favoritesVideos}
+					favVideos={favVideos}
+					clickHeart={clickHeart}
+					handleSidebarClick={handleSidebarClick}
+				/>
+			) : (
+				<ListDefault
+					defaultVideo={defaultVideo}
+					listDefault={listDefault}
+					videoIds={videoIds}
+					favoritesVideos={favoritesVideos}
+					clickHeart={clickHeart}
+					handleSidebarClick={handleSidebarClick}
+				/>
+			)}
+		</div>
+	);
 };
 
 export default ListOfVideosSidebar;

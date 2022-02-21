@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React from 'react';
 
 const NextBtn = ({ onNextClick }) => {
-  return (
-    <button onClick={onNextClick} className="next-btn">
+	return (
+		<button onClick={onNextClick} className="next-btn">
       Next
-    </button>
-  );
+		</button>
+	);
 };
 
 export default NextBtn;

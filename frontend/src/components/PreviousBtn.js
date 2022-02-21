@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React from 'react';
 
 const PreviousBtn = ({ onPrevClick }) => {
-  return (
-    <button onClick={onPrevClick} className="previous-btn">
+	return (
+		<button onClick={onPrevClick} className="previous-btn">
       Previous
-    </button>
-  );
+		</button>
+	);
 };
 
 export default PreviousBtn;
