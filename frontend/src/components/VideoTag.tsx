@@ -3,12 +3,10 @@ import React from 'react';
 import { FaHeart } from 'react-icons/fa';
 import BtnVideoName from './BtnVideoName';
 
+
 const VideoTag = ({
-	videoName,
-	videoId,
-	favoritesVideos,
-	clickHeart,
-	handleSidebarClick,
+// @ts-ignore
+	videoName, videoId,	favoritesVideos, clickHeart, handleSidebarClick,
 }) => {
 	return (
 		<div>
@@ -20,6 +18,7 @@ const VideoTag = ({
 			<button
 				className="btn-heart"
 				type="button"
+				// @ts-ignore
 				alt="heart-favorite"
 				id={videoId}
 				onClick={() => clickHeart(videoId)}

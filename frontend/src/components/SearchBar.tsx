@@ -3,10 +3,8 @@ import React from 'react';
 import { BiSearchAlt } from 'react-icons/bi';
 
 const SearchBar = ({
-	handleFilter,
-	filteredList,
-	handleSearch,
-	placeholder,
+	// @ts-ignore
+	handleFilter,	filteredList,	handleSearch,	placeholder,
 }) => {
 	return (
 		<div className="search-bar">
@@ -18,7 +16,7 @@ const SearchBar = ({
 					aria-label="Search a video"
 					onChange={handleFilter}
 				/>
-				<button className="search-button" type="button">
+				<button className="search-button" type="button" title='search-button'>
 					<BiSearchAlt />
 				</button>
 			</div>

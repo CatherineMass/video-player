@@ -4,10 +4,8 @@ import ListOfVideosSidebar from './ListOfVideosSidebar';
 import LinksSidebar from './LinksSidebar';
 
 const SideBar = ({
-	videoIds,
-	defaultVideo,
-	listDefault,
-	handleSidebarClick,
+	// @ts-ignore
+	videoIds,	defaultVideo,	listDefault,	handleSidebarClick,
 }) => {
 	// Button All
 	const [visibleAll, setVisibleAll] = useState(false);
@@ -34,19 +32,23 @@ const SideBar = ({
 		const localFavorites = localStorage.getItem('favoriteObj');
 		return localFavorites ? JSON.parse(localFavorites) : [];
 	});
-
+// @ts-ignore
 	const clickHeart = (id) => {
+		// @ts-ignore
 		const fav = videoIds.find((video) => video.id.videoId === id);
 		if (favoritesVideos.includes(id)) {
+			// @ts-ignore
 			setFavoritesVideos(favoritesVideos.filter((videoId) => videoId !== id));
 		} else {
 			setFavoritesVideos([...favoritesVideos, id]);
 		}
 		// Put favorite videos in an array
+		// @ts-ignore
 		const stringFavVideos = favVideos.map((vid) => JSON.stringify(vid));
 		if (stringFavVideos.includes(JSON.stringify(fav))) {
 			setFavVideos(
 				favVideos.filter(
+					// @ts-ignore
 					(video) => JSON.stringify(video) !== JSON.stringify(fav)
 				)
 			);

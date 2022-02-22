@@ -8,12 +8,12 @@ type Props = {
 }
 
 const BtnVideoName = ({ videoName, videoId, handleSidebarClick }: Props) => {
-	console.log(videoId);
 	
 	return (
 		<button
 			className="btn-video-name"
 			type="button"
+			// @ts-ignore
 			onClick={() => handleSidebarClick(videoId)}
 		>
 			{videoName} #{videoId}

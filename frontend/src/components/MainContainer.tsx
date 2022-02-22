@@ -6,15 +6,8 @@ import BtnGroup from './BtnGroup';
 import logo from '../logo.svg';
 
 const MainContainer = ({
-	defaultVideo,
-	handleFilter,
-	filteredList,
-	handleSearch,
-	placeholder,
-	currentVideo,
-	nextClick,
-	prevClick,
-	sendVideoToSidebar,
+	// @ts-ignore
+	defaultVideo,	handleFilter,	filteredList,	handleSearch,	placeholder, currentVideo, nextClick,	prevClick, sendVideoToSidebar,
 }) => {
 	return (
 		<div className="main-container">
@@ -28,6 +21,7 @@ const MainContainer = ({
 			<div className="video-and-btn-container">
 				<Video
 					currentVideo={currentVideo}
+					// @ts-ignore
 					defaultVideo={defaultVideo}
 					sendVideoToSidebar={sendVideoToSidebar}
 				/>

@@ -3,10 +3,8 @@ import React from 'react';
 import VideoTag from './VideoTag';
 
 const ListFavorites = ({
-	clickHeart,
-	favoritesVideos,
-	favVideos,
-	handleSidebarClick,
+	// @ts-ignore
+	clickHeart,	favoritesVideos, favVideos,	handleSidebarClick,
 }) => {
 	return (
 		<div className="list-favorites">

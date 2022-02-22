@@ -3,6 +3,7 @@ import React from 'react';
 import PreviousBtn from './PreviousBtn';
 import NextBtn from './NextBtn';
 
+// @ts-ignore
 const BtnGroup = ({ onNextClick, onPrevClick }) => {
 	return (
 		<div className="btn-group">

@@ -5,15 +5,8 @@ import ListFavorites from './ListFavorites';
 import ListDefault from './ListDefault';
 
 const ListOfVideosSidebar = ({
-	defaultVideo,
-	videoIds,
-	visibleAll,
-	visibleFav,
-	clickHeart,
-	favoritesVideos,
-	favVideos,
-	listDefault,
-	handleSidebarClick,
+	// @ts-ignore
+	defaultVideo,	videoIds,	visibleAll,	visibleFav,	clickHeart,	favoritesVideos, favVideos, listDefault,handleSidebarClick,
 }) => {
 	return (
 		<div className="list-of-videos-sidebar">
@@ -26,6 +19,7 @@ const ListOfVideosSidebar = ({
 				/>
 			) : visibleFav ? (
 				<ListFavorites
+				// @ts-ignore
 					videoIds={videoIds}
 					favoritesVideos={favoritesVideos}
 					favVideos={favVideos}
@@ -34,6 +28,7 @@ const ListOfVideosSidebar = ({
 				/>
 			) : (
 				<ListDefault
+				// @ts-ignore
 					defaultVideo={defaultVideo}
 					listDefault={listDefault}
 					videoIds={videoIds}
@@ -47,4 +42,3 @@ const ListOfVideosSidebar = ({
 };
 
 export default ListOfVideosSidebar;
-// <VideoTag defaultVideo={defaultVideo} />
