@@ -5,9 +5,10 @@ import ListFavorites from './ListFavorites';
 import ListDefault from './ListDefault';
 
 const ListOfVideosSidebar = ({
-	// @ts-ignore
 	defaultVideo,	videoIds,	visibleAll,	visibleFav,	clickHeart,	favoritesVideos, favVideos, listDefault,handleSidebarClick,
 }) => {
+	console.log(videoIds);
+	
 	return (
 		<div className="list-of-videos-sidebar">
 			{visibleAll ? (
@@ -19,8 +20,6 @@ const ListOfVideosSidebar = ({
 				/>
 			) : visibleFav ? (
 				<ListFavorites
-				// @ts-ignore
-					videoIds={videoIds}
 					favoritesVideos={favoritesVideos}
 					favVideos={favVideos}
 					clickHeart={clickHeart}
@@ -28,7 +27,6 @@ const ListOfVideosSidebar = ({
 				/>
 			) : (
 				<ListDefault
-				// @ts-ignore
 					defaultVideo={defaultVideo}
 					listDefault={listDefault}
 					videoIds={videoIds}

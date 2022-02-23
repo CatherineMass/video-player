@@ -4,7 +4,6 @@ import BtnAllVideos from './BtnAllVideos';
 import BtnFavorites from './BtnFavorites';
 
 // eslint-disable-next-line react/prop-types
-// @ts-ignore
 const LinksSidebar = ({ onClickAllVideos, onClickFav }) => {
 	return (
 		<div className="sidebar-links">

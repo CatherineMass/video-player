@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-//@ts-ignore 
 const Video = ({ currentVideo, sendVideoToSidebar }) => {
 	const youtubeVideoId = currentVideo?.id?.videoId;
 

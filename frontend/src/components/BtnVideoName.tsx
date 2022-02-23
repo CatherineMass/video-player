@@ -4,16 +4,14 @@ import React, { MouseEventHandler } from 'react';
 type Props = {
 	videoName: string;
 	videoId: string;
-  handleSidebarClick: MouseEventHandler;
+  handleSidebarClick: () => void;
 }
 
-const BtnVideoName = ({ videoName, videoId, handleSidebarClick }: Props) => {
-	
+const BtnVideoName: React.FC<Props> = ({ videoName, videoId, handleSidebarClick }) => {
 	return (
 		<button
 			className="btn-video-name"
 			type="button"
-			// @ts-ignore
 			onClick={() => handleSidebarClick(videoId)}
 		>
 			{videoName} #{videoId}

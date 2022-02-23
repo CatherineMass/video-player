@@ -23,7 +23,7 @@ function App() {
 	// Previous and Next buttons:
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const currentVideo = videoIds[currentIndex];
-
+	
 	// Next Button
 	const nextClick = () => {
 		currentIndex < videoIds.length - 1
@@ -42,25 +42,22 @@ function App() {
 	const [filteredList, setFilteredList] = useState([]);
 	let searchWord = '';
 
-	// @ts-ignore
+
 	const handleFilter = (e) => {
 		searchWord = e.target.value;
 		const newFilter = videoIds.filter(
 			(video) =>
-			// @ts-ignore
 				video?.id?.name &&
-				// @ts-ignore
-        video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
+				video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
 		);
 		searchWord === '' ? setFilteredList([]) : setFilteredList(newFilter);
 	};
 
 	// Handle search from suggestions
-	const placeholder = 'Search a video';
-	// @ts-ignore
+	const placeholder = 'Search a video';	
+
 	const handleSearch = (id, video) => {
 		const indexVideoSearched = videoIds.findIndex(
-			// @ts-ignore
 			(video) => video?.id?.videoId === id
 		);
 		setCurrentIndex(indexVideoSearched);
@@ -69,20 +66,18 @@ function App() {
 
 	// Sidebar default list:
 	const [listDefault, setListDefault] = useState([]);
-// @ts-ignore
+
 	const sendVideoToSidebar = (stringifiedVid, video) => {
 		const stringListDef = listDefault.map((vid) => JSON.stringify(vid));
 		video &&
-      !stringListDef.includes(stringifiedVid) &&
-			// @ts-ignore
-      setListDefault([...listDefault, video]);
+			!stringListDef.includes(stringifiedVid) &&
+			setListDefault([...listDefault, video]);
 	};
 
 	// When link sideBar clicked:
-	// @ts-ignore
+
 	const handleSidebarClick = (id) => {
 		const indexVideoSearched = videoIds.findIndex(
-			// @ts-ignore
 			(video) => video?.id?.videoId === id
 		);
 		setCurrentIndex(indexVideoSearched);
@@ -97,7 +92,6 @@ function App() {
 				prevClick={prevClick}
 				sendVideoToSidebar={sendVideoToSidebar}
 				defaultVideo={defaultVideo}
-				// @ts-ignore
 				videoIds={videoIds}
 				filteredList={filteredList}
 				placeholder={placeholder}

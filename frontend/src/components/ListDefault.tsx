@@ -4,7 +4,6 @@ import React from 'react';
 import VideoTag from './VideoTag';
 
 const ListDefault = ({
-	// @ts-ignore
 	listDefault, favoritesVideos, clickHeart,	handleSidebarClick,
 }) => {
 	return (

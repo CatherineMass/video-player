@@ -5,7 +5,6 @@ import BtnVideoName from './BtnVideoName';
 
 
 const VideoTag = ({
-// @ts-ignore
 	videoName, videoId,	favoritesVideos, clickHeart, handleSidebarClick,
 }) => {
 	return (
@@ -18,7 +17,6 @@ const VideoTag = ({
 			<button
 				className="btn-heart"
 				type="button"
-				// @ts-ignore
 				alt="heart-favorite"
 				id={videoId}
 				onClick={() => clickHeart(videoId)}
