@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import { AppProps } from './AppProps';
 import MainContainer from './components/MainContainer';
 import SideBar from './components/SideBar';
 
 function App() {
-	const [videoIds, setVideoIds] = useState([]);
-	const [defaultVideo, setDefaultVideo] = useState({});
+	const [videoIds, setVideoIds] = React.useState<AppProps['videoIds']>([]);
+	const [defaultVideo, setDefaultVideo] = React.useState<AppProps['video']>({} as AppProps['video']);
 
 	const getVideos = async () => {
 		const response = await fetch(
@@ -41,21 +42,19 @@ function App() {
 	// Search bar ==> To filter suggestions based on user input:
 	const [filteredList, setFilteredList] = useState([]);
 	let searchWord = '';
-	
-	const handleFilter = (e) => {
+
+	const handleFilter: AppProps['handleFilter'] = (e) => {
 		searchWord = e.target.value;
 		const newFilter = videoIds.filter(
 			(video) =>
-				video?.id?.name &&
+				typeof video?.id?.name === 'string' &&
 				video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
 		);
 		searchWord === '' ? setFilteredList([]) : setFilteredList(newFilter);
 	};
 
 	// Handle search from suggestions
-	const placeholder = 'Search a video';	
-
-	const handleSearch = (id, video) => {
+	const handleSearch: AppProps['handleSearch'] = (id, video) => {		
 		const indexVideoSearched = videoIds.findIndex(
 			(video) => video?.id?.videoId === id
 		);
@@ -66,7 +65,7 @@ function App() {
 	// Sidebar default list:
 	const [listDefault, setListDefault] = useState([]);
 
-	const sendVideoToSidebar = (stringifiedVid, video) => {
+	const sendVideoToSidebar: AppProps['sendVideoToSidebar'] = (stringifiedVid, video) => {		
 		const stringListDef = listDefault.map((vid) => JSON.stringify(vid));
 		video &&
 			!stringListDef.includes(stringifiedVid) &&
@@ -93,7 +92,6 @@ function App() {
 				defaultVideo={defaultVideo}
 				videoIds={videoIds}
 				filteredList={filteredList}
-				placeholder={placeholder}
 				currentIndex={currentIndex}
 				currentVideo={currentVideo}
 			/>

@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
+import { AppProps } from '../AppProps';
 
-type Props = {
-  onPrevClick: MouseEventHandler;
+interface Props {
+  onPrevClick: AppProps['previousClick'];
 }
 
-const PreviousBtn = ({ onPrevClick }: Props) => {
+const PreviousBtn:React.FC<Props> = ({ onPrevClick }) => {
 	return (
 		<button onClick={onPrevClick} className="previous-btn">
       Previous

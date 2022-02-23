@@ -2,7 +2,7 @@
 import React from 'react';
 import { AppProps } from '../AppProps';
 
-type Props = {
+interface Props {
 	videoName: string;
 	videoId: string;
   handleSidebarClick: AppProps['handleSidebarClick'];

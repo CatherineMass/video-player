@@ -3,7 +3,7 @@ import React from 'react';
 import { BiSearchAlt } from 'react-icons/bi';
 
 const SearchBar = ({
-	handleFilter,	filteredList,	handleSearch,	placeholder,
+	handleFilter,	filteredList,	handleSearch
 }) => {
 	return (
 		<div className="search-bar">
@@ -11,7 +11,7 @@ const SearchBar = ({
 				<input
 					type="text"
 					className="search-bar__input-field"
-					placeholder={placeholder}
+					placeholder='Search a video'
 					aria-label="Search a video"
 					onChange={handleFilter}
 				/>

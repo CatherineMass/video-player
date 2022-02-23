@@ -4,9 +4,21 @@ import SearchBar from './SearchBar';
 import Video from './Video';
 import BtnGroup from './BtnGroup';
 import logo from '../logo.svg';
+import { AppProps } from '../AppProps';
 
-const MainContainer = ({
-	defaultVideo,	handleFilter,	filteredList,	handleSearch,	placeholder, currentVideo, nextClick,	prevClick, sendVideoToSidebar,
+interface Props {
+	currentVideo: AppProps['video'];
+	defaultVideo: AppProps['video'];
+	// filteredList:
+	handleFilter: AppProps['handleFilter'];
+	handleSearch: AppProps['handleSearch'];
+	nextClick: AppProps['nextClick'];
+	prevClick: AppProps['previousClick'];
+	sendVideoToSidebar: AppProps['sendVideoToSidebar'];
+}
+
+const MainContainer: React.FC<Props> = ({
+	defaultVideo,	handleFilter,	filteredList,	handleSearch, currentVideo, nextClick,	prevClick, sendVideoToSidebar,
 }) => {
 	return (
 		<div className="main-container">
@@ -15,7 +27,6 @@ const MainContainer = ({
 				handleFilter={handleFilter}
 				filteredList={filteredList}
 				handleSearch={handleSearch}
-				placeholder={placeholder}
 			/>
 			<div className="video-and-btn-container">
 				<Video
