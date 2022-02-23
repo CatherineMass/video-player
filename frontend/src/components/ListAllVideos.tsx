@@ -2,10 +2,12 @@
 import React from 'react';
 import VideoTag from './VideoTag';
 
-const ListAllVideos = ({
+// type Props = {
+// }
+
+const ListAllVideos: React.FC<Props> = ({
 	videoIds,	favoritesVideos, clickHeart, handleSidebarClick,
 }) => {
-	console.log(videoIds);
 	
 	return (
 		<div className="list-all-videos">

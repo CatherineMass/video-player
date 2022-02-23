@@ -41,8 +41,7 @@ function App() {
 	// Search bar ==> To filter suggestions based on user input:
 	const [filteredList, setFilteredList] = useState([]);
 	let searchWord = '';
-
-
+	
 	const handleFilter = (e) => {
 		searchWord = e.target.value;
 		const newFilter = videoIds.filter(
