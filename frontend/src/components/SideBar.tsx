@@ -33,7 +33,7 @@ const SideBar: React.FC<Props> = ({
 		return localFavoritesId ? JSON.parse(localFavoritesId) : [];
 	});
 	// Array of objects
-	const [favVideos, setFavVideos] = useState<AppProps['arrayOfVideos']>(() => {
+	const [favVideos, setFavVideos] = useState<AppProps['arrayOfVideos'] | undefined>(() => {
 		const localFavorites = localStorage.getItem('favoriteObj');
 		return localFavorites ? JSON.parse(localFavorites) : [];
 	});

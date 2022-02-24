@@ -6,7 +6,7 @@ import SideBar from './components/SideBar';
 
 function App() {
 	const [videoIds, setVideoIds] = useState<AppProps['arrayOfVideos']>([]);
-	const [defaultVideo, setDefaultVideo] = useState<AppProps['video']>({} as AppProps['video']);
+	// const [defaultVideo, setDefaultVideo] = useState<AppProps['video']>({} as AppProps['video']);
 
 	const getVideos = async () => {
 		const response = await fetch(
@@ -14,7 +14,7 @@ function App() {
 		);
 		const data = await response.json();
 		setVideoIds(data.videos);
-		setDefaultVideo(data.videos[0]);
+		// setDefaultVideo(data.videos[0]);
 	};
 
 	useEffect(() => {

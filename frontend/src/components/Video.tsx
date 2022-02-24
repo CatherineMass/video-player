@@ -7,12 +7,12 @@ interface Props {
 }
 
 const Video: React.FC<Props> = ({ currentVideo, sendVideoToSidebar }) => {
-	const youtubeVideoId: AppProps['video'] = currentVideo?.id?.videoId;
+	const youtubeVideoId: string = currentVideo?.id?.videoId;
 
 	return (
 		<iframe
 			className="video"
-			onLoad={sendVideoToSidebar}
+			onLoad={() => sendVideoToSidebar}
 			width="500"
 			height="300"
 			src={`https://www.youtube-nocookie.com/embed/${youtubeVideoId}`}

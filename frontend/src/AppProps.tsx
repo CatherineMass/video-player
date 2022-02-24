@@ -1,21 +1,15 @@
 import React from 'react';
 
-type Id = {
-  id: {
-    kind: string;
-    videoId: string;
-    name: string | null;
-  };
-}
-
 type Video = {
-  id: string;
-  video: {
     kind: string;
     etag: string;
-    id: Id;
-  };
-}
+    id: {
+      kind: string;
+      videoId: string;
+      name: string | null;
+    };
+};
+
 
 export interface AppProps {
   video: Video;
