@@ -1,9 +1,13 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import { AppProps } from '../AppProps';
 import VideoTag from './VideoTag';
 
-// type Props = {
-// }
+interface Props {
+	clickHeart: AppProps['stringVoid'];
+	favoritesVideos: AppProps['arrayOfIds'];
+	handleSidebarClick: AppProps['handleSidebarClick'];
+	videoIds: AppProps['arrayOfVideos'];
+}
 
 const ListAllVideos: React.FC<Props> = ({
 	videoIds,	favoritesVideos, clickHeart, handleSidebarClick,

@@ -1,11 +1,11 @@
-/* eslint-disable react/prop-types */
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
+import { AppProps } from '../AppProps';
 
-type Props = {
-  onClickAllVideos: MouseEventHandler;
+interface Props {
+  onClickAllVideos: AppProps['noParamVoid'];
 }
 
-const BtnAllVideos = ({ onClickAllVideos }: Props) => {
+const BtnAllVideos: React.FC<Props> = ({ onClickAllVideos }) => {
 	return (
 		<button
 			className="btn-all-videos"

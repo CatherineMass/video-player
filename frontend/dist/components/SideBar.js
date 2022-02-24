@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
-/* eslint-disable react/prop-types */
 const react_1 = tslib_1.__importStar(require("react"));
 const ListOfVideosSidebar_1 = tslib_1.__importDefault(require("./ListOfVideosSidebar"));
 const LinksSidebar_1 = tslib_1.__importDefault(require("./LinksSidebar"));
-const SideBar = ({ videoIds, defaultVideo, listDefault, handleSidebarClick, }) => {
+const SideBar = ({ videoIds, listDefault, handleSidebarClick, }) => {
     // Button All
     const [visibleAll, setVisibleAll] = react_1.useState(false);
     const onClickAllVideos = () => {
@@ -56,6 +55,6 @@ const SideBar = ({ videoIds, defaultVideo, listDefault, handleSidebarClick, }) =
     }, [favoritesVideos]);
     return (react_1.default.createElement("div", { className: "side-bar-container" },
         react_1.default.createElement(LinksSidebar_1.default, { onClickAllVideos: onClickAllVideos, onClickFav: onClickFav }),
-        react_1.default.createElement(ListOfVideosSidebar_1.default, { clickHeart: clickHeart, handleSidebarClick: handleSidebarClick, defaultVideo: defaultVideo, listDefault: listDefault, videoIds: videoIds, visibleAll: visibleAll, visibleFav: visibleFav, favoritesVideos: favoritesVideos, favVideos: favVideos })));
+        react_1.default.createElement(ListOfVideosSidebar_1.default, { clickHeart: clickHeart, handleSidebarClick: handleSidebarClick, listDefault: listDefault, videoIds: videoIds, visibleAll: visibleAll, visibleFav: visibleFav, favoritesVideos: favoritesVideos, favVideos: favVideos })));
 };
 exports.default = SideBar;

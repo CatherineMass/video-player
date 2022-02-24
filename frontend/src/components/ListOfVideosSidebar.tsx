@@ -1,11 +1,22 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import ListAllVideos from './ListAllVideos';
 import ListFavorites from './ListFavorites';
 import ListDefault from './ListDefault';
+import { AppProps } from '../AppProps';
 
-const ListOfVideosSidebar = ({
-	defaultVideo,	videoIds,	visibleAll,	visibleFav,	clickHeart,	favoritesVideos, favVideos, listDefault,handleSidebarClick,
+interface Props {
+	clickHeart: AppProps['stringVoid'];
+	favoritesVideos: AppProps['arrayOfIds'];
+	favVideos: AppProps['arrayOfVideos'];
+	handleSidebarClick: AppProps['handleSidebarClick'];
+	listDefault: AppProps['arrayOfVideos'];
+	videoIds: AppProps['arrayOfVideos'];
+	visibleAll: boolean;
+	visibleFav: boolean;
+}
+
+const ListOfVideosSidebar: React.FC<Props> = ({
+	videoIds,	visibleAll,	visibleFav,	clickHeart,	favoritesVideos, favVideos, listDefault,handleSidebarClick,
 }) => {
 	
 	return (
@@ -26,7 +37,6 @@ const ListOfVideosSidebar = ({
 				/>
 			) : (
 				<ListDefault
-					defaultVideo={defaultVideo}
 					listDefault={listDefault}
 					videoIds={videoIds}
 					favoritesVideos={favoritesVideos}

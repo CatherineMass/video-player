@@ -1,8 +1,14 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { BiSearchAlt } from 'react-icons/bi';
+import { AppProps } from '../AppProps';
 
-const SearchBar = ({
+interface Props {
+	filteredList: AppProps['arrayOfVideos'];
+	handleFilter: AppProps['handleFilter'];
+	handleSearch: AppProps['handleSearch'];
+}
+
+const SearchBar: React.FC<Props> = ({
 	handleFilter,	filteredList,	handleSearch
 }) => {
 	return (

@@ -1,11 +1,11 @@
-/* eslint-disable react/prop-types */
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
+import { AppProps } from '../AppProps';
 
-type Props = {
-  onClickFav: MouseEventHandler;
+interface Props {
+  onClickFav: AppProps['noParamVoid'];
 }
 
-const BtnFavorites = ({ onClickFav }: Props) => {
+const BtnFavorites: React.FC<Props> = ({ onClickFav }) => {
 	return (
 		<button className="btn-favorites" type="button" onClick={onClickFav}>
       My Favorites

@@ -1,8 +1,13 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import { AppProps } from '../AppProps';
 
-const Video = ({ currentVideo, sendVideoToSidebar }) => {
-	const youtubeVideoId = currentVideo?.id?.videoId;
+interface Props {
+	currentVideo: AppProps['video'];
+	sendVideoToSidebar: AppProps['sendVideoToSidebar'];
+}
+
+const Video: React.FC<Props> = ({ currentVideo, sendVideoToSidebar }) => {
+	const youtubeVideoId: AppProps['video'] = currentVideo?.id?.videoId;
 
 	return (
 		<iframe
@@ -18,7 +23,5 @@ const Video = ({ currentVideo, sendVideoToSidebar }) => {
 		></iframe>
 	);
 };
-
-// Default video to put in ==> if favorite, 1st favorite, if no fav, 1st of the list.
 
 export default Video;

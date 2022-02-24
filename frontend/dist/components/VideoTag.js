@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
-/* eslint-disable react/prop-types */
 const react_1 = tslib_1.__importDefault(require("react"));
 const fa_1 = require("react-icons/fa");
 const BtnVideoName_1 = tslib_1.__importDefault(require("./BtnVideoName"));

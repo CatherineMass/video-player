@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import SearchBar from './SearchBar';
 import Video from './Video';
@@ -8,8 +7,7 @@ import { AppProps } from '../AppProps';
 
 interface Props {
 	currentVideo: AppProps['video'];
-	defaultVideo: AppProps['video'];
-	// filteredList:
+	filteredList: AppProps['arrayOfVideos'];
 	handleFilter: AppProps['handleFilter'];
 	handleSearch: AppProps['handleSearch'];
 	nextClick: AppProps['nextClick'];
@@ -18,7 +16,7 @@ interface Props {
 }
 
 const MainContainer: React.FC<Props> = ({
-	defaultVideo,	handleFilter,	filteredList,	handleSearch, currentVideo, nextClick,	prevClick, sendVideoToSidebar,
+	handleFilter,	filteredList,	handleSearch, currentVideo, nextClick,	prevClick, sendVideoToSidebar,
 }) => {
 	return (
 		<div className="main-container">
@@ -31,7 +29,6 @@ const MainContainer: React.FC<Props> = ({
 			<div className="video-and-btn-container">
 				<Video
 					currentVideo={currentVideo}
-					defaultVideo={defaultVideo}
 					sendVideoToSidebar={sendVideoToSidebar}
 				/>
 				<BtnGroup onNextClick={nextClick} onPrevClick={prevClick} />

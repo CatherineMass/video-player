@@ -1,10 +1,17 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { FaHeart } from 'react-icons/fa';
+import { AppProps } from '../AppProps';
 import BtnVideoName from './BtnVideoName';
 
+interface Props {
+	clickHeart: AppProps['stringVoid'];
+	favoritesVideos: AppProps['arrayOfIds'];
+	handleSidebarClick: AppProps['handleSidebarClick'];
+	videoId: string;
+	videoName: string;
+}
 
-const VideoTag = ({
+const VideoTag: React.FC<Props> = ({
 	videoName, videoId,	favoritesVideos, clickHeart, handleSidebarClick,
 }) => {
 	return (

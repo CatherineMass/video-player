@@ -5,8 +5,8 @@ import MainContainer from './components/MainContainer';
 import SideBar from './components/SideBar';
 
 function App() {
-	const [videoIds, setVideoIds] = React.useState<AppProps['videoIds']>([]);
-	const [defaultVideo, setDefaultVideo] = React.useState<AppProps['video']>({} as AppProps['video']);
+	const [videoIds, setVideoIds] = useState<AppProps['arrayOfVideos']>([]);
+	const [defaultVideo, setDefaultVideo] = useState<AppProps['video']>({} as AppProps['video']);
 
 	const getVideos = async () => {
 		const response = await fetch(
@@ -40,7 +40,8 @@ function App() {
 	};
 
 	// Search bar ==> To filter suggestions based on user input:
-	const [filteredList, setFilteredList] = useState([]);
+	const [filteredList, setFilteredList] = useState<AppProps['arrayOfVideos']>([]);
+	
 	let searchWord = '';
 
 	const handleFilter: AppProps['handleFilter'] = (e) => {
@@ -63,7 +64,7 @@ function App() {
 	};
 
 	// Sidebar default list:
-	const [listDefault, setListDefault] = useState([]);
+	const [listDefault, setListDefault] = useState<AppProps['arrayOfVideos']>([]);
 
 	const sendVideoToSidebar: AppProps['sendVideoToSidebar'] = (stringifiedVid, video) => {		
 		const stringListDef = listDefault.map((vid) => JSON.stringify(vid));
@@ -73,8 +74,7 @@ function App() {
 	};
 
 	// When link sideBar clicked:
-
-	const handleSidebarClick = (id) => {
+	const handleSidebarClick: AppProps['handleSidebarClick'] = (id) => {
 		const indexVideoSearched = videoIds.findIndex(
 			(video) => video?.id?.videoId === id
 		);
@@ -89,15 +89,11 @@ function App() {
 				nextClick={nextClick}
 				prevClick={prevClick}
 				sendVideoToSidebar={sendVideoToSidebar}
-				defaultVideo={defaultVideo}
-				videoIds={videoIds}
 				filteredList={filteredList}
-				currentIndex={currentIndex}
 				currentVideo={currentVideo}
 			/>
 			<SideBar
 				handleSidebarClick={handleSidebarClick}
-				defaultVideo={defaultVideo}
 				listDefault={listDefault}
 				videoIds={videoIds}
 			/>

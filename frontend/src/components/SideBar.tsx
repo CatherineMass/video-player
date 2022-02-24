@@ -1,10 +1,16 @@
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import ListOfVideosSidebar from './ListOfVideosSidebar';
 import LinksSidebar from './LinksSidebar';
+import { AppProps } from '../AppProps';
 
-const SideBar = ({
-	videoIds, defaultVideo, listDefault, handleSidebarClick,
+interface Props {
+	handleSidebarClick: AppProps['handleSidebarClick'];
+	listDefault: AppProps['arrayOfVideos'];
+	videoIds: AppProps['arrayOfVideos'];
+}
+
+const SideBar: React.FC<Props> = ({
+	videoIds, listDefault, handleSidebarClick,
 }) => {	
 	// Button All
 	const [visibleAll, setVisibleAll] = useState(false);
@@ -22,17 +28,17 @@ const SideBar = ({
 
 	// Click heart function
 	// Array of ids
-	const [favoritesVideos, setFavoritesVideos] = useState(() => {
+	const [favoritesVideos, setFavoritesVideos] = useState<AppProps['arrayOfIds']>(() => {
 		const localFavoritesId = localStorage.getItem('favoriteId');
 		return localFavoritesId ? JSON.parse(localFavoritesId) : [];
 	});
 	// Array of objects
-	const [favVideos, setFavVideos] = useState(() => {
+	const [favVideos, setFavVideos] = useState<AppProps['arrayOfVideos']>(() => {
 		const localFavorites = localStorage.getItem('favoriteObj');
 		return localFavorites ? JSON.parse(localFavorites) : [];
 	});
 
-	const clickHeart = (id) => {
+	const clickHeart: AppProps['stringVoid'] = (id) => {
 		const fav = videoIds.find((video) => video.id.videoId === id);
 		if (favoritesVideos.includes(id)) {
 			setFavoritesVideos(favoritesVideos.filter((videoId) => videoId !== id));
@@ -71,7 +77,6 @@ const SideBar = ({
 			<ListOfVideosSidebar
 				clickHeart={clickHeart}
 				handleSidebarClick={handleSidebarClick}
-				defaultVideo={defaultVideo}
 				listDefault={listDefault}
 				videoIds={videoIds}
 				visibleAll={visibleAll}
