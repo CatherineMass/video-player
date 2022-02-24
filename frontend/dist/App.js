@@ -1,10 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const tslib_1 = require("tslib");
-const react_1 = tslib_1.__importStar(require("react"));
-require("./App.css");
-const MainContainer_1 = tslib_1.__importDefault(require("./components/MainContainer"));
-const SideBar_1 = tslib_1.__importDefault(require("./components/SideBar"));
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const tslib_1 = require('tslib');
+const react_1 = tslib_1.__importStar(require('react'));
+require('./App.css');
+const MainContainer_1 = tslib_1.__importDefault(require('./components/MainContainer'));
+const SideBar_1 = tslib_1.__importDefault(require('./components/SideBar'));
 function App() {
     const [videoIds, setVideoIds] = react_1.useState([]);
     const [defaultVideo, setDefaultVideo] = react_1.useState({});
@@ -63,7 +63,7 @@ function App() {
         const indexVideoSearched = videoIds.findIndex((video) => { var _a; return ((_a = video === null || video === void 0 ? void 0 : video.id) === null || _a === void 0 ? void 0 : _a.videoId) === id; });
         setCurrentIndex(indexVideoSearched);
     };
-    return (react_1.default.createElement("div", { className: "App" },
+    return (react_1.default.createElement('div', { className: 'App' },
         react_1.default.createElement(MainContainer_1.default, { handleFilter: handleFilter, handleSearch: handleSearch, nextClick: nextClick, prevClick: prevClick, sendVideoToSidebar: sendVideoToSidebar, defaultVideo: defaultVideo, videoIds: videoIds, filteredList: filteredList, placeholder: placeholder, currentIndex: currentIndex, currentVideo: currentVideo }),
         react_1.default.createElement(SideBar_1.default, { handleSidebarClick: handleSidebarClick, defaultVideo: defaultVideo, listDefault: listDefault, videoIds: videoIds })));
 }
