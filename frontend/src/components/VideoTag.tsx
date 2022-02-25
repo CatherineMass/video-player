@@ -8,7 +8,7 @@ interface Props {
 	favoritesVideos: AppProps['arrayOfIds'];
 	handleSidebarClick: AppProps['handleSidebarClick'];
 	videoId: string;
-	videoName: string;
+	videoName: string | null;
 }
 
 const VideoTag: React.FC<Props> = ({
