@@ -4,8 +4,8 @@ import NextBtn from './NextBtn';
 import { AppProps } from '../AppProps';
 
 interface Props {
-	onNextClick: AppProps['nextClick'];
-	onPrevClick: AppProps['previousClick'];
+	onNextClick: AppProps['noParamVoid'];
+	onPrevClick: AppProps['noParamVoid'];
 }
 
 const BtnGroup: React.FC<Props> = ({ onNextClick, onPrevClick }) => {

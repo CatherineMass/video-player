@@ -4,7 +4,7 @@ import LinksSidebar from './LinksSidebar';
 import { AppProps } from '../AppProps';
 
 interface Props {
-	handleSidebarClick: AppProps['handleSidebarClick'];
+	handleSidebarClick: AppProps['stringVoid'];
 	listDefault: AppProps['arrayOfVideos'];
 	videoIds: AppProps['arrayOfVideos'];
 }

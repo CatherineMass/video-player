@@ -10,8 +10,8 @@ interface Props {
 	filteredList: AppProps['arrayOfVideos'];
 	handleFilter: AppProps['handleFilter'];
 	handleSearch: AppProps['handleSearch'];
-	nextClick: AppProps['nextClick'];
-	prevClick: AppProps['previousClick'];
+	nextClick: AppProps['noParamVoid'];
+	prevClick: AppProps['noParamVoid'];
 	sendVideoToSidebar: AppProps['sendVideoToSidebar'];
 }
 

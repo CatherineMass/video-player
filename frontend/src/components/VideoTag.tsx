@@ -6,7 +6,7 @@ import BtnVideoName from './BtnVideoName';
 interface Props {
 	clickHeart: AppProps['stringVoid'];
 	favoritesVideos: AppProps['arrayOfIds'];
-	handleSidebarClick: AppProps['handleSidebarClick'];
+	handleSidebarClick: AppProps['stringVoid'];
 	videoId: string;
 	videoName: string | null;
 }
@@ -24,7 +24,6 @@ const VideoTag: React.FC<Props> = ({
 			<button
 				className="btn-heart"
 				type="button"
-				alt="heart-favorite"
 				id={videoId}
 				onClick={() => clickHeart(videoId)}
 			>

@@ -74,7 +74,7 @@ function App() {
 	};
 
 	// When link sideBar clicked:
-	const handleSidebarClick: AppProps['handleSidebarClick'] = (id) => {
+	const handleSidebarClick: AppProps['stringVoid'] = (id) => {
 		const indexVideoSearched = videoIds.findIndex(
 			(video) => video?.id?.videoId === id
 		);

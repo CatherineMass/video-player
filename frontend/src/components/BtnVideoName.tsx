@@ -4,7 +4,7 @@ import { AppProps } from '../AppProps';
 interface Props {
 	videoName: string | null;
 	videoId: string;
-  handleSidebarClick: AppProps['handleSidebarClick'];
+  handleSidebarClick: AppProps['stringVoid'];
 }
 
 const BtnVideoName: React.FC<Props> = ({ videoName, videoId, handleSidebarClick }) => {

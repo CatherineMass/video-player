@@ -2,7 +2,7 @@ import React from 'react';
 import { AppProps } from '../AppProps';
 
 interface Props {
-  onPrevClick: AppProps['previousClick'];
+  onPrevClick: AppProps['noParamVoid'];
 }
 
 const PreviousBtn:React.FC<Props> = ({ onPrevClick }) => {

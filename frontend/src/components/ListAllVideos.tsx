@@ -5,7 +5,7 @@ import VideoTag from './VideoTag';
 interface Props {
 	clickHeart: AppProps['stringVoid'];
 	favoritesVideos: AppProps['arrayOfIds'];
-	handleSidebarClick: AppProps['handleSidebarClick'];
+	handleSidebarClick: AppProps['stringVoid'];
 	videoIds: AppProps['arrayOfVideos'];
 }
 

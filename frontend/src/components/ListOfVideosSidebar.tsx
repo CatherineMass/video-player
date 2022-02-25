@@ -8,7 +8,7 @@ interface Props {
 	clickHeart: AppProps['stringVoid'];
 	favoritesVideos: AppProps['arrayOfIds'];
 	favVideos: AppProps['arrayOfVideos'];
-	handleSidebarClick: AppProps['handleSidebarClick'];
+	handleSidebarClick: AppProps['stringVoid'];
 	listDefault: AppProps['arrayOfVideos'];
 	videoIds: AppProps['arrayOfVideos'];
 	visibleAll: boolean;

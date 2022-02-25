@@ -2,7 +2,7 @@ import React from 'react';
 import { AppProps } from '../AppProps';
 
 interface Props {
-  onNextClick: AppProps['nextClick'];
+  onNextClick: AppProps['noParamVoid'];
 }
 
 const NextBtn: React.FC<Props> = ({ onNextClick }) => {
