@@ -12,11 +12,10 @@ interface Props {
 const ListFavorites: React.FC<Props> = ({
 	clickHeart,	favoritesVideos, favVideos,	handleSidebarClick,
 }) => {
-	console.log(favVideos);
 	
 	return (
 		<div className="list-favorites">
-			{favVideos.map((video) => (
+			{favVideos && favVideos.map((video) => (
 				<VideoTag
 					videoName={video?.id?.name}
 					videoId={video?.id?.videoId}

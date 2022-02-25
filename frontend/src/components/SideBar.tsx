@@ -10,8 +10,10 @@ interface Props {
 }
 
 const SideBar: React.FC<Props> = ({
-	videoIds, listDefault, handleSidebarClick,
-}) => {	
+	videoIds,
+	listDefault,
+	handleSidebarClick,
+}) => {
 	// Button All
 	const [visibleAll, setVisibleAll] = useState(false);
 	const onClickAllVideos = () => {
@@ -28,15 +30,18 @@ const SideBar: React.FC<Props> = ({
 
 	// Click heart function
 	// Array of ids
-	const [favoritesVideos, setFavoritesVideos] = useState<AppProps['arrayOfIds']>(() => {
+	const [favoritesVideos, setFavoritesVideos] = useState<
+		AppProps['arrayOfIds']
+	>(() => {
 		const localFavoritesId = localStorage.getItem('favoriteId');
 		return localFavoritesId ? JSON.parse(localFavoritesId) : [];
 	});
 	// Array of objects
-	const [favVideos, setFavVideos] = useState<AppProps['arrayOfVideos'] | undefined>(() => {
-		const localFavorites = localStorage.getItem('favoriteObj');
-		return localFavorites ? JSON.parse(localFavorites) : [];
-	});
+	const [favVideos, setFavVideos] = useState<
+		AppProps['arrayOfVideos']>(() => {
+			const localFavorites = localStorage.getItem('favoriteObj');
+			return localFavorites ? JSON.parse(localFavorites) : [];
+		});
 
 	const clickHeart: AppProps['stringVoid'] = (id) => {
 		const fav = videoIds.find((video) => video.id.videoId === id);
@@ -46,16 +51,16 @@ const SideBar: React.FC<Props> = ({
 			setFavoritesVideos([...favoritesVideos, id]);
 		}
 		// Put favorite videos in an array
-		const stringFavVideos = favVideos.map((vid) => JSON.stringify(vid));
-		if (stringFavVideos.includes(JSON.stringify(fav))) {
-			setFavVideos(
+		const stringFavVideos =
+			favVideos.map((vid) => JSON.stringify(vid));
+			
+		stringFavVideos && stringFavVideos.includes(JSON.stringify(fav))
+			? setFavVideos(
 				favVideos.filter(
 					(video) => JSON.stringify(video) !== JSON.stringify(fav)
 				)
-			);
-		} else {
-			setFavVideos([...favVideos, fav]);
-		}
+			)
+			: fav && setFavVideos([...favVideos, fav]);
 	};
 
 	// Store favorite videos object in local storage
