@@ -19,7 +19,11 @@ const knexConfig: KnexConfig = {
 			max: 10
 		},
 		migrations: {
-			tableName: 'knex_migrations'
+			tableName: 'knex_migrations',
+			directory: __dirname+'/src/migrations',
+		},
+		seeds: {
+			directory: __dirname+'/src/seeds',
 		}
 	}
 };
