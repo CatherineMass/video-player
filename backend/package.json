@@ -20,6 +20,7 @@
   "scripts": {
     "start": "ts-node-dev ./src/server.ts",
     "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "migrate": "./node_modules/.bin/knex migrate:latest"
   }
 }
