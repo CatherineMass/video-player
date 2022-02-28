@@ -1,10 +1,16 @@
 import express, { Router, Request, Response } from 'express';
+import Video from '../models/video';
 
 const router: Router = express.Router();
 
 
-router.get('/', (req: Request, res: Response) => {
-	res.send('Hi there');
-});
+router
+	.route('/')
+	.get(async (req: Request, res: Response) => {
+		const videos = await Video.query();
+	
+	
+		return res.send(videos);
+	});
 
 export default router;
