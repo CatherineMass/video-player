@@ -10,7 +10,7 @@ const knexConfig: KnexConfig = {
 	development: {
 		client: 'postgresql',
 		connection: {
-			database: 'my_youtube_db',
+			database: 'youtube_db',
 			user:     'postgres',
 			password: process.env.DB_PASSWORD,
 		},

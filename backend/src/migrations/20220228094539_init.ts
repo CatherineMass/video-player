@@ -4,7 +4,9 @@ import { Knex } from 'knex';
 export async function up(knex: Knex): Promise<void> {
 	return knex.schema.createTable('videos', (table: Knex.TableBuilder) => {
 		table.increments('id');
-		table.json('video');
+		table.string('etag').notNullable().unique();
+		table.string('videoId').notNullable().unique();
+		table.string('name');
 		table.timestamps(true, true);
 	});
 }
