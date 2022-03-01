@@ -10,7 +10,7 @@ router
 		const videos = await Video.query();
 	
 	
-		return res.send(videos);
+		return res.status(200).send(videos);
 	});
 
 export default router;

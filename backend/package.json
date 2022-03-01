@@ -10,10 +10,14 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
+    "@types/jest": "^27.4.1",
+    "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
     "eslint": "^8.10.0",
     "jest": "^27.5.1",
+    "supertest": "^6.2.2",
+    "ts-jest": "^27.1.3",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.5"
   },
@@ -21,6 +25,7 @@
     "start": "ts-node-dev ./src/server.ts",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint --fix",
-    "migrate": "./node_modules/.bin/knex migrate:latest"
+    "migrate": "./node_modules/.bin/knex migrate:latest",
+    "test": "jest"
   }
 }
