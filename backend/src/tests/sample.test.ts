@@ -1,8 +1,6 @@
 import request from 'supertest';
-import { describe } from 'yargs';
+// import describe from 'supertest';
 import routes from '../routes/routes';
-
-
 
 describe('GET /', () => {
 	describe('get all the data from the db', () => {
