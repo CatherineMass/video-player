@@ -2,10 +2,6 @@ import dotenv from 'dotenv';
 import type { Knex } from 'knex';
 dotenv.config();
 
-// interface KnexConfig {
-//   [key: string]: object;
-// }
-
 const config: { [key: string]: Knex.Config } = {
 	local: {
 		client: 'postgresql',
