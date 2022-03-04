@@ -1,8 +1,8 @@
 import express, { Application } from 'express';
 // import {raw} from 'objection';
-// import config from '../../knexfile';
-// import Knex from 'knex';
-// import { Model } from 'objection';
+import config from '../../knexfile';
+import Knex from 'knex';
+import { Model } from 'objection';
 import request from 'supertest';
 import router from '../routes/routes';
 
@@ -13,10 +13,10 @@ import router from '../routes/routes';
 const app: Application = express();
 
 describe('GET /', () => { 
-	// beforeEach(async () => {
-	// 	const knex = Knex(config.development);
-	// 	Model.knex(knex);
-	// });
+	beforeEach(async () => {
+		const knex = Knex(config.test);
+		Model.knex(knex);
+	});
 
 	// afterEach(async () => {
 	// 	const knex = Knex(config.development);

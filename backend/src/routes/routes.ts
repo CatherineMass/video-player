@@ -1,14 +1,14 @@
 import express, { Application, Router, Request, Response } from 'express';
-import Knex from 'knex';
-import config from '../../knexfile';
-import { Model } from 'objection';
+// import Knex from 'knex';
+// import config from '../../knexfile';
+// import { Model } from 'objection';
 import Video from '../models/video';
 
 // // Initialize knex
-const knex = Knex(config.development);
+// const knex = Knex(config.development);
 
-// // Give the knex instance to Objection
-Model.knex(knex);
+// // // Give the knex instance to Objection
+// Model.knex(knex);
 
 export const app: Application = express();
 
