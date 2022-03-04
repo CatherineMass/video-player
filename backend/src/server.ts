@@ -10,7 +10,7 @@ const knex = Knex(config.development);
 // Give the knex instance to Objection
 Model.knex(knex);
 
-app.use('/', router);
+app.use('/api/v1', router);
 
 app.listen(5000, () => {
 	console.log('App is listening at http://localhost:5000...');  

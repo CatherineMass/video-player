@@ -7,7 +7,7 @@ const config: { [key: string]: Knex.Config } = {
 		client: 'postgresql',
 		connection: {
 			host: 'localhost',
-			database: 'youtube_db',
+			database: 'youtube_db', // will change it to youtube_db_test when coming back to testing. Idea is to create the db everytime I run the tests and delete it afterwards.
 			user: 'postgres',
 			password: process.env.DB_PASSWORD,
 			port: 5432,
@@ -21,7 +21,7 @@ const config: { [key: string]: Knex.Config } = {
 			directory: __dirname+'/src/migrations',
 		},
 	},
-	
+
 	local: {
 		client: 'postgresql',
 		connection: {

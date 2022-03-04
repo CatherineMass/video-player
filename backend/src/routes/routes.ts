@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 const router: Router = express.Router();
 
 router
-	.route('/')
+	.route('/videos')
 	.get(async (req: Request, res: Response) => {
 		const videos = await Video.query();
 	
