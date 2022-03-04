@@ -26,6 +26,7 @@
     "start": "ts-node-dev ./src/server.ts",
     "lint": "eslint . --ext .ts --fix",
     "migrate": "./node_modules/.bin/knex migrate:latest",
+    "seed": "./node_modules/.bin/knex seed:run",
     "test": "jest"
   }
 }

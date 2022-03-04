@@ -3,6 +3,24 @@ import type { Knex } from 'knex';
 dotenv.config();
 
 const config: { [key: string]: Knex.Config } = {
+	test: {
+		client: 'postgresql',
+		connection: {
+			host: 'localhost',
+			database: 'youtube_db',
+			user: 'postgres',
+			password: process.env.DB_PASSWORD,
+			port: 5432,
+		},
+		pool: {
+			min: 2,
+			max: 10,
+		},
+		migrations: {
+			tableName: 'knex_migrations',
+			directory: __dirname+'/src/migrations',
+		},
+	},
 	local: {
 		client: 'postgresql',
 		connection: {
