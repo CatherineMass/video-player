@@ -21,6 +21,7 @@ const config: { [key: string]: Knex.Config } = {
 			directory: __dirname+'/src/migrations',
 		},
 	},
+	
 	local: {
 		client: 'postgresql',
 		connection: {
