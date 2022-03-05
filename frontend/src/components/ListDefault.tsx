@@ -18,9 +18,9 @@ const ListDefault: React.FC<Props> = ({
 			{listDefault.length !== 0 &&
 				listDefault.map((video) => (
 					<VideoTag
-						videoName={video?.id?.name}
-						videoId={video?.id?.videoId}
-						key={video?.id?.videoId}
+						videoName={video?.name}
+						videoId={video?.videoId}
+						key={video?.videoId}
 						favoritesVideos={favoritesVideos}
 						clickHeart={clickHeart}
 						handleSidebarClick={handleSidebarClick}

@@ -17,9 +17,9 @@ const ListFavorites: React.FC<Props> = ({
 		<div className="list-favorites">
 			{favVideos && favVideos.map((video) => (
 				<VideoTag
-					videoName={video?.id?.name}
-					videoId={video?.id?.videoId}
-					key={video?.id?.videoId}
+					videoName={video?.name}
+					videoId={video?.videoId}
+					key={video?.videoId}
 					clickHeart={clickHeart}
 					favoritesVideos={favoritesVideos}
 					handleSidebarClick={handleSidebarClick}
