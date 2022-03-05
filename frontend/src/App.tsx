@@ -17,12 +17,12 @@ function App() {
 			}
 		);
 		const data = await response.json();
-		console.log(response);
-		
+				
 		setVideoIds(data.videos);
 		// setDefaultVideo(data.videos[0]);
 	};
 	
+	console.log(videoIds);
 
 	useEffect(() => {
 		getVideos();
@@ -55,8 +55,8 @@ function App() {
 		searchWord = e.target.value;
 		const newFilter = videoIds.filter(
 			(video) =>
-				typeof video?.id?.name === 'string' &&
-				video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
+				typeof video?.name === 'string' &&
+				video?.name.toLowerCase().includes(searchWord.toLowerCase())
 		);
 		searchWord === '' ? setFilteredList([]) : setFilteredList(newFilter);
 	};
@@ -64,7 +64,7 @@ function App() {
 	// Handle search from suggestions
 	const handleSearch: AppProps['handleSearch'] = (id, video) => {		
 		const indexVideoSearched = videoIds.findIndex(
-			(video) => video?.id?.videoId === id
+			(video) => video?.videoId === id
 		);
 		setCurrentIndex(indexVideoSearched);
 		sendVideoToSidebar(JSON.stringify(video), video);
@@ -83,7 +83,7 @@ function App() {
 	// When link sideBar clicked:
 	const handleSidebarClick: AppProps['stringVoid'] = (id) => {
 		const indexVideoSearched = videoIds.findIndex(
-			(video) => video?.id?.videoId === id
+			(video) => video?.videoId === id
 		);
 		setCurrentIndex(indexVideoSearched);
 	};
