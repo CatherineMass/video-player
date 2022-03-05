@@ -4,7 +4,7 @@ type Video = {
   id: number;
   etag: string;
   videoId: string;
-  name: string | null;
+  name: string;
   created_at: string;
   updated_at: string;
 };
