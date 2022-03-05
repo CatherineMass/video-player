@@ -10,12 +10,19 @@ function App() {
 
 	const getVideos = async () => {
 		const response = await fetch(
-			'https://youtube-api-smartcoding-2022.herokuapp.com/videos'
+			'http://localhost:3005/api/v1/videos', {
+				method: 'GET',
+				headers: { 'Content-Type': 'application/json' },
+				credentials: 'include',
+			}
 		);
 		const data = await response.json();
+		console.log(response);
+		
 		setVideoIds(data.videos);
 		// setDefaultVideo(data.videos[0]);
 	};
+	
 
 	useEffect(() => {
 		getVideos();

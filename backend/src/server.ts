@@ -12,6 +12,6 @@ Model.knex(knex);
 
 app.use('/api/v1', router);
 
-app.listen(5000, () => {
-	console.log('App is listening at http://localhost:5000...');  
+app.listen(3005, () => {
+	console.log('App is listening at http://localhost:3005/api/v1/videos...');  
 });
