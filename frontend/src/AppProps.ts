@@ -1,12 +1,11 @@
 import React from 'react';
 
 type Video = {
-  id: number;
   etag: string;
-  videoId: string;
-  name: string;
-  created_at: string;
-  updated_at: string;
+  id: {
+    videoId: string;
+    name: string;
+  }
 };
 
 

@@ -29,11 +29,11 @@ const SearchBar: React.FC<Props> = ({
 				<div className="drop-down__list">
 					{filteredList.slice(0, 5).map((video) => (
 						<button
-							key={video?.videoId}
+							key={video?.id?.videoId}
 							className="drop-down__btn-video"
-							onClick={() => handleSearch(video.videoId, video)}
+							onClick={() => handleSearch(video.id?.videoId, video)}
 						>
-							{video?.name}
+							{video?.id?.name}
 						</button>
 					))}
 				</div>

@@ -44,7 +44,7 @@ const SideBar: React.FC<Props> = ({
 		});
 
 	const clickHeart: AppProps['stringVoid'] = (id) => {
-		const fav = videoIds.find((video) => video.videoId === id);
+		const fav = videoIds.find((video) => video.id?.videoId === id);
 		if (favoritesVideos.includes(id)) {
 			setFavoritesVideos(favoritesVideos.filter((videoId) => videoId !== id));
 		} else {

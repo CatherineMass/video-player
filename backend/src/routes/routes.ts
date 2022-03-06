@@ -30,9 +30,15 @@ router
 	.route('/videos')
 	.get(async (req: Request, res: Response) => {
 		const videos = await Video.query();
-	
-	
-		return res.status(200).json({ videos });
+		const resVideos = videos.map(video => ({
+			etag: video.etag,
+			id: {
+				videoId: video.videoId,
+				name: video.name,
+			}
+		}));
+		
+		return res.status(200).json({ resVideos });
 	});
 
 export default router;

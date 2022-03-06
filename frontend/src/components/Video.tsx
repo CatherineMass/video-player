@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Video: React.FC<Props> = ({ currentVideo, sendVideoToSidebar }) => {
-	const youtubeVideoId: string = currentVideo?.videoId;
+	const youtubeVideoId: string = currentVideo?.id?.videoId;
 
 	return (
 		<iframe
