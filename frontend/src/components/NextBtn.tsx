@@ -6,11 +6,11 @@ interface Props {
 }
 
 const NextBtn: React.FC<Props> = ({ onNextClick }) => {
-    return (
-        <button onClick={onNextClick} className="next-btn">
+  return (
+    <button onClick={onNextClick} className="next-btn">
       Next
-        </button>
-    );
+    </button>
+  );
 };
 
 export default NextBtn;

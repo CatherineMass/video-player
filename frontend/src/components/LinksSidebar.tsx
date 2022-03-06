@@ -9,12 +9,12 @@ interface Props {
 }
 
 const LinksSidebar: React.FC<Props> = ({ onClickAllVideos, onClickFav }) => {
-    return (
-        <div className="sidebar-links">
-            <BtnFavorites onClickFav={onClickFav} />
-            <BtnAllVideos onClickAllVideos={onClickAllVideos} />
-        </div>
-    );
+  return (
+    <div className="sidebar-links">
+      <BtnFavorites onClickFav={onClickFav} />
+      <BtnAllVideos onClickAllVideos={onClickAllVideos} />
+    </div>
+  );
 };
 
 export default LinksSidebar;

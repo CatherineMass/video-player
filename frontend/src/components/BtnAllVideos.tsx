@@ -6,15 +6,15 @@ interface Props {
 }
 
 const BtnAllVideos: React.FC<Props> = ({ onClickAllVideos }) => {
-    return (
-        <button
-            className="btn-all-videos"
-            type="button"
-            onClick={onClickAllVideos}
-        >
+  return (
+    <button
+      className="btn-all-videos"
+      type="button"
+      onClick={onClickAllVideos}
+    >
       All Videos
-        </button>
-    );
+    </button>
+  );
 };
 
 export default BtnAllVideos;
