@@ -6,11 +6,11 @@ interface Props {
 }
 
 const PreviousBtn:React.FC<Props> = ({ onPrevClick }) => {
-	return (
-		<button onClick={onPrevClick} className="previous-btn">
+    return (
+        <button onClick={onPrevClick} className="previous-btn">
       Previous
-		</button>
-	);
+        </button>
+    );
 };
 
 export default PreviousBtn;

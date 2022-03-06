@@ -10,23 +10,23 @@ interface Props {
 }
 
 const ListFavorites: React.FC<Props> = ({
-	clickHeart,	favoritesVideos, favVideos,	handleSidebarClick,
+    clickHeart,	favoritesVideos, favVideos,	handleSidebarClick,
 }) => {
 	
-	return (
-		<div className="list-favorites">
-			{favVideos && favVideos.map((video) => (
-				<VideoTag
-					videoName={video?.id?.name}
-					videoId={video?.id?.videoId}
-					key={video?.id?.videoId}
-					clickHeart={clickHeart}
-					favoritesVideos={favoritesVideos}
-					handleSidebarClick={handleSidebarClick}
-				/>
-			))}
-		</div>
-	);
+    return (
+        <div className="list-favorites">
+            {favVideos && favVideos.map((video) => (
+                <VideoTag
+                    videoName={video?.id?.name}
+                    videoId={video?.id?.videoId}
+                    key={video?.id?.videoId}
+                    clickHeart={clickHeart}
+                    favoritesVideos={favoritesVideos}
+                    handleSidebarClick={handleSidebarClick}
+                />
+            ))}
+        </div>
+    );
 };
 
 export default ListFavorites;

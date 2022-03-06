@@ -6,11 +6,11 @@ interface Props {
 }
 
 const BtnFavorites: React.FC<Props> = ({ onClickFav }) => {
-	return (
-		<button className="btn-favorites" type="button" onClick={onClickFav}>
+    return (
+        <button className="btn-favorites" type="button" onClick={onClickFav}>
       My Favorites
-		</button>
-	);
+        </button>
+    );
 };
 
 export default BtnFavorites;

@@ -12,29 +12,29 @@ interface Props {
 }
 
 const VideoTag: React.FC<Props> = ({
-	videoName, videoId,	favoritesVideos, clickHeart, handleSidebarClick,
+    videoName, videoId,	favoritesVideos, clickHeart, handleSidebarClick,
 }) => {
-	return (
-		<div>
-			<BtnVideoName
-				videoName={videoName}
-				videoId={videoId}
-				handleSidebarClick={handleSidebarClick}
-			/>
-			<button
-				className="btn-heart"
-				type="button"
-				id={videoId}
-				onClick={() => clickHeart(videoId)}
-			>
-				{favoritesVideos.includes(videoId) ? (
-					<FaHeart color="red" />
-				) : (
-					<FaHeart color="grey" />
-				)}
-			</button>
-		</div>
-	);
+    return (
+        <div>
+            <BtnVideoName
+                videoName={videoName}
+                videoId={videoId}
+                handleSidebarClick={handleSidebarClick}
+            />
+            <button
+                className="btn-heart"
+                type="button"
+                id={videoId}
+                onClick={() => clickHeart(videoId)}
+            >
+                {favoritesVideos.includes(videoId) ? (
+                    <FaHeart color="red" />
+                ) : (
+                    <FaHeart color="grey" />
+                )}
+            </button>
+        </div>
+    );
 };
 
 export default VideoTag;

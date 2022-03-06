@@ -9,12 +9,12 @@ interface Props {
 }
 
 const BtnGroup: React.FC<Props> = ({ onNextClick, onPrevClick }) => {
-	return (
-		<div className="btn-group">
-			<PreviousBtn onPrevClick={onPrevClick} />
-			<NextBtn onNextClick={onNextClick} />
-		</div>
-	);
+    return (
+        <div className="btn-group">
+            <PreviousBtn onPrevClick={onPrevClick} />
+            <NextBtn onNextClick={onNextClick} />
+        </div>
+    );
 };
 
 export default BtnGroup;

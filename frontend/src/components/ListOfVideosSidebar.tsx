@@ -16,36 +16,36 @@ interface Props {
 }
 
 const ListOfVideosSidebar: React.FC<Props> = ({
-	videoIds,	visibleAll,	visibleFav,	clickHeart,	favoritesVideos, favVideos, listDefault,handleSidebarClick,
+    videoIds,	visibleAll,	visibleFav,	clickHeart,	favoritesVideos, favVideos, listDefault,handleSidebarClick,
 }) => {
 	
-	return (
-		<div className="list-of-videos-sidebar">
-			{visibleAll ? (
-				<ListAllVideos
-					videoIds={videoIds}
-					favoritesVideos={favoritesVideos}
-					clickHeart={clickHeart}
-					handleSidebarClick={handleSidebarClick}
-				/>
-			) : visibleFav ? (
-				<ListFavorites
-					favoritesVideos={favoritesVideos}
-					favVideos={favVideos}
-					clickHeart={clickHeart}
-					handleSidebarClick={handleSidebarClick}
-				/>
-			) : (
-				<ListDefault
-					listDefault={listDefault}
-					videoIds={videoIds}
-					favoritesVideos={favoritesVideos}
-					clickHeart={clickHeart}
-					handleSidebarClick={handleSidebarClick}
-				/>
-			)}
-		</div>
-	);
+    return (
+        <div className="list-of-videos-sidebar">
+            {visibleAll ? (
+                <ListAllVideos
+                    videoIds={videoIds}
+                    favoritesVideos={favoritesVideos}
+                    clickHeart={clickHeart}
+                    handleSidebarClick={handleSidebarClick}
+                />
+            ) : visibleFav ? (
+                <ListFavorites
+                    favoritesVideos={favoritesVideos}
+                    favVideos={favVideos}
+                    clickHeart={clickHeart}
+                    handleSidebarClick={handleSidebarClick}
+                />
+            ) : (
+                <ListDefault
+                    listDefault={listDefault}
+                    videoIds={videoIds}
+                    favoritesVideos={favoritesVideos}
+                    clickHeart={clickHeart}
+                    handleSidebarClick={handleSidebarClick}
+                />
+            )}
+        </div>
+    );
 };
 
 export default ListOfVideosSidebar;

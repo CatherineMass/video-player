@@ -16,25 +16,25 @@ interface Props {
 }
 
 const MainContainer: React.FC<Props> = ({
-	handleFilter,	filteredList,	handleSearch, currentVideo, nextClick,	prevClick, sendVideoToSidebar,
+    handleFilter,	filteredList,	handleSearch, currentVideo, nextClick,	prevClick, sendVideoToSidebar,
 }) => {
-	return (
-		<div className="main-container">
-			<img src={logo} alt="logo" className="logo" />
-			<SearchBar
-				handleFilter={handleFilter}
-				filteredList={filteredList}
-				handleSearch={handleSearch}
-			/>
-			<div className="video-and-btn-container">
-				<Video
-					currentVideo={currentVideo}
-					sendVideoToSidebar={sendVideoToSidebar}
-				/>
-				<BtnGroup onNextClick={nextClick} onPrevClick={prevClick} />
-			</div>
-		</div>
-	);
+    return (
+        <div className="main-container">
+            <img src={logo} alt="logo" className="logo" />
+            <SearchBar
+                handleFilter={handleFilter}
+                filteredList={filteredList}
+                handleSearch={handleSearch}
+            />
+            <div className="video-and-btn-container">
+                <Video
+                    currentVideo={currentVideo}
+                    sendVideoToSidebar={sendVideoToSidebar}
+                />
+                <BtnGroup onNextClick={nextClick} onPrevClick={prevClick} />
+            </div>
+        </div>
+    );
 };
 
 export default MainContainer;
