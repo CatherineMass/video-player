@@ -57,7 +57,7 @@ function App() {
 				typeof video?.id?.name === 'string' &&
 				video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
 		);
-		searchWord === '' ? setFilteredList([]) : setFilteredList(newFilter);
+		setFilteredList(searchWord.replace(/\s+/g, '') === '' ? [] : newFilter);
 	};
 
 	// Handle search from suggestions
