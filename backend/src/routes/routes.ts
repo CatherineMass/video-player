@@ -17,9 +17,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const corsOptions = {
-	origin: 'http://localhost:3000',
-	optionsSuccessStatus: 200,
-	credentials: true,
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200,
+    credentials: true,
 };
 
 app.use(cors(corsOptions));
@@ -27,18 +27,18 @@ app.use(cors(corsOptions));
 const router: Router = express.Router();
 
 router
-	.route('/videos')
-	.get(async (req: Request, res: Response) => {
-		const videos = await Video.query();
-		const resVideos = videos.map(video => ({
-			etag: video.etag,
-			id: {
-				videoId: video.videoId,
-				name: video.name,
-			}
-		}));
+    .route('/videos')
+    .get(async (req: Request, res: Response) => {
+        const videos = await Video.query();
+        const resVideos = videos.map(video => ({
+            etag: video.etag,
+            id: {
+                videoId: video.videoId,
+                name: video.name,
+            }
+        }));
 		
-		return res.status(200).json({ resVideos });
-	});
+        return res.status(200).json({ resVideos });
+    });
 
 export default router;
