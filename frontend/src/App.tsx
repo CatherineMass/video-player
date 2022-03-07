@@ -8,9 +8,7 @@ function App() {
   const [videoIds, setVideoIds] = useState<AppProps['arrayOfVideos']>([]);
   // const [defaultVideo, setDefaultVideo] = useState<AppProps['video']>({} as AppProps['video']);
 
-  const getVideos = async () => {
-    console.log(process.env.REACT_APP_SERVER);
-    
+  const getVideos = async () => {    
     const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/videos`, {
       method: 'GET',
       credentials: 'include',
@@ -60,7 +58,13 @@ function App() {
         video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
     );
     setFilteredList(searchWord.replace(/\s+/g, '') === '' ? [] : newFilter);
+    if (filteredList.length === 0) {fetchYoutube();}
   };
+
+  const fetchYoutube = () => {
+    console.log('Oups, we need to get videos from youtube');
+  };
+  
 
   // Handle search from suggestions
   const handleSearch: AppProps['handleSearch'] = (id, video) => {
