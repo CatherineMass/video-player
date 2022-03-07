@@ -58,13 +58,16 @@ function App() {
         video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
     );
     setFilteredList(searchWord.replace(/\s+/g, '') === '' ? [] : newFilter);
-    if (filteredList.length === 0) {fetchYoutube();}
+    // if (filteredList.length === 0) {fetchYoutube();}
   };
 
+
+  console.log(filteredList);
   const fetchYoutube = () => {
     console.log('Oups, we need to get videos from youtube');
   };
-  
+  searchWord && !filteredList.length && fetchYoutube(); // doesn't work.
+  //  youtube api search: options I will need => videoEmbeddable: true, type: video, q: searchWord
 
   // Handle search from suggestions
   const handleSearch: AppProps['handleSearch'] = (id, video) => {
