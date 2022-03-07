@@ -9,16 +9,19 @@ function App() {
   // const [defaultVideo, setDefaultVideo] = useState<AppProps['video']>({} as AppProps['video']);
 
   const getVideos = async () => {
-    const response = await fetch('http://localhost:3005/api/v1/videos', {
+    console.log(process.env.REACT_APP_SERVER);
+    
+    const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/videos`, {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
     });
+
     const data = await response.json();
 
     setVideoIds(data.resVideos);
     // setDefaultVideo(data.videos[0]);
   };
+  // console.log(videoIds);
 
   useEffect(() => {
     getVideos();
