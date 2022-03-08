@@ -54,10 +54,21 @@ router.route('/search').get(async (req: Request, res: Response) => {
     // const {q} = req.query; // where q is the search term that you would send from the frontend as well
 
     // API connection to Youtube
-    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=sweden&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
+    // Limit of 2 videos is just for now. Will increase it once the feature is working.
+    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=sweden&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
     const data = await response.json();
     const items: Item[] = data.items;
-    
+
+    // save to database
+    const videosInsert = items.map(item => ({
+        etag: item.etag,
+        videoId: item.id.videoId,
+        name: item.snippet.title
+    }));
+
+    await Video.query().insert(videosInsert);
+
+    // send result    
     const searchResult = items.map(item => ({
         etag: item.etag,
         id: {
@@ -66,10 +77,6 @@ router.route('/search').get(async (req: Request, res: Response) => {
         }
     }));
     return res.send(searchResult);
-
-    // save to database
-
-    // send result
 });
 
 export default router;
