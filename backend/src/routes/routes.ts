@@ -6,7 +6,15 @@ import config from '../../knexfile';
 import { Model } from 'objection';
 import Video from '../models/video';
 
-// const fetch = (...args: string[]) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+interface Item {
+    etag: string;
+    id: {
+        videoId: string;
+    }
+    snippet: {
+        title: string;
+    }
+}
 
 // // Initialize knex
 const knex = Knex(config.development);
@@ -48,8 +56,16 @@ router.route('/search').get(async (req: Request, res: Response) => {
     // API connection to Youtube
     const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=sweden&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
     const data = await response.json();
-
-    return res.send(data);
+    const items: Item[] = data.items;
+    
+    const searchResult = items.map(item => ({
+        etag: item.etag,
+        id: {
+            videoId: item.id.videoId,
+            name: item.snippet.title,
+        }
+    }));
+    return res.send(searchResult);
 
     // save to database
 
