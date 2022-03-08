@@ -61,12 +61,10 @@ function App() {
     // if (filteredList.length === 0) {fetchYoutube();}
   };
 
-
-  console.log(filteredList);
-  const fetchYoutube = () => {
-    console.log('Oups, we need to get videos from youtube');
-  };
-  searchWord && !filteredList.length && fetchYoutube(); // doesn't work.
+  // const fetchYoutube = () => {
+  //   console.log('Oups, we need to get videos from youtube');
+  // };
+  // searchWord && !filteredList.length && fetchYoutube(); // doesn't work.
   //  youtube api search: options I will need => videoEmbeddable: true, type: video, q: searchWord
 
   // Handle search from suggestions
