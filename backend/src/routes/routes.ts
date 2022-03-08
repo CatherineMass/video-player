@@ -1,9 +1,12 @@
 import cors from 'cors';
 import express, { Application, Router, Request, Response } from 'express';
 import Knex from 'knex';
+import fetch from 'node-fetch';
 import config from '../../knexfile';
 import { Model } from 'objection';
 import Video from '../models/video';
+
+// const fetch = (...args: string[]) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 // // Initialize knex
 const knex = Knex(config.development);
@@ -39,14 +42,18 @@ router.route('/videos').get(async (req: Request, res: Response) => {
     return res.status(200).json({ resVideos });
 });
 
-app.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=sweden&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`, (req: Request, res: Response) => {
-    
+router.route('/search').get(async (req: Request, res: Response) => {
+    // const {q} = req.query; // where q is the search term that you would send from the frontend as well
+
+    // API connection to Youtube
+    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=sweden&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
+    const data = await response.json();
+
+    return res.send(data);
+
+    // save to database
+
+    // send result
 });
-
-
-// router.route('/youtube').get(async (req: Request, res: Response) => {
-
-
-// });
 
 export default router;
