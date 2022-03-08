@@ -54,7 +54,7 @@ router.route('/search').get(async (req: Request, res: Response) => {
     // const {q} = req.query; // where q is the search term that you would send from the frontend as well
 
     // API connection to Youtube
-    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=sweden&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
+    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=sweden&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
     const data = await response.json();
     const items: Item[] = data.items;
     
