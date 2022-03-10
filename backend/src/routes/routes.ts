@@ -55,24 +55,36 @@ router.route('/search').get(async (req: Request, res: Response) => {
 
     // API connection to Youtube
     // Limit of 2 videos is just for now. Will increase it once the feature is working.
-    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=france&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
+    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=spain&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
     const data = await response.json();
     const items: Item[] = data.items;
 
-    // save to database
-    items.map(item => {(
-        toInsert = {etag: item.etag, videoId: item.id.videoId, name: item.snippet.title};
-        Video.query().insert(toInsert);
-        const result = {
+    const results = items.map(async item => {
+        const toInsert = {
+            etag: item.etag, 
+            videoId: item.id.videoId, 
+            name: item.snippet.title
+        };
+        await Video.query().insert(toInsert);
+        return {
             etag: item.etag,
             id: {
                 videoId: item.id.videoId,
                 name: item.snippet.title,
             }
         };
-        return result;
-    )}
-    );    
+    });
+    return res.send(results);
+
+    // save to database
+    // const result = items.map(item => {
+    //     Video.query().insertAndFetch({
+    //         etag: item.etag, 
+    //         videoId: item.id.videoId, 
+    //         name: item.snippet.title
+    //     });
+    // });
+    // return res.send(result);
 
     // await Video.query().insert(videosInsert);
 
