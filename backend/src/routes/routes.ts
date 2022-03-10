@@ -3,7 +3,7 @@ import express, { Application, Router, Request, Response } from 'express';
 import Knex from 'knex';
 import fetch from 'node-fetch';
 import config from '../../knexfile';
-import { Model } from 'objection';
+import { Model, QueryBuilder } from 'objection';
 import Video from '../models/video';
 
 interface Item {
@@ -55,7 +55,7 @@ router.route('/search').get(async (req: Request, res: Response) => {
 
     // API connection to Youtube
     // Limit of 2 videos is just for now. Will increase it once the feature is working.
-    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=ethiopia&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
+    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=india&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
     const data = await response.json();
     const items: Item[] = data.items;
         
@@ -74,9 +74,9 @@ router.route('/search').get(async (req: Request, res: Response) => {
             },
         };
     });
-    const toSend = await Promise.all(promises);   
+    const searchResult = await Promise.all(promises);   
 
-    return res.status(201).json({toSend});
+    return res.status(201).json(searchResult);
 });
 
 export default router;
