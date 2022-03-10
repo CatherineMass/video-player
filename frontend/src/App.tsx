@@ -50,22 +50,29 @@ function App() {
 
   let searchWord = '';
 
-  const handleFilter: AppProps['handleFilter'] = (e) => {
+  const handleFilter: AppProps['handleFilter'] = async (e) => {
     searchWord = e.target.value;
+
+    const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/search`, {
+      method: 'POST',
+      headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json' 
+      },
+      credentials: 'include',
+      body: JSON.stringify(searchWord)
+    });
+    const searchResult = await response.json();
+    console.log(searchResult);
+    
+
     const newFilter = videoIds.filter(
       (video) =>
         typeof video?.id?.name === 'string' &&
         video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
     );
     setFilteredList(searchWord.replace(/\s+/g, '') === '' ? [] : newFilter);
-    // if (filteredList.length === 0) {fetchYoutube();}
   };
-
-  // const fetchYoutube = () => {
-  //   console.log('Oups, we need to get videos from youtube');
-  // };
-  // searchWord && !filteredList.length && fetchYoutube(); // doesn't work.
-  //  youtube api search: options I will need => videoEmbeddable: true, type: video, q: searchWord
 
   // Handle search from suggestions
   const handleSearch: AppProps['handleSearch'] = (id, video) => {
