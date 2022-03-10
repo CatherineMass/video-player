@@ -55,12 +55,12 @@ router.route('/search').get(async (req: Request, res: Response) => {
 
     // API connection to Youtube
     // Limit of 2 videos is just for now. Will increase it once the feature is working.
-    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=colombia&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
+    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=ethiopia&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
     const data = await response.json();
     const items: Item[] = data.items;
         
     const promises = items.map(async item => {
-        const toInsert = await {
+        const toInsert = {
             etag: item.etag, 
             videoId: item.id.videoId, 
             name: item.snippet.title
