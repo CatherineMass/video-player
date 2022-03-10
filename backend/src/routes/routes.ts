@@ -55,28 +55,36 @@ router.route('/search').get(async (req: Request, res: Response) => {
 
     // API connection to Youtube
     // Limit of 2 videos is just for now. Will increase it once the feature is working.
-    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=sweden&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
+    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=france&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
     const data = await response.json();
     const items: Item[] = data.items;
 
     // save to database
-    const videosInsert = items.map(item => ({
-        etag: item.etag,
-        videoId: item.id.videoId,
-        name: item.snippet.title
-    }));
+    items.map(item => {(
+        toInsert = {etag: item.etag, videoId: item.id.videoId, name: item.snippet.title};
+        Video.query().insert(toInsert);
+        const result = {
+            etag: item.etag,
+            id: {
+                videoId: item.id.videoId,
+                name: item.snippet.title,
+            }
+        };
+        return result;
+    )}
+    );    
 
-    await Video.query().insert(videosInsert);
+    // await Video.query().insert(videosInsert);
 
     // send result    
-    const searchResult = items.map(item => ({
-        etag: item.etag,
-        id: {
-            videoId: item.id.videoId,
-            name: item.snippet.title,
-        }
-    }));
-    return res.send(searchResult);
+    // const searchResult = items.map(item => ({
+    //     etag: item.etag,
+    //     id: {
+    //         videoId: item.id.videoId,
+    //         name: item.snippet.title,
+    //     }
+    // }));
+    // return res.send(searchResult);
 });
 
 export default router;
