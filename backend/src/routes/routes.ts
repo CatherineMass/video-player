@@ -50,38 +50,33 @@ router.route('/videos').get(async (req: Request, res: Response) => {
     return res.status(200).json({ resVideos });
 });
 
-router.route('/search').get(async (req: Request, res: Response) => {
+router.route('/search').post(async (req: Request, res: Response) => {
     const { q } = req.body;
-
-    res.json({q});
-    
-    // const {q} = req.query; // where q is the search term that you would send from the frontend as well
 
     // API connection to Youtube
     // Limit of 2 videos is just for now. Will increase it once the feature is working.
-
-    // const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=india&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
-    // const data = await response.json();
-    // const items: Item[] = data.items;
+    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${q}&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
+    const data = await response.json();
+    const items: Item[] = data.items;
         
-    // const promises = items.map(async item => {
-    //     const toInsert = {
-    //         etag: item.etag, 
-    //         videoId: item.id.videoId, 
-    //         name: item.snippet.title
-    //     };
-    //     await Video.query().insert(toInsert);
-    //     return {
-    //         etag: item.etag,
-    //         id: {
-    //             videoId: item.id.videoId,
-    //             name: item.snippet.title,
-    //         },
-    //     };
-    // });
-    // const searchResult = await Promise.all(promises);   
+    const promises = items.map(async item => {
+        const toInsert = {
+            etag: item.etag, 
+            videoId: item.id.videoId, 
+            name: item.snippet.title
+        };
+        await Video.query().insert(toInsert);
+        return {
+            etag: item.etag,
+            id: {
+                videoId: item.id.videoId,
+                name: item.snippet.title,
+            },
+        };
+    });
+    const searchResult = await Promise.all(promises);   
 
-    // return res.status(201).json(searchResult);
+    return res.status(201).json(searchResult);
 });
 
 export default router;

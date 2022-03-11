@@ -60,7 +60,7 @@ function App() {
         'Content-Type': 'application/json' 
       },
       credentials: 'include',
-      body: JSON.stringify(searchWord)
+      body: JSON.stringify({'q': `${searchWord}`})
     });
     const searchResult = await response.json();
     console.log(searchResult);
