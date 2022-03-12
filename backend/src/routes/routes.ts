@@ -68,12 +68,15 @@ router.route('/search').post(async (req: Request, res: Response) => {
         
         // Insert only if video is not already in.
         const promises = items.map(async item => {
-            const toInsert = {
-                etag: item.etag, 
-                videoId: item.id.videoId, 
-                name: item.snippet.title
-            };
-            await Video.query().insert(toInsert);
+            const videoInDb = await Video.query().where('videoId', item.id.videoId);
+            if (!videoInDb) {
+                const toInsert = {
+                    etag: item.etag, 
+                    videoId: item.id.videoId, 
+                    name: item.snippet.title
+                };
+                await Video.query().insert(toInsert);
+            }
             return {
                 etag: item.etag,
                 id: {
