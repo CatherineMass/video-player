@@ -65,12 +65,13 @@ function App() {
     const searchResult = await response.json();
     console.log(searchResult);
     
-
     const newFilter = videoIds.filter(
       (video) =>
         typeof video?.id?.name === 'string' &&
         video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
     );
+    console.log(newFilter);
+    
     setFilteredList(searchWord.replace(/\s+/g, '') === '' ? [] : newFilter);
   };
 
