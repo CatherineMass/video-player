@@ -139,6 +139,9 @@
 .btn-video-name {
   width: 24rem;
   height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   border: none;
   background-color: white;
   text-align: left;
