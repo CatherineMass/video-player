@@ -115,7 +115,9 @@
   flex-direction: column;
   justify-content: left;
   position: relative;
-  width: 24em;
+  overflow: hidden;
+  overflow-y: auto;
+  width: 28em;
   height: 80vh;
   float: right;
   margin-top: 1em;
@@ -135,8 +137,8 @@
 }
 
 .btn-video-name {
-  width: 22rem;
-  height: 2em;
+  width: 24rem;
+  height: 3em;
   border: none;
   background-color: white;
   text-align: left;

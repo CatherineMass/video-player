@@ -14,7 +14,10 @@ const BtnVideoName: React.FC<Props> = ({ videoName, videoId, handleSidebarClick 
       type="button"
       onClick={() => handleSidebarClick(videoId)}
     >
-      {videoName} #{videoId}
+      {
+        videoName && videoName?.split(' ').length > 4 ? `${videoName.split(' ').slice(0, 4).join(' ')}... #${videoId}` : `${videoName} #${videoId}`
+      }
+      
     </button>
   );
 };
