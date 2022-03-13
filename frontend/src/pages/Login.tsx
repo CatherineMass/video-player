@@ -10,7 +10,7 @@ const Login = () => {
       <input title='password' placeholder='Password' type='text' className='form-text-input' />
       <div className='form-footer'>
         <button className='form-btn'>Submit</button>
-        <a href='#'>No account yet? Sign up!</a>
+        <a href='/signup'>No account yet? Sign up!</a>
       </div>
     </form>
   );

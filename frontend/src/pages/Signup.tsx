@@ -13,7 +13,7 @@ const Signup = () => {
         <input title='password' placeholder='Password' type='text' className='form-text-input' />
         <div className='form-footer'>
           <button className='form-btn'>Submit</button>
-          <a href='#'>Already have an account? Login!</a>
+          <a href='/login'>Already have an account? Login!</a>
         </div>
       </form>
     </div>
