@@ -36,6 +36,11 @@ app.use(cors(corsOptions));
 
 const router: Router = express.Router();
 
+// Add middleware to format data that go to the frontend.
+// Add error handling.
+// Middleware for error handling/ try-catch.
+// Controllers? (like in task manager)
+
 router.route('/videos').get(async (req: Request, res: Response) => {
     const videos = await Video.query();
     const resVideos = videos.map((video) => ({
@@ -96,5 +101,12 @@ router.route('/search').post(async (req: Request, res: Response) => {
         return res.status(201).json({ videos: searchResult });
     }
 });
+
+// router.route('/users').post ==> signup. Username, email, password.
+// router.route('/users/:id').post ==> login. Username/email, password.
+// router.route('/users/:id').get ==> logout.
+// router.route('/users/:id').patch ==> update.
+// router.route('/users/:id').delete ==> delete account.
+
 
 export default router;

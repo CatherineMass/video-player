@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom';
 import './reset.css';
 import './index.css';
 import App from './App';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<App />} />
+      <Route path='/login' element={<Login />} />
+    </Routes>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
