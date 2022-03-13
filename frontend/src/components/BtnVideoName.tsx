@@ -2,22 +2,25 @@ import React from 'react';
 import { AppProps } from '../AppProps';
 
 interface Props {
-	videoName: string | null;
-	videoId: string;
+  videoName: string | null;
+  videoId: string;
   handleSidebarClick: AppProps['stringVoid'];
 }
 
-const BtnVideoName: React.FC<Props> = ({ videoName, videoId, handleSidebarClick }) => {
+const BtnVideoName: React.FC<Props> = ({
+  videoName,
+  videoId,
+  handleSidebarClick,
+}) => {
   return (
     <button
       className="btn-video-name"
       type="button"
       onClick={() => handleSidebarClick(videoId)}
     >
-      {
-        videoName && videoName?.split(' ').length > 4 ? `${videoName.split(' ').slice(0, 4).join(' ')}... #${videoId}` : `${videoName} #${videoId}`
-      }
-      
+      {videoName && videoName?.split(' ').length > 4
+        ? `${videoName.split(' ').slice(0, 4).join(' ')}... #${videoId}`
+        : `${videoName} #${videoId}`}
     </button>
   );
 };
