@@ -63,17 +63,8 @@ function App() {
       body: JSON.stringify({'q': `${searchWord}`})
     });
     const searchRes = await response.json();
-    const searchResult = searchRes.dbResult;
-    console.log(searchResult);
-    
-    
-    // const newFilter = videoIds.filter(
-    //   (video) =>
-    //     typeof video?.id?.name === 'string' &&
-    //     video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
-    // );
-    // console.log(newFilter);
-    
+    const searchResult = searchRes?.searchResult;
+
     setFilteredList([...searchResult]);
   };
 
