@@ -62,8 +62,8 @@ function App() {
       credentials: 'include',
       body: JSON.stringify({'q': `${searchWord}`})
     });
-    const searchRes = await response.json();
-    const searchResult = searchRes?.searchResult;
+    const searchRes = await response.json();    
+    const searchResult = searchRes.videos;
 
     setFilteredList([...searchResult]);
   };

@@ -66,7 +66,7 @@ router.route('/search').post(async (req: Request, res: Response) => {
                 name: video.name,
             },
         }));
-        return res.status(200).json({ searchResult });
+        return res.status(200).json({ videos: searchResult });
     } else {
         const response = await fetch(
             `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${q}&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`
@@ -95,7 +95,7 @@ router.route('/search').post(async (req: Request, res: Response) => {
         });
         const searchResult = await Promise.all(promises);
 
-        return res.status(201).json({ searchResult });
+        return res.status(201).json({ videos: searchResult });
     }
 });
 
