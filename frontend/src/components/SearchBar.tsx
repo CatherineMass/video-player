@@ -11,6 +11,7 @@ interface Props {
 const SearchBar: React.FC<Props> = ({
   handleFilter,	filteredList,	handleSearch
 }) => {
+  console.log(filteredList);
   return (
     <div className="search-bar">
       <div className="search-bar__input">
@@ -27,7 +28,7 @@ const SearchBar: React.FC<Props> = ({
       </div>
       {filteredList.length !== 0 && (
         <div className="drop-down__list">
-          {filteredList.slice(0, 5).map((video) => (
+          {filteredList.slice(0, 10).map((video) => (
             <button
               key={video?.id?.videoId}
               className="drop-down__btn-video"

@@ -62,17 +62,19 @@ function App() {
       credentials: 'include',
       body: JSON.stringify({'q': `${searchWord}`})
     });
-    const searchResult = await response.json();
+    const searchRes = await response.json();
+    const searchResult = searchRes.dbResult;
     console.log(searchResult);
     
-    const newFilter = videoIds.filter(
-      (video) =>
-        typeof video?.id?.name === 'string' &&
-        video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
-    );
-    console.log(newFilter);
     
-    setFilteredList(searchWord.replace(/\s+/g, '') === '' ? [] : newFilter);
+    // const newFilter = videoIds.filter(
+    //   (video) =>
+    //     typeof video?.id?.name === 'string' &&
+    //     video?.id?.name.toLowerCase().includes(searchWord.toLowerCase())
+    // );
+    // console.log(newFilter);
+    
+    setFilteredList([...searchResult]);
   };
 
   // Handle search from suggestions

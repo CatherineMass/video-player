@@ -1,20 +1,19 @@
 import cors from 'cors';
 import express, { Application, Router, Request, Response } from 'express';
 import Knex from 'knex';
-// import whereLike from 'knex';
 import fetch from 'node-fetch';
 import config from '../../knexfile';
 import { Model } from 'objection';
 import Video from '../models/video';
 
-interface Item {
-    etag: string;
-    id: {
-        videoId: string;
-    }
-    snippet: {
-        title: string;
-    }
+interface VideoResult {
+  etag: string;
+  id: {
+    videoId: string;
+  };
+  snippet: {
+    title: string;
+  };
 }
 
 // // Initialize knex
@@ -60,20 +59,29 @@ router.route('/search').post(async (req: Request, res: Response) => {
     // API connection to Youtube
     // Limit of 2 videos is just for now. Will increase it once the feature is working.
     if (resultDb.length > 0) {
-        return res.status(200).json(resultDb);
+        const dbResult = resultDb.map((video) => ({
+            etag: video.etag,
+            id: {
+                videoId: video.videoId,
+                name: video.name,
+            },
+        }));
+        return res.status(200).json({ dbResult });
     } else {
-        const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${q}&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`);
+        const response = await fetch(
+            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${q}&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`
+        );
         const data = await response.json();
-        const items: Item[] = data.items;
-        
+        const items: VideoResult[] = data.items;
+
         // Insert only if video is not already in.
-        const promises = items.map(async item => {
+        const promises = items.map(async (item) => {
             const videoInDb = await Video.query().where('videoId', item.id.videoId);
             if (!videoInDb) {
                 const toInsert = {
-                    etag: item.etag, 
-                    videoId: item.id.videoId, 
-                    name: item.snippet.title
+                    etag: item.etag,
+                    videoId: item.id.videoId,
+                    name: item.snippet.title,
                 };
                 await Video.query().insert(toInsert);
             }
@@ -85,7 +93,7 @@ router.route('/search').post(async (req: Request, res: Response) => {
                 },
             };
         });
-        const searchResult = await Promise.all(promises);   
+        const searchResult = await Promise.all(promises);
 
         return res.status(201).json(searchResult);
     }
