@@ -107,7 +107,8 @@ router.route('/search').post(async (req: Request, res: Response) => {
 
 router.route('/users').post(async (req: Request, res: Response) => {
     const { username, email, password } = req.body;
-
+    console.log(req.body);
+    
     const newUser = {
         username,
         email,
@@ -118,8 +119,8 @@ router.route('/users').post(async (req: Request, res: Response) => {
     };
 
     await User.query().insert(newUser);
-
-    return res.status(200).json(newUser);
+    
+    return res.status(200).json({ username });
 });
 // ==> signup. Username, email, password.
 // router.route('/users/:id').post ==> login. Username/email, password.

@@ -1,4 +1,12 @@
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../providers/AuthProvider';
+
+interface LocationProps {
+  from: {
+    pathname: string;
+  };
+}
 
 const Signup = () => {
   const [newUser, setNewUser] = useState({
@@ -6,8 +14,37 @@ const Signup = () => {
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
+  const location = useLocation();
+  const auth = useAuth();
 
-  const handleSignup = () => {
+  let from = (location.state as LocationProps)?.from;
+  if(!from) {
+    from = { pathname: '/' };
+  }
+
+  // Check if user already exist (backend?)
+
+  const handleSignup = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { username, email, password } = newUser;
+
+    if (username && email && password) {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/users`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newUser),
+          credentials: 'include',
+        });
+
+        await response.json();
+
+        auth.login(newUser, () => navigate(from, { replace: true }));
+        
+      } catch (err) {
+        console.log(err);
+      }}
   };
 
   return (
