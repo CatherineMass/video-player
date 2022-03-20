@@ -157,8 +157,8 @@
 }
 
 .form {
-  margin-top: 20em;
-  margin-left: 45em;
+  margin-top: 20vh;
+  margin-left: 30vw;
   display: flex;
   flex-direction: column;
   width: 50vw;

@@ -1,19 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Signup = () => {
+  const [newUser, setNewUser] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  const handleSignup = () => {
+  };
+
   return (
     <div>
-      <form className='form signup'>
-        <h1 className='form-title'>Sign up</h1>
-        <label className='form-label'>Username</label>
-        <input title='username' placeholder='Username' type='text' className='form-text-input' />
-        <label className='form-label'>Email</label>
-        <input title='email' placeholder='Email' type='text' className='form-text-input' />
-        <label className='form-label'>Password</label>
-        <input title='password' placeholder='Password' type='text' className='form-text-input' />
-        <div className='form-footer'>
-          <button className='form-btn'>Submit</button>
-          <a href='/login'>Already have an account? Login!</a>
+      <form className="form signup" onSubmit={handleSignup}>
+        <h1 className="form-title">Sign up</h1>
+        <label className="form-label">Username</label>
+        <input
+          title="username"
+          placeholder="Username"
+          type="text"
+          className="form-text-input"
+          onChange={(e) => {
+            setNewUser({
+              ...newUser,
+              username: e.target.value,
+            });
+          }}
+        />
+        <label className="form-label">Email</label>
+        <input
+          title="email"
+          placeholder="Email"
+          type="email"
+          className="form-text-input"
+          onChange={(e) => {
+            setNewUser({
+              ...newUser,
+              email: e.target.value,
+            });
+          }}
+        />
+        <label className="form-label">Password</label>
+        <input
+          title="password"
+          placeholder="Password"
+          type="password"
+          className="form-text-input"
+          onChange={(e) => {
+            setNewUser({
+              ...newUser,
+              password: e.target.value,
+            });
+          }}
+        />
+        <div className="form-footer">
+          <button className="form-btn" type='submit'>Submit</button>
+          <a href="/login">Already have an account? Login!</a>
         </div>
       </form>
     </div>

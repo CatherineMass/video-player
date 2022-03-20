@@ -2,9 +2,11 @@ import cors from 'cors';
 import express, { Application, Router, Request, Response } from 'express';
 import Knex from 'knex';
 import fetch from 'node-fetch';
+import jwt from 'jsonwebtoken';
 import config from '../../knexfile';
 import { Model } from 'objection';
 import Video from '../models/video';
+import User from '../models/user';
 
 interface VideoResult {
   etag: string;
@@ -34,6 +36,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+const secret: string = process.env.JWT_SECRET as string;
 const router: Router = express.Router();
 
 // Add middleware to format data that go to the frontend.
@@ -102,7 +105,23 @@ router.route('/search').post(async (req: Request, res: Response) => {
     }
 });
 
-// router.route('/users').post ==> signup. Username, email, password.
+router.route('/users').post(async (req: Request, res: Response) => {
+    const { username, email, password } = req.body;
+
+    const newUser = {
+        username,
+        email,
+        password,
+        token: jwt.sign({ email, username }, secret, {
+            expiresIn: 60 * 3,
+        })
+    };
+
+    await User.query().insert(newUser);
+
+    return res.status(200).json(newUser);
+});
+// ==> signup. Username, email, password.
 // router.route('/users/:id').post ==> login. Username/email, password.
 // router.route('/users/:id').get ==> logout.
 // router.route('/users/:id').patch ==> update.
