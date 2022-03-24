@@ -15,13 +15,13 @@ const Signup = () => {
     password: '',
   });
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
   const auth = useAuth();
 
-  let from = (location.state as LocationProps)?.from;
-  if(!from) {
-    from = { pathname: '/' };
-  }
+  // let from = (location.state as LocationProps)?.from;
+  // if(!from) {
+  //   from = { pathname: '/' };
+  // }
 
   // Check if user already exist (backend?)
 
@@ -40,7 +40,7 @@ const Signup = () => {
 
         await response.json();
 
-        auth.login(newUser, () => navigate(from, { replace: true }));
+        auth.signin(newUser, () => navigate('/'));
         
       } catch (err) {
         console.log(err);

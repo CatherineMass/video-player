@@ -11,7 +11,6 @@ interface Props {
 const SearchBar: React.FC<Props> = ({
   handleFilter,	filteredList,	handleSearch
 }) => {
-  console.log(filteredList);
   return (
     <div className="search-bar">
       <div className="search-bar__input">

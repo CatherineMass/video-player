@@ -1,53 +1,62 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 
-interface AuthContextProps {
-  user: any;
-  login: (user: any, callback: VoidFunction) => void;
-  logout: (callback: VoidFunction) => void;
+interface NewUser {
+  username: string;
+  email: string;
+  password: string;
 }
 
-interface AuthenticationProps {
-  authed: boolean | null | undefined;
-  login: (callback: VoidFunction) => void;
-  logout: (callback: VoidFunction) => void;
+interface AuthContextProps {
+  user: NewUser;
+  signin: (user: NewUser, callback: VoidFunction) => void;
+  signout: (callback: VoidFunction) => void;
 }
+
+// interface AuthenticationProps {
+//   authed: boolean | null | undefined;
+//   login: (newUser: string, callback: VoidFunction) => void;
+//   logout: (callback: VoidFunction) => void;
+// }
 
 const AuthContext = createContext<AuthContextProps>(null!);
 export const useAuth = () => useContext(AuthContext);
 
-const authentication: AuthenticationProps = {
+const authentication = {
   authed: false,
-  login(callback: VoidFunction) {
+  signin(callback: VoidFunction) {
     localStorage.setItem('isLoggedIn', 'true');
     authentication.authed = true;
     callback();
   },
-  logout(callback: VoidFunction) {
+  signout(callback: VoidFunction) {
     localStorage.removeItem('isLoggedIn');
     authentication.authed = false;
     callback();
-  }
+  },
 };
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-
-  const [user, setUser] = useState<any>(null);
-
-  const login = (newUser: any, callback: VoidFunction) => authentication.login(() => {
-    setUser(newUser);
-    callback();
+  const [user, setUser] = useState<NewUser>({
+    username: '',
+    email: '',
+    password: '',
   });
 
-  const logout = (callback: VoidFunction) => authentication.logout(() => {
-    setUser(null);
-    callback();
-  });
+  const signin = (newUser: NewUser, callback: VoidFunction) =>
+    authentication.signin(() => {
+      setUser(newUser);
+      callback();
+    });
 
-  const value = { user, login, logout };
+  const signout = (callback: VoidFunction) =>
+    authentication.signout(() => {
+      setUser({ username: '', email: '', password: '' });
+      callback();
+    });
 
-  return (
-    <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-  );
+  const value = { user, signin, signout };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;
