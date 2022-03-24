@@ -1,13 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../providers/AuthProvider';
 
 const Login = () => {
   const [user, setUser] = useState({
     username: '',
+    email: null,
     password: '',
   });
-
-  console.log(user);
+  const navigate = useNavigate();
+  const auth = useAuth();
+  const [error, setError] = useState();
   
+  const loginHandler = async (e: MouseEvent) => {
+    e.preventDefault();
+
+    const { username, password } = user;
+
+    if (username && password) {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(user),
+          credentials: 'include',
+        });
+
+        const data = await response.json();
+        if (response.status === 401) {
+          setError(data.message);
+          localStorage.setItem('isLoggedin', 'false');
+          throw new Error(data.message);
+        }
+
+        auth.signin(user, () => navigate('/'));
+        
+      } catch (err) {
+        console.log(err);
+      }}
+  };
+
+  useEffect(() => {
+    const checkLogin = () => {
+      if (JSON.parse(localStorage?.isLoggedin || false)) {
+        navigate('/');
+      }
+    };
+    checkLogin();
+  }, []);
 
   return (
     <form className="form login">

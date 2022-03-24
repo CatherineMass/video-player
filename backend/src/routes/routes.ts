@@ -3,6 +3,7 @@ import express, { Application, Router, Request, Response } from 'express';
 import Knex from 'knex';
 import fetch from 'node-fetch';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 import config from '../../knexfile';
 import { Model } from 'objection';
 import Video from '../models/video';
@@ -105,7 +106,7 @@ router.route('/search').post(async (req: Request, res: Response) => {
     }
 });
 
-router.route('/users').post(async (req: Request, res: Response) => {
+router.route('/signup').post(async (req: Request, res: Response) => {
     const { username, email, password } = req.body;
     console.log(req.body);
     
@@ -122,8 +123,23 @@ router.route('/users').post(async (req: Request, res: Response) => {
     
     return res.status(200).json({ username });
 });
-// ==> signup. Username, email, password.
-// router.route('/users/:id').post ==> login. Username/email, password.
+
+router.route('/login').post(async (req: Request, res: Response) => {
+    const { username, password } = req.body;
+
+    try {
+        const user = await User.query().findOne({ username });
+
+        if (user && bcrypt.compareSync(password, user.password)) {
+            // const token = jwt.sign()
+            return res.status(200).json({ message: 'Login successfull' });
+        }
+    } catch (err) {
+        console.log(err);
+    }
+    return res.status(401).json({ message: 'Incorrect username or password' });
+});
+
 // router.route('/users/:id').get ==> logout.
 // router.route('/users/:id').patch ==> update.
 // router.route('/users/:id').delete ==> delete account.
