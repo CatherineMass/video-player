@@ -124,7 +124,7 @@ router.route('/signup').post(async (req: Request, res: Response) => {
     return res.status(200).json({ username });
 });
 
-router.route('/login').post(async (req: Request, res: Response) => {
+router.route('/log').post(async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
     try {

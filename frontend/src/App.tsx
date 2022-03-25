@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AuthProvider from './providers/AuthProvider';
@@ -11,17 +12,15 @@ interface Props {
 
 const App: React.FC<Props> = () => {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <RequireAuth>
-            <Route path='/' element={<App />} />
-          </RequireAuth>
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/login' element={<Login />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+    <Routes>
+      <Route path='/' element={
+        <RequireAuth>
+          <Home />
+        </RequireAuth>
+      } />
+      <Route path='/signup' element={<Signup />} />
+      <Route path='/login' element={<Login />} />
+    </Routes>
   );
 };
 

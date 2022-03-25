@@ -9,7 +9,7 @@ const Signup = () => {
     password: '',
   });
   const navigate = useNavigate();
-  const auth = useAuth();
+  const { signin, authed } = useAuth();
 
   // Check if user already exist (backend?)
 
@@ -19,16 +19,17 @@ const Signup = () => {
 
     if (username && email && password) {
       try {
-        const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/signup`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newUser),
-          credentials: 'include',
-        });
+        // const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/signup`, {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify(newUser),
+        //   credentials: 'include',
+        // });
 
-        await response.json();
+        // await response.json();
 
-        auth.signin(newUser, () => navigate('/'));
+        signin(newUser, () => navigate('/'));
+        console.log('signin ', authed);
         
       } catch (err) {
         console.log(err);

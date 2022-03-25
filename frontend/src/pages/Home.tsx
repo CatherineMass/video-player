@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import { AppProps } from '../AppProps';
 import MainContainer from '../components/MainContainer';
 import SideBar from '../components/SideBar';
+import { useAuth } from '../providers/AuthProvider';
 
 function App() {
   const [videoIds, setVideoIds] = useState<AppProps['arrayOfVideos']>([]);
@@ -19,7 +21,6 @@ function App() {
     setVideoIds(data.resVideos);
     // setDefaultVideo(data.videos[0]);
   };
-  // console.log(videoIds);
 
   useEffect(() => {
     getVideos();
@@ -98,11 +99,42 @@ function App() {
     setCurrentIndex(indexVideoSearched);
   };
 
+  // Check if logged in
+  useEffect(() => {
+    const ping = () => {
+      if (!authed) {
+        navigate('/login');
+      }
+    };
+    ping();
+  }, []);
+
+  const navigate = useNavigate();
+  const {signout, authed} = useAuth();
+
+  const logoutHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    signout(() => navigate('/login'));
+    console.log('logout ', authed);
+
+    // try {
+    //   const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/log`, {
+    //     method: 'GET',
+    //     credentials: 'include',
+    //   });
+    //   const data = await response.json();
+    //   if (data) {}
+
+    // } catch (err) {
+    //   console.log(err);
+    // }
+  };
+
   return (
     <div className="App">
-      <div className='header' style={{ backgroundColor: 'red' }}>
-        <p>Username</p>
-        <button>Logout</button>
+      <div className='header'>
+        <p className='username'>Username</p>
+        <button className='logout-btn' type='button' onClick={logoutHandler}>Logout</button>
       </div>
       <div className='main'>
         <MainContainer

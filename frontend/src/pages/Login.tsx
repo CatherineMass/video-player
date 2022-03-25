@@ -5,35 +5,36 @@ import { useAuth } from '../providers/AuthProvider';
 const Login = () => {
   const [user, setUser] = useState({
     username: '',
-    email: null,
+    email: '',
     password: '',
   });
   const navigate = useNavigate();
-  const auth = useAuth();
+  const { signin, authed } = useAuth();
   const [error, setError] = useState();
   
-  const loginHandler = async (e: MouseEvent) => {
+  const loginHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     const { username, password } = user;
 
     if (username && password) {
       try {
-        const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(user),
-          credentials: 'include',
-        });
+        // const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/log`, {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify(user),
+        //   credentials: 'include',
+        // });
 
-        const data = await response.json();
-        if (response.status === 401) {
-          setError(data.message);
-          localStorage.setItem('isLoggedin', 'false');
-          throw new Error(data.message);
-        }
+        // const data = await response.json();
+        // if (response.status === 401) {
+        //   setError(data.message);
+        //   localStorage.setItem('isLoggedin', 'false');
+        //   throw new Error(data.message);
+        // }
 
-        auth.signin(user, () => navigate('/'));
+        signin(user, () => navigate('/', { replace: true }));
+        console.log('login ', authed);
         
       } catch (err) {
         console.log(err);
@@ -42,7 +43,7 @@ const Login = () => {
 
   useEffect(() => {
     const checkLogin = () => {
-      if (JSON.parse(localStorage?.isLoggedin || false)) {
+      if (authed) {
         navigate('/');
       }
     };
@@ -52,6 +53,7 @@ const Login = () => {
   return (
     <form className="form login">
       <h1 className="form-title">Login</h1>
+      {error && alert({error})}
       <label className="form-label">Username</label>
       <input
         title="username"
@@ -79,7 +81,7 @@ const Login = () => {
         }}
       />
       <div className="form-footer">
-        <button className="form-btn">Submit</button>
+        <button className="form-btn" type='submit' onSubmit={loginHandler}>Submit</button>
         <a href="/signup">No account yet? Sign up!</a>
       </div>
     </form>
