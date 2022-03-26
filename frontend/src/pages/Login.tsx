@@ -19,19 +19,18 @@ const Login = () => {
 
     if (username && password) {
       try {
-        // const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/log`, {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify(user),
-        //   credentials: 'include',
-        // });
+        const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/log`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(user),
+          credentials: 'include',
+        });
 
-        // const data = await response.json();
-        // if (response.status === 401) {
-        //   setError(data.message);
-        //   localStorage.setItem('isLoggedin', 'false');
-        //   throw new Error(data.message);
-        // }
+        const data = await response.json();
+        if (response.status === 401) {
+          setError(data.message);
+          throw new Error(data.message);
+        }
 
         signin(user, () => navigate('/', { replace: true }));
         console.log('login ', authed);
@@ -81,7 +80,7 @@ const Login = () => {
         }}
       />
       <div className="form-footer">
-        <button className="form-btn" type='submit' onSubmit={loginHandler}>Submit</button>
+        <button className="form-btn" type='submit' onClick={loginHandler}>Submit</button>
         <a href="/signup">No account yet? Sign up!</a>
       </div>
     </form>

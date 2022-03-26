@@ -12,15 +12,19 @@ interface Props {
 
 const App: React.FC<Props> = () => {
   return (
-    <Routes>
-      <Route path='/' element={
-        <RequireAuth>
-          <Home />
-        </RequireAuth>
-      } />
-      <Route path='/signup' element={<Signup />} />
-      <Route path='/login' element={<Login />} />
-    </Routes>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={
+            <RequireAuth>
+              <Home />
+            </RequireAuth>
+          } />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 

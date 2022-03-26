@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../providers/AuthProvider';
 
@@ -19,22 +19,31 @@ const Signup = () => {
 
     if (username && email && password) {
       try {
-        // const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/signup`, {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify(newUser),
-        //   credentials: 'include',
-        // });
+        const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newUser),
+          credentials: 'include',
+        });
 
-        // await response.json();
+        await response.json();
 
-        signin(newUser, () => navigate('/'));
+        signin(newUser, () => navigate('/', { replace: true }));
         console.log('signin ', authed);
         
       } catch (err) {
         console.log(err);
       }}
   };
+
+  useEffect(() => {
+    const checkLogin = () => {
+      if (authed) {
+        navigate('/');
+      }
+    };
+    checkLogin();
+  }, []);
 
   return (
     <div>

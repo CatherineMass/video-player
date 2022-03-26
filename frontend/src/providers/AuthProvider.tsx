@@ -26,19 +26,15 @@ const authProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const signin = (newUser: NewUser, callback: VoidFunction) => {
-    () => {
-      setAuthed(true);
-      setUser(newUser);
-      callback();
-    };
+    setAuthed(true);
+    setUser(newUser);
+    callback();
   };
 
   const signout = (callback: VoidFunction) => {
-    () => {
-      setAuthed(false);
-      setUser({ username: '', email: '', password: '' });
-      callback();
-    };
+    setAuthed(false);
+    setUser({ username: '', email: '', password: '' });
+    callback();
   };
 
   const value = { authed, user, signin, signout };

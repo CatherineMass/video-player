@@ -6,7 +6,9 @@ import MainContainer from '../components/MainContainer';
 import SideBar from '../components/SideBar';
 import { useAuth } from '../providers/AuthProvider';
 
-function App() {
+const Home = () => {
+  const navigate = useNavigate();
+  const {signout, authed} = useAuth();
   const [videoIds, setVideoIds] = useState<AppProps['arrayOfVideos']>([]);
   // const [defaultVideo, setDefaultVideo] = useState<AppProps['video']>({} as AppProps['video']);
 
@@ -99,18 +101,13 @@ function App() {
     setCurrentIndex(indexVideoSearched);
   };
 
-  // Check if logged in
-  useEffect(() => {
-    const ping = () => {
-      if (!authed) {
-        navigate('/login');
-      }
-    };
-    ping();
-  }, []);
+  // Check if logged in ==> cannot be useEffect here. UseEffect has to be after an async function, not just on its own.
+  // useEffect(() => {
 
-  const navigate = useNavigate();
-  const {signout, authed} = useAuth();
+  //   ping();
+  // }, []);
+
+
 
   const logoutHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -154,6 +151,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
-export default App;
+export default Home;
