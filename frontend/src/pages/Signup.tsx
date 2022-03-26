@@ -3,12 +3,20 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../providers/AuthProvider';
 
 const Signup = () => {
-  const style = {
-    border: '3px solid red'
+  // Validation
+  const initialValidationState = {
+    style: {},
+    invalid: false,
   };
-  const [nameStyle, setNameStyle] = useState({});
-  const [emailStyle, setEmailStyle] = useState({});
-  const [passwordStyle, setPasswordStyle] = useState({});
+  const invalidState = {
+    style: {
+      border: '3px solid red'
+    },
+    invalid: true,
+  };
+  const [nameValidation, setNameValidation] = useState(initialValidationState);
+  const [emailValidation, setEmailValidation] = useState(initialValidationState);
+  const [passwordValidation, setPasswordValidation] = useState(initialValidationState);
 
   const [newUser, setNewUser] = useState({
     username: '',
@@ -24,9 +32,10 @@ const Signup = () => {
     event.preventDefault();
     const { username, email, password } = newUser;
 
-    !username ? setNameStyle(style) : setNameStyle({});
-    !email ? setEmailStyle(style) : setEmailStyle({}); 
-    !password ? setPasswordStyle(style) : setPasswordStyle({});
+    // Validation
+    !username ? setNameValidation(invalidState) : setNameValidation(initialValidationState);
+    !email ? setEmailValidation(invalidState) : setEmailValidation(initialValidationState);
+    !password ? setPasswordValidation(invalidState) : setPasswordValidation(initialValidationState);
 
     if (username && email && password) {
       try {
@@ -62,7 +71,7 @@ const Signup = () => {
         <h1 className="form-title">Sign up</h1>
         <label className="form-label">Username</label>
         <input
-          style={nameStyle}
+          style={nameValidation.style}
           title="username"
           placeholder="Username"
           type="text"
@@ -74,9 +83,10 @@ const Signup = () => {
             });
           }}
         />
+        { nameValidation.invalid && <p className='invalid-input'>This field is required.</p> }
         <label className="form-label">Email</label>
         <input
-          style={emailStyle}
+          style={emailValidation.style}
           title="email"
           placeholder="Email"
           type="email"
@@ -88,9 +98,10 @@ const Signup = () => {
             });
           }}
         />
+        { emailValidation.invalid && <p className='invalid-input'>This field is required.</p> }
         <label className="form-label">Password</label>
         <input
-          style={passwordStyle}
+          style={passwordValidation.style}
           title="password"
           placeholder="Password"
           type="password"
@@ -102,6 +113,7 @@ const Signup = () => {
             });
           }}
         />
+        { passwordValidation.invalid && <p className='invalid-input'>This field is required.</p> }
         <div className="form-footer">
           <button className="form-btn" type='submit'>Submit</button>
           <a href="/login">Already have an account? Login!</a>

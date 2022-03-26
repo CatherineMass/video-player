@@ -3,11 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../providers/AuthProvider';
 
 const Login = () => {
-  const style = {
-    border: '3px solid red'
+  // Validation
+  const initialValidationState = {
+    style: {},
+    invalid: false,
   };
-  const [nameStyle, setNameStyle] = useState({});
-  const [passwordStyle, setPasswordStyle] = useState({});
+  const invalidState = {
+    style: {
+      border: '3px solid red'
+    },
+    invalid: true,
+  };
+  const [nameValidation, setNameValidation] = useState(initialValidationState);
+  const [passwordValidation, setPasswordValidation] = useState(initialValidationState);
 
   const [user, setUser] = useState({
     username: '',
@@ -23,8 +31,9 @@ const Login = () => {
 
     const { username, password } = user;
 
-    !username ? setNameStyle(style) : setNameStyle({});
-    !password ? setPasswordStyle(style) : setPasswordStyle({});
+    // Validation
+    !username ? setNameValidation(invalidState) : setNameValidation(initialValidationState);
+    !password ? setPasswordValidation(invalidState) : setPasswordValidation(initialValidationState);
 
     if (username && password) {
       try {
@@ -64,7 +73,7 @@ const Login = () => {
       {error && alert({error})}
       <label className="form-label">Username</label>
       <input
-        style={nameStyle}
+        style= {nameValidation.style}
         title="username"
         placeholder="Username"
         type="text"
@@ -76,9 +85,10 @@ const Login = () => {
           });
         }}
       />
+      { nameValidation.invalid && <p className='invalid-input'>This field is required.</p> }
       <label className="form-label">Password</label>
       <input
-        style={passwordStyle}
+        style={passwordValidation.style}
         title="password"
         placeholder="Password"
         type="password"
@@ -90,6 +100,7 @@ const Login = () => {
           });
         }}
       />
+      { passwordValidation.invalid && <p className='invalid-input'>This field is required.</p> }
       <div className="form-footer">
         <button className="form-btn" type='submit' onClick={loginHandler}>Submit</button>
         <a href="/signup">No account yet? Sign up!</a>

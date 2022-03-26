@@ -217,3 +217,8 @@
 .form-btn {
   font-size: x-large;
 }
+
+.invalid-input {
+  color: red;
+  font-size: x-large;
+}
