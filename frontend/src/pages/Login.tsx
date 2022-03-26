@@ -3,6 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../providers/AuthProvider';
 
 const Login = () => {
+  const style = {
+    border: '3px solid red'
+  };
+  const [nameStyle, setNameStyle] = useState({});
+  const [passwordStyle, setPasswordStyle] = useState({});
+
   const [user, setUser] = useState({
     username: '',
     email: '',
@@ -16,6 +22,9 @@ const Login = () => {
     e.preventDefault();
 
     const { username, password } = user;
+
+    !username ? setNameStyle(style) : setNameStyle({});
+    !password ? setPasswordStyle(style) : setPasswordStyle({});
 
     if (username && password) {
       try {
@@ -55,6 +64,7 @@ const Login = () => {
       {error && alert({error})}
       <label className="form-label">Username</label>
       <input
+        style={nameStyle}
         title="username"
         placeholder="Username"
         type="text"
@@ -68,6 +78,7 @@ const Login = () => {
       />
       <label className="form-label">Password</label>
       <input
+        style={passwordStyle}
         title="password"
         placeholder="Password"
         type="password"
