@@ -129,7 +129,6 @@ router.route('/log').post(async (req: Request, res: Response) => {
 
     try {
         const user = await User.query().findOne({ username });
-        console.log(user);
 
         if (user && bcrypt.compareSync(password, user.password)) {
             // const token = jwt.sign()

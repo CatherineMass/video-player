@@ -3,6 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../providers/AuthProvider';
 
 const Signup = () => {
+  const style = {
+    border: '3px solid red'
+  };
+  const [nameStyle, setNameStyle] = useState({});
+  const [emailStyle, setEmailStyle] = useState({});
+  const [passwordStyle, setPasswordStyle] = useState({});
+
   const [newUser, setNewUser] = useState({
     username: '',
     email: '',
@@ -16,6 +23,10 @@ const Signup = () => {
   const handleSignup = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { username, email, password } = newUser;
+
+    !username ? setNameStyle(style) : setNameStyle({});
+    !email ? setEmailStyle(style) : setEmailStyle({}); 
+    !password ? setPasswordStyle(style) : setPasswordStyle({});
 
     if (username && email && password) {
       try {
@@ -51,6 +62,7 @@ const Signup = () => {
         <h1 className="form-title">Sign up</h1>
         <label className="form-label">Username</label>
         <input
+          style={nameStyle}
           title="username"
           placeholder="Username"
           type="text"
@@ -64,6 +76,7 @@ const Signup = () => {
         />
         <label className="form-label">Email</label>
         <input
+          style={emailStyle}
           title="email"
           placeholder="Email"
           type="email"
@@ -77,6 +90,7 @@ const Signup = () => {
         />
         <label className="form-label">Password</label>
         <input
+          style={passwordStyle}
           title="password"
           placeholder="Password"
           type="password"
