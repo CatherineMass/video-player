@@ -12,6 +12,16 @@ const Home = () => {
   const [videoIds, setVideoIds] = useState<AppProps['arrayOfVideos']>([]);
   // const [defaultVideo, setDefaultVideo] = useState<AppProps['video']>({} as AppProps['video']);
 
+  // useEffect(() => {
+  //   const ping = () => {
+  //     const token = sessionStorage.getItem('token');
+  //     if (token) {
+  //       navigate('/');
+  //     } else navigate('/login');
+  //   };
+  //   ping();
+  // }, []);
+
   const getVideos = async () => {    
     const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/videos`, {
       method: 'GET',
@@ -101,18 +111,9 @@ const Home = () => {
     setCurrentIndex(indexVideoSearched);
   };
 
-  // Check if logged in ==> cannot be useEffect here. UseEffect has to be after an async function, not just on its own.
-  // useEffect(() => {
-
-  //   ping();
-  // }, []);
-
-
-
   const logoutHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const username = sessionStorage.getItem('username');
-    console.log(typeof username);
 
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/logout`, {
@@ -124,8 +125,6 @@ const Home = () => {
       await response.json();
 
       signout(() => navigate('/login'));
-      sessionStorage.removeItem('token');
-      sessionStorage.removeItem('username');
 
     } catch (err) {
       console.log(err);

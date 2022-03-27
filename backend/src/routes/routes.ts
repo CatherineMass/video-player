@@ -39,7 +39,7 @@ app.use(cors(corsOptions));
 
 const secret: string = process.env.JWT_SECRET as string;
 if (!secret) {
-    throw new Error('Your are missing a JWT secret in your environment');
+    throw new Error('You are missing a JWT secret in your environment');
 }
 
 const router: Router = express.Router();
@@ -119,7 +119,7 @@ router.route('/signup').post(async (req: Request, res: Response) => {
         email,
         password,
         token: jwt.sign({ email, username }, secret, {
-            expiresIn: 60 * 3,
+            expiresIn: 60 * 10,
         })
     };
 
@@ -137,7 +137,7 @@ router.route('/login')
 
             if (user && bcrypt.compareSync(password, user.password)) {
                 const token = jwt.sign({ email: user.email, username }, secret, {
-                    expiresIn: 60 * 3,
+                    expiresIn: 60 * 10,
                 });
 
                 await User.query().update({'token': token}).where({username});

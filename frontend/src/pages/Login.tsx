@@ -50,23 +50,24 @@ const Login = () => {
           throw new Error(data.message);
         }
 
-        signin(user, () => navigate('/', { replace: true }));
-        sessionStorage.setItem('token', data.token);
-        sessionStorage.setItem('username', username);
+        signin(data.token, user, () => navigate('/', { replace: true }));
         
       } catch (err) {
         console.log(err);
       }}
   };
 
-  useEffect(() => {
-    const checkLogin = () => {
-      if (authed) {
-        navigate('/');
-      }
-    };
-    checkLogin();
-  }, []);
+  // const token = sessionStorage.getItem('token');
+  // console.log(sessionStorage?.token);
+
+  // useEffect(() => {
+  //   const checkLogin = () => {
+  //     if (sessionStorage?.token ==! undefined) {
+  //       navigate('/');
+  //     }
+  //   };
+  //   checkLogin();
+  // }, []);
 
   return (
     <form className="form login">

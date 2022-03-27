@@ -9,7 +9,7 @@ interface NewUser {
 interface AuthContextProps {
   authed: boolean;
   user: NewUser;
-  signin: (user: NewUser, callback: VoidFunction) => void;
+  signin: (token: string, user: NewUser, callback: VoidFunction) => void;
   signout: (callback: VoidFunction) => void;
 }
 
@@ -25,14 +25,18 @@ const authProvider = ({ children }: { children: ReactNode }) => {
     password: '',
   });
 
-  const signin = (newUser: NewUser, callback: VoidFunction) => {
+  const signin = (token: string, newUser: NewUser, callback: VoidFunction) => {
     setAuthed(true);
+    sessionStorage.setItem('token', token);
+    sessionStorage.setItem('username', newUser.username);
     setUser(newUser);
     callback();
   };
 
   const signout = (callback: VoidFunction) => {
     setAuthed(false);
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('username');
     setUser({ username: '', email: '', password: '' });
     callback();
   };

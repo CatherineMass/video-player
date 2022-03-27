@@ -48,23 +48,12 @@ const Signup = () => {
 
         const data = await response.json();
 
-        signin(newUser, () => navigate('/', { replace: true }));
-        sessionStorage.setItem('token', data.token);
-        sessionStorage.setItem('username', data.username);
+        signin(data.token, newUser, () => navigate('/', { replace: true }));
         
       } catch (err) {
         console.log(err);
       }}
   };
-
-  useEffect(() => {
-    const checkLogin = () => {
-      if (authed) {
-        navigate('/');
-      }
-    };
-    checkLogin();
-  }, []);
 
   return (
     <div>
