@@ -37,7 +37,7 @@ const Login = () => {
 
     if (username && password) {
       try {
-        const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/log`, {
+        const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(user),
@@ -51,7 +51,8 @@ const Login = () => {
         }
 
         signin(user, () => navigate('/', { replace: true }));
-        console.log('login ', authed);
+        sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('username', username);
         
       } catch (err) {
         console.log(err);

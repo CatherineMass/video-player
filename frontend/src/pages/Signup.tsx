@@ -46,10 +46,11 @@ const Signup = () => {
           credentials: 'include',
         });
 
-        await response.json();
+        const data = await response.json();
 
         signin(newUser, () => navigate('/', { replace: true }));
-        console.log('signin ', authed);
+        sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('username', data.username);
         
       } catch (err) {
         console.log(err);

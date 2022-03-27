@@ -38,6 +38,10 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 const secret: string = process.env.JWT_SECRET as string;
+if (!secret) {
+    throw new Error('Your are missing a JWT secret in your environment');
+}
+
 const router: Router = express.Router();
 
 // Add middleware to format data that go to the frontend.
@@ -121,24 +125,46 @@ router.route('/signup').post(async (req: Request, res: Response) => {
 
     await User.query().insert(newUser);
     
-    return res.status(200).json({ username });
+    return res.status(200).json({ token: newUser.token, username });
 });
 
-router.route('/log').post(async (req: Request, res: Response) => {
-    const { username, password } = req.body;
+router.route('/login')
+    .post(async (req: Request, res: Response) => {
+        const { username, password } = req.body;
 
-    try {
-        const user = await User.query().findOne({ username });
+        try {
+            const user = await User.query().findOne({ username });
 
-        if (user && bcrypt.compareSync(password, user.password)) {
-            // const token = jwt.sign()
-            return res.status(200).json({ message: 'Login successfull' });
+            if (user && bcrypt.compareSync(password, user.password)) {
+                const token = jwt.sign({ email: user.email, username }, secret, {
+                    expiresIn: 60 * 3,
+                });
+
+                await User.query().update({'token': token}).where({username});
+
+                return res.status(200).json({ token, message: 'Login successfull' });
+            }
+        } catch (err) {
+            console.log(err);
         }
-    } catch (err) {
-        console.log(err);
-    }
-    return res.status(401).json({ message: 'Incorrect username or password' });
-});
+        return res.status(401).json({ message: 'Incorrect username or password' });
+    });
+
+router.route('/logout')
+    .post(async (req: Request, res: Response) => {
+        const { username } = req.body;
+
+        try {
+            const user = await User.query().update({ token: '' }).where('username', username);
+
+            if (user) {
+                return res.status(200).json({ message: 'Logout successfull' });
+            }
+        } catch (err) {
+            console.log(err);
+        }
+        return res.status(400).json({ message: 'Something went wrong' });
+    });
 
 // router.route('/users/:id').get ==> logout.
 // router.route('/users/:id').patch ==> update.

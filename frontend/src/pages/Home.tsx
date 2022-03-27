@@ -111,20 +111,25 @@ const Home = () => {
 
   const logoutHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    signout(() => navigate('/login'));
-    console.log('logout ', authed);
+    const username = sessionStorage.getItem('username');
+    console.log(typeof username);
 
-    // try {
-    //   const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/log`, {
-    //     method: 'GET',
-    //     credentials: 'include',
-    //   });
-    //   const data = await response.json();
-    //   if (data) {}
+    try {
+      const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/logout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username }),
+        credentials: 'include',
+      });
+      await response.json();
 
-    // } catch (err) {
-    //   console.log(err);
-    // }
+      signout(() => navigate('/login'));
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('username');
+
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
