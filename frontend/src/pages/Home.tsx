@@ -8,19 +8,9 @@ import { useAuth } from '../providers/AuthProvider';
 
 const Home = () => {
   const navigate = useNavigate();
-  const {signout, authed} = useAuth();
+  const {signout} = useAuth();
   const [videoIds, setVideoIds] = useState<AppProps['arrayOfVideos']>([]);
   // const [defaultVideo, setDefaultVideo] = useState<AppProps['video']>({} as AppProps['video']);
-
-  // useEffect(() => {
-  //   const ping = () => {
-  //     const token = sessionStorage.getItem('token');
-  //     if (token) {
-  //       navigate('/');
-  //     } else navigate('/login');
-  //   };
-  //   ping();
-  // }, []);
 
   const getVideos = async () => {    
     const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/videos`, {
@@ -111,6 +101,7 @@ const Home = () => {
     setCurrentIndex(indexVideoSearched);
   };
 
+  // Logout:
   const logoutHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const username = sessionStorage.getItem('username');

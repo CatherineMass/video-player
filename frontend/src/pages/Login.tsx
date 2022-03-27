@@ -22,8 +22,9 @@ const Login = () => {
     email: '',
     password: '',
   });
+
   const navigate = useNavigate();
-  const { signin, authed } = useAuth();
+  const { signin } = useAuth();
   const [error, setError] = useState();
   
   const loginHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -57,17 +58,14 @@ const Login = () => {
       }}
   };
 
-  // const token = sessionStorage.getItem('token');
-  // console.log(sessionStorage?.token);
-
-  // useEffect(() => {
-  //   const checkLogin = () => {
-  //     if (sessionStorage?.token ==! undefined) {
-  //       navigate('/');
-  //     }
-  //   };
-  //   checkLogin();
-  // }, []);
+  useEffect(() => {
+    const checkLogin = () => {
+      if (JSON.parse(localStorage?.authed || false)) {
+        navigate('/');
+      }
+    };
+    checkLogin();
+  }, []);
 
   return (
     <form className="form login">

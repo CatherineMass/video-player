@@ -7,7 +7,6 @@ interface NewUser {
 }
 
 interface AuthContextProps {
-  authed: boolean;
   user: NewUser;
   signin: (token: string, user: NewUser, callback: VoidFunction) => void;
   signout: (callback: VoidFunction) => void;
@@ -18,7 +17,6 @@ const authContext = createContext<AuthContextProps>(null!);
 export const useAuth = () => useContext(authContext);
 
 const authProvider = ({ children }: { children: ReactNode }) => {
-  const [authed, setAuthed] = useState(false);
   const [user, setUser] = useState({
     username: '',
     email: '',
@@ -26,7 +24,7 @@ const authProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const signin = (token: string, newUser: NewUser, callback: VoidFunction) => {
-    setAuthed(true);
+    localStorage.setItem('authed', 'true');
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('username', newUser.username);
     setUser(newUser);
@@ -34,14 +32,14 @@ const authProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const signout = (callback: VoidFunction) => {
-    setAuthed(false);
+    localStorage.removeItem('authed');
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('username');
     setUser({ username: '', email: '', password: '' });
     callback();
   };
 
-  const value = { authed, user, signin, signout };
+  const value = { user, signin, signout };
 
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
 };

@@ -24,7 +24,7 @@ const Signup = () => {
     password: '',
   });
   const navigate = useNavigate();
-  const { signin, authed } = useAuth();
+  const { signin } = useAuth();
 
   // Check if user already exist (backend?)
 
@@ -54,6 +54,15 @@ const Signup = () => {
         console.log(err);
       }}
   };
+
+  useEffect(() => {
+    const checkLogin = () => {
+      if (JSON.parse(localStorage?.authed || false)) {
+        navigate('/');
+      }
+    };
+    checkLogin();
+  }, []);
 
   return (
     <div>
