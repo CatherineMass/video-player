@@ -1,6 +1,6 @@
 import { Model, RelationMappings, RelationMappingsThunk } from 'objection';
 import bcrypt from 'bcrypt';
-import Video from './video';
+// import Video from './video';
 
 class User extends Model {
     username!: string;
@@ -19,7 +19,7 @@ class User extends Model {
     static relationMappings: RelationMappings | RelationMappingsThunk = {
         favoriteVideos: {
             relation: Model.HasManyRelation,
-            modelClass: Video,
+            modelClass: './video.ts',
             join: {
                 from: 'users.id',
                 to: 'videos.user_id'

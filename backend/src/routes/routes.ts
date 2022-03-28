@@ -62,6 +62,19 @@ router.route('/videos').get(async (req: Request, res: Response) => {
     return res.status(200).json({ resVideos });
 });
 
+router.route('/favorites').patch(async (req: Request, res: Response) => {
+    const username = 'ob';
+    const videoId = '_3ngiSxVCBs';
+
+    // const user = await User.query().findOne('username', username).returning('id');
+    const user = await knex.select('id').from<User>('users').where('username', username);
+    const userId = user[0].id;
+    
+    const likedVideo = await Video.query().patch({ 'user_id': userId }).where({videoId});
+
+    res.status(200).json({ likedVideo });
+});
+
 router.route('/search').post(async (req: Request, res: Response) => {
     const { q } = req.body;
 
