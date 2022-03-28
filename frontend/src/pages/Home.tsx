@@ -125,7 +125,7 @@ const Home = () => {
   return (
     <div className="App">
       <div className='header'>
-        <p className='username'>Username</p>
+        <p className='username'>{sessionStorage.username}</p>
         <button className='logout-btn' type='button' onClick={logoutHandler}>Logout</button>
       </div>
       <div className='main'>

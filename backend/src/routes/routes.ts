@@ -65,7 +65,7 @@ router.route('/videos').get(async (req: Request, res: Response) => {
 router.route('/search').post(async (req: Request, res: Response) => {
     const { q } = req.body;
 
-    // Search the db. If not found, api call. ==> res either with what is in db or rsponse from youtube.
+    // Search the db. If not found, api call. ==> res either with what is in db or response from youtube.
     const resultDb = await Video.query().where('name', 'like', `%${q}%`);
 
     // API connection to Youtube
@@ -80,7 +80,7 @@ router.route('/search').post(async (req: Request, res: Response) => {
         return res.status(200).json({ videos: searchResult });
     } else {
         const response = await fetch(
-            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=100&q=${q}&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`
+            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${q}&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`
         );
         const data = await response.json();
         const items: VideoResult[] = data.items;
@@ -88,6 +88,7 @@ router.route('/search').post(async (req: Request, res: Response) => {
         // Insert only if video is not already in.
         const promises = items.map(async (item) => {
             const videoInDb = await Video.query().where('videoId', item.id.videoId);
+            
             if (!videoInDb) {
                 const toInsert = {
                     etag: item.etag,
