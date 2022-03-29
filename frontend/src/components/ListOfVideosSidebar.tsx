@@ -6,7 +6,6 @@ import { AppProps } from '../AppProps';
 
 interface Props {
 	clickHeart: AppProps['stringVoid'];
-	favoritesVideos: AppProps['arrayOfIds'];
 	favVideos: AppProps['arrayOfVideos'];
 	handleSidebarClick: AppProps['stringVoid'];
 	defaultList: AppProps['arrayOfVideos'];
@@ -16,7 +15,7 @@ interface Props {
 }
 
 const ListOfVideosSidebar: React.FC<Props> = ({
-  videoIds,	visibleAll,	visibleFav,	clickHeart,	favoritesVideos, favVideos, defaultList,handleSidebarClick,
+  videoIds,	visibleAll,	visibleFav,	clickHeart, favVideos, defaultList,handleSidebarClick,
 }) => {
 	
   return (
@@ -24,13 +23,12 @@ const ListOfVideosSidebar: React.FC<Props> = ({
       {visibleAll ? (
         <ListAllVideos
           videoIds={videoIds}
-          favoritesVideos={favoritesVideos}
+          favVideos={favVideos}
           clickHeart={clickHeart}
           handleSidebarClick={handleSidebarClick}
         />
       ) : visibleFav ? (
         <ListFavorites
-          favoritesVideos={favoritesVideos}
           favVideos={favVideos}
           clickHeart={clickHeart}
           handleSidebarClick={handleSidebarClick}
@@ -39,7 +37,7 @@ const ListOfVideosSidebar: React.FC<Props> = ({
         <DefaultList
           defaultList={defaultList}
           videoIds={videoIds}
-          favoritesVideos={favoritesVideos}
+          favVideos={favVideos}
           clickHeart={clickHeart}
           handleSidebarClick={handleSidebarClick}
         />

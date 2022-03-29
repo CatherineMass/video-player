@@ -4,15 +4,15 @@ import VideoTag from './VideoTag';
 
 interface Props {
   clickHeart: AppProps['stringVoid'];
-  favoritesVideos: AppProps['arrayOfIds'];
   handleSidebarClick: AppProps['stringVoid'];
+  favVideos: AppProps['arrayOfVideos'];
   defaultList: AppProps['arrayOfVideos'];
   videoIds: AppProps['arrayOfVideos'];
 }
 
 const DefaultList: React.FC<Props> = ({
   defaultList,
-  favoritesVideos,
+  favVideos,
   clickHeart,
   handleSidebarClick,
 }) => {
@@ -24,7 +24,7 @@ const DefaultList: React.FC<Props> = ({
             videoName={video?.id?.name}
             videoId={video?.id?.videoId}
             key={video?.id?.videoId}
-            favoritesVideos={favoritesVideos}
+            favVideos={favVideos}
             clickHeart={clickHeart}
             handleSidebarClick={handleSidebarClick}
           />

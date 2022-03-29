@@ -5,15 +5,17 @@ import BtnVideoName from './BtnVideoName';
 
 interface Props {
 	clickHeart: AppProps['stringVoid'];
-	favoritesVideos: AppProps['arrayOfIds'];
 	handleSidebarClick: AppProps['stringVoid'];
+  favVideos: AppProps['arrayOfVideos'];
 	videoId: string;
 	videoName: string | null;
 }
 
 const VideoTag: React.FC<Props> = ({
-  videoName, videoId,	favoritesVideos, clickHeart, handleSidebarClick,
+  videoName, videoId, favVideos, clickHeart, handleSidebarClick,
 }) => {
+  const favorites = favVideos.map(video => video.id.videoId);
+
   return (
     <div>
       <BtnVideoName
@@ -27,7 +29,7 @@ const VideoTag: React.FC<Props> = ({
         id={videoId}
         onClick={() => clickHeart(videoId)}
       >
-        {favoritesVideos.includes(videoId) ? (
+        {favorites.includes(videoId) ? (
           <FaHeart color="red" />
         ) : (
           <FaHeart color="grey" />

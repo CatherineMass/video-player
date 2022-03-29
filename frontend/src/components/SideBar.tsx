@@ -29,47 +29,43 @@ const SideBar: React.FC<Props> = ({
   };
 
   // Click heart function
-  // Array of ids
-  const [favoritesVideos, setFavoritesVideos] = useState<
-    AppProps['arrayOfIds']
-  >(() => {
-    const localFavoritesId = localStorage.getItem('favoriteId');
-    return localFavoritesId ? JSON.parse(localFavoritesId) : [];
-  });
-    // Array of objects
-  const [favVideos, setFavVideos] = useState<AppProps['arrayOfVideos']>(() => {
-    const localFavorites = localStorage.getItem('favoriteObj');
-    return localFavorites ? JSON.parse(localFavorites) : [];
-  });
+  const [favVideos, setFavVideos] = useState<AppProps['arrayOfVideos']>([]);
 
-  const clickHeart: AppProps['stringVoid'] = (id) => {
-    const fav = videoIds.find((video) => video.id?.videoId === id);
-    if (favoritesVideos.includes(id)) {
-      setFavoritesVideos(favoritesVideos.filter((videoId) => videoId !== id));
-    } else {
-      setFavoritesVideos([...favoritesVideos, id]);
+  const getFavorites = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/favorites`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
+      const data = await response.json();
+      setFavVideos(data.resFavVideos);
+    } catch (err) {
+      console.log(err);
     }
-    // Put favorite videos in an array
-    const stringFavVideos = favVideos.map((vid) => JSON.stringify(vid));
-
-    stringFavVideos && stringFavVideos.includes(JSON.stringify(fav))
-      ? setFavVideos(
-        favVideos.filter(
-          (video) => JSON.stringify(video) !== JSON.stringify(fav)
-        )
-      )
-      : fav && setFavVideos([...favVideos, fav]);
   };
 
-  // Store favorite videos object in local storage
-  useEffect(() => {
-    localStorage.setItem('favoriteObj', JSON.stringify(favVideos));
-  }, [favVideos]);
+  const clickHeart: AppProps['stringVoid'] = async (id) => {
+    const username = sessionStorage.getItem('username');
+    try {
+      const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/favorites`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ videoId: id, username }),
+        credentials: 'include',
+      });
+      await response.json();
 
-  // Store favorite videos' ids in local storage
+      getFavorites();
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    localStorage.setItem('favoriteId', JSON.stringify(favoritesVideos));
-  }, [favoritesVideos]);
+    getFavorites();
+  }, []);
 
   return (
     <div className="side-bar-container">
@@ -84,7 +80,6 @@ const SideBar: React.FC<Props> = ({
         videoIds={videoIds}
         visibleAll={visibleAll}
         visibleFav={visibleFav}
-        favoritesVideos={favoritesVideos}
         favVideos={favVideos}
       />
     </div>

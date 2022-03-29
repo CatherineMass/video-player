@@ -4,13 +4,12 @@ import VideoTag from './VideoTag';
 
 interface Props {
 	clickHeart: AppProps['stringVoid'];
-	favoritesVideos: AppProps['arrayOfIds'];
 	favVideos: AppProps['arrayOfVideos'];
 	handleSidebarClick: AppProps['stringVoid'];
 }
 
 const ListFavorites: React.FC<Props> = ({
-  clickHeart,	favoritesVideos, favVideos,	handleSidebarClick,
+  clickHeart, favVideos, handleSidebarClick,
 }) => {
 	
   return (
@@ -20,8 +19,8 @@ const ListFavorites: React.FC<Props> = ({
           videoName={video?.id?.name}
           videoId={video?.id?.videoId}
           key={video?.id?.videoId}
+          favVideos={favVideos}
           clickHeart={clickHeart}
-          favoritesVideos={favoritesVideos}
           handleSidebarClick={handleSidebarClick}
         />
       ))}

@@ -64,8 +64,7 @@ router.route('/videos').get(async (req: Request, res: Response) => {
 
 router.route('/favorites')
     .patch(async (req: Request, res: Response) => {
-        const username = 'ob';
-        const videoId = '_3ngiSxVCBs';
+        const { username, videoId } = req.body;
 
         try {
             const user = await knex.select('id').from<User>('users').where('username', username);
@@ -88,7 +87,14 @@ router.route('/favorites')
     .get(async (req: Request, res: Response) => {
         try {
             const likedVideos = await Video.query().whereNot('user_id', '');
-            return res.status(200).json({ likedVideos });
+            const resFavVideos = likedVideos.map((video) => ({
+                etag: video.etag,
+                id: {
+                    videoId: video.videoId,
+                    name: video.name,
+                },
+            }));
+            return res.status(200).json({ resFavVideos });
         } catch (err) {
             console.log(err);
             return res.status(400).json({ err, message: 'Something went wrong' });
