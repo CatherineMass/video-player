@@ -62,20 +62,38 @@ router.route('/videos').get(async (req: Request, res: Response) => {
     return res.status(200).json({ resVideos });
 });
 
-router.route('/favorites').patch(async (req: Request, res: Response) => {
-    const username = 'ob';
-    const videoId = '_3ngiSxVCBs';
+router.route('/favorites')
+    .patch(async (req: Request, res: Response) => {
+        const username = 'ob';
+        const videoId = '_3ngiSxVCBs';
 
-    const user = await knex.select('id').from<User>('users').where('username', username);
-    const userId = user[0].id;
-
-    const isFavorite = await Video.query().findOne('videoId', videoId);
-    console.log(isFavorite?.user_id);
+        try {
+            const user = await knex.select('id').from<User>('users').where('username', username);
+            const userId = user[0].id.toString();
     
-    // const likedVideo = await Video.query().patch({ 'user_id': userId }).where({videoId});
-
-    res.status(200).json({ isFavorite });
-});
+            const videoClicked = await Video.query().findOne('videoId', videoId);
+        
+            if (videoClicked?.user_id) {
+                await Video.query().patch({ 'user_id': '' }).where({videoId});
+                return res.status(200).json({ message: 'Video unliked.' });
+            } else {
+                await Video.query().patch({ 'user_id': userId }).where({videoId});
+                return res.status(200).json({ message: 'Video liked.' });
+            }
+        } catch (err) {
+            console.log(err);
+            return res.status(400).json({ err, message: 'Something went wrong' });
+        }
+    })
+    .get(async (req: Request, res: Response) => {
+        try {
+            const likedVideos = await Video.query().whereNot('user_id', '');
+            return res.status(200).json({ likedVideos });
+        } catch (err) {
+            console.log(err);
+            return res.status(400).json({ err, message: 'Something went wrong' });
+        }
+    });
 
 router.route('/search').post(async (req: Request, res: Response) => {
     const { q } = req.body;
