@@ -57,7 +57,7 @@ const Signup = () => {
 
   useEffect(() => {
     const checkLogin = () => {
-      if (JSON.parse(localStorage?.authed || false)) {
+      if (sessionStorage?.token) {
         navigate('/');
       }
     };

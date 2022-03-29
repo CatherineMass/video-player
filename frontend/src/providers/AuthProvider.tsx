@@ -24,7 +24,7 @@ const authProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const signin = (token: string, newUser: NewUser, callback: VoidFunction) => {
-    localStorage.setItem('authed', 'true');
+    sessionStorage.setItem('authed', 'true');
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('username', newUser.username);
     setUser(newUser);
@@ -32,7 +32,7 @@ const authProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const signout = (callback: VoidFunction) => {
-    localStorage.removeItem('authed');
+    sessionStorage.removeItem('authed');
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('username');
     setUser({ username: '', email: '', password: '' });
