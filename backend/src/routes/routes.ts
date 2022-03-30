@@ -8,6 +8,7 @@ import config from '../../knexfile';
 import { Model } from 'objection';
 import Video from '../models/video';
 import User from '../models/user';
+import Favorites from '../models/favorite';
 
 interface VideoResult {
   etag: string;
@@ -63,38 +64,65 @@ router.route('/videos').get(async (req: Request, res: Response) => {
 });
 
 router.route('/favorites')
-    .patch(async (req: Request, res: Response) => {
+    .post(async (req: Request, res: Response) => {
         const { username, videoId } = req.body;
 
         try {
             const user = await knex.select('id').from<User>('users').where('username', username);
-            const userId = user[0].id.toString();
-    
-            const videoClicked = await Video.query().findOne('videoId', videoId);
-        
-            if (videoClicked?.user_id) {
-                await Video.query().patch({ 'user_id': '' }).where({videoId});
-                return res.status(200).json({ message: 'Video unliked.' });
-            } else {
-                await Video.query().patch({ 'user_id': userId }).where({videoId});
-                return res.status(200).json({ message: 'Video liked.' });
-            }
+            const userId = user[0].id;
+            const video = await knex.select('id').from<Video>('videos').where('videoId', videoId);
+            const vidId = video[0].id;
+
+            await Favorites.query().insert({user_id: userId, video_id: vidId});
+
+            return res.json({ message: 'Favorite added' });
         } catch (err) {
             console.log(err);
             return res.status(400).json({ err, message: 'Something went wrong' });
         }
     })
-    .get(async (req: Request, res: Response) => {
+    .delete(async (req: Request, res: Response) => {
+        const { username, videoId } = req.body;
+
         try {
-            const likedVideos = await Video.query().whereNot('user_id', '');
-            const resFavVideos = likedVideos.map((video) => ({
-                etag: video.etag,
-                id: {
-                    videoId: video.videoId,
-                    name: video.name,
-                },
-            }));
-            return res.status(200).json({ resFavVideos });
+            const user = await knex.select('id').from<User>('users').where('username', username);
+            const userId = user[0].id;
+            const video = await knex.select('id').from<Video>('videos').where('videoId', videoId);
+            const vidId = video[0].id;
+
+            await Favorites.query().delete().where({user_id: userId, video_id: vidId});
+
+            return res.json({ message: 'Favorite removed' });
+        } catch (err) {
+            console.log(err);
+            return res.status(400).json({ err, message: 'Something went wrong' });
+        }
+    });
+
+router.route('/getfavorites')
+    .post(async (req: Request, res: Response) => {
+        const { username } = req.body;
+        try {
+            const user = await knex.select('id').from<User>('users').where('username', username);
+            const userId = user[0].id;
+
+            const likedIds = await Favorites.query().where({user_id: userId});
+
+            const promises = likedIds.map(async fav => {
+                const id = fav.video_id;
+                const video = await Video.query().findOne({ id: id });
+
+                return {
+                    etag: video?.etag,
+                    id: {
+                        videoId: video?.videoId,
+                        name: video?.name,
+                    },
+                };
+            });
+            const favorites = await Promise.all(promises);
+            
+            return res.status(200).json({ favorites });
         } catch (err) {
             console.log(err);
             return res.status(400).json({ err, message: 'Something went wrong' });
