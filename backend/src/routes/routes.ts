@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express, { Application, Router } from 'express';
-import { addFavorite, deleteFavorite, getAllFavorites, getAllVideos, login, logout, search, signup } from '../controllers/videos';
+import { addFavorite, deleteFavorite, getAllFavorites, getAllVideos, login, logout, search, signup } from '../controllers/constrollers';
 
 export const app: Application = express();
 
