@@ -22,7 +22,7 @@ const router: Router = express.Router();
 // Add error handling.
 // Middleware for error handling/ try-catch.
 
-router.route('/videos').get(getAllVideos);
+router.route('/videos').post(getAllVideos);
 
 router.route('/favorites').post(addFavorite).delete(deleteFavorite);
 

@@ -12,10 +12,18 @@ const Home = () => {
   const [videoIds, setVideoIds] = useState<AppProps['arrayOfVideos']>([]);
   // const [defaultVideo, setDefaultVideo] = useState<AppProps['video']>({} as AppProps['video']);
 
+  const token = sessionStorage.getItem('token');
+  const username = sessionStorage.getItem('username');
+
   const getVideos = async () => {    
     const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/videos`, {
-      method: 'GET',
+      method: 'POST',
+      headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json' 
+      },
       credentials: 'include',
+      body: JSON.stringify({ token, username })
     });
 
     const data = await response.json();
@@ -63,7 +71,7 @@ const Home = () => {
         'Content-Type': 'application/json' 
       },
       credentials: 'include',
-      body: JSON.stringify({'q': `${searchWord}`})
+      body: JSON.stringify({'q': `${searchWord}`, token})
     });
     const searchRes = await response.json();    
     const searchResult = searchRes.videos;
@@ -104,7 +112,6 @@ const Home = () => {
   // Logout:
   const logoutHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const username = sessionStorage.getItem('username');
 
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/logout`, {

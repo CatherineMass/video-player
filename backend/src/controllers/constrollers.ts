@@ -9,6 +9,7 @@ import Favorites from '../models/favorite';
 import User from '../models/user';
 import Video from '../models/video';
 import { asyncWrap, asyncWrapper } from '../middlewares/async';
+import { checkToken, getIds } from '../utils';
 
 interface VideoResult {
   etag: string;
@@ -31,30 +32,37 @@ const knex = Knex(config.development);
 // // // Give the knex instance to Objection
 Model.knex(knex);
 
-export const getAllVideos = asyncWrapper(async (req: Request, res: Response) => {
-    const videos = await Video.query();
-    const resVideos = videos.map((video) => ({
-        etag: video.etag,
-        id: {
-            videoId: video.videoId,
-            name: video.name,
-        },
-    }));
+export const getAllVideos = asyncWrap(async (req: Request, res: Response) => {
+    const { token, username } = req.body;
 
-    return res.status(200).json({ resVideos });
+    const user = await checkToken(token, username);
+
+    if (user) {
+        const videos = await Video.query();
+        const resVideos = videos.map((video) => ({
+            etag: video.etag,
+            id: {
+                videoId: video.videoId,
+                name: video.name,
+            },
+        }));
+
+        return res.status(200).json({ resVideos });
+    } // else: error handler
 });
 
-export const addFavorite = asyncWrapper(async (req: Request, res: Response) => {
-    const { username, videoId } = req.body;
+export const addFavorite = asyncWrap(async (req: Request, res: Response) => {
+    const { username, videoId, token } = req.body;
 
-    const user = await knex.select('id').from<User>('users').where('username', username);
-    const userId = user[0].id;
-    const video = await knex.select('id').from<Video>('videos').where('videoId', videoId);
-    const vidId = video[0].id;
+    const user = await checkToken(token, username);
 
-    await Favorites.query().insert({user_id: userId, video_id: vidId});
+    if(user) {
+        const { userId, vidId } = await getIds(username, videoId);
 
-    return res.json({ message: 'Favorite added' });
+        await Favorites.query().insert({user_id: userId, video_id: vidId});
+
+        return res.json({ message: 'Favorite added' });
+    }
     // } catch (err) {
     //     console.log(err);
     //     return res.status(400).json({ err, message: 'Something went wrong' });
@@ -64,10 +72,7 @@ export const addFavorite = asyncWrapper(async (req: Request, res: Response) => {
 export const deleteFavorite = asyncWrapper(async (req: Request, res: Response) => {
     const { username, videoId } = req.body;
 
-    const user = await knex.select('id').from<User>('users').where('username', username);
-    const userId = user[0].id;
-    const video = await knex.select('id').from<Video>('videos').where('videoId', videoId);
-    const vidId = video[0].id;
+    const { userId, vidId } = await getIds(username, videoId);
 
     await Favorites.query().delete().where({user_id: userId, video_id: vidId});
 

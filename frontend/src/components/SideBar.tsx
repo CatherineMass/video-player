@@ -31,13 +31,14 @@ const SideBar: React.FC<Props> = ({
   // Click heart function
   const [favVideos, setFavVideos] = useState<AppProps['arrayOfVideos']>([]);
   const username = sessionStorage.getItem('username');
+  const token = sessionStorage.getItem('token');
 
   const getFavorites = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/getfavorites`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username }),
+        body: JSON.stringify({ username, token }),
         credentials: 'include',
       });
       const data = await response.json();
@@ -54,7 +55,7 @@ const SideBar: React.FC<Props> = ({
       const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/favorites`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, videoId: id }),
+        body: JSON.stringify({ username, videoId: id, token }),
         credentials: 'include',
       });
       await response.json();
@@ -64,7 +65,7 @@ const SideBar: React.FC<Props> = ({
         const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/favorites`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, videoId: id }),
+          body: JSON.stringify({ username, videoId: id, token }),
           credentials: 'include',
         });
         await response.json();
