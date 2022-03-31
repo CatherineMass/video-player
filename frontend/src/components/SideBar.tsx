@@ -30,36 +30,48 @@ const SideBar: React.FC<Props> = ({
 
   // Click heart function
   const [favVideos, setFavVideos] = useState<AppProps['arrayOfVideos']>([]);
+  const username = sessionStorage.getItem('username');
 
   const getFavorites = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/favorites`, {
-        method: 'GET',
+      const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/getfavorites`, {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username }),
         credentials: 'include',
       });
       const data = await response.json();
-      setFavVideos(data.resFavVideos);
+      setFavVideos(data.favorites);
     } catch (err) {
       console.log(err);
     }
   };
 
   const clickHeart: AppProps['stringVoid'] = async (id) => {
-    const username = sessionStorage.getItem('username');
-    try {
+    const favorites = favVideos.map(video => video.id.videoId);
+
+    if (favorites.includes(id)) {
       const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/favorites`, {
-        method: 'PATCH',
+        method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ videoId: id, username }),
+        body: JSON.stringify({ username, videoId: id }),
         credentials: 'include',
       });
       await response.json();
-
       getFavorites();
-
-    } catch (err) {
-      console.log(err);
+    } else {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/favorites`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, videoId: id }),
+          credentials: 'include',
+        });
+        await response.json();
+        getFavorites();
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
