@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-export const asyncWrapper = (fn: (req: Request, res: Response, next: NextFunction) => Promise<Response<any, Record<string, any>>>) => {
+export const asyncWrapper = (fn: (req: Request, res: Response, next: NextFunction) => Promise<void | Response<any, Record<string, any>>>) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
             await fn(req, res, next);
@@ -11,7 +11,7 @@ export const asyncWrapper = (fn: (req: Request, res: Response, next: NextFunctio
     };
 };
 
-export const asyncWrap = (fn: (req: Request, res: Response, next: NextFunction) => Promise<Response<any, Record<string, any>> | undefined> ) => {
+export const asyncWrap = (fn: (req: Request, res: Response, next: NextFunction) => Promise<void> ) => {
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
             await fn(req, res, next);

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import Knex from 'knex';
 import { Model } from 'objection';
 import fetch from 'node-fetch';
@@ -10,6 +10,9 @@ import User from '../models/user';
 import Video from '../models/video';
 import { asyncWrap, asyncWrapper } from '../middlewares/async';
 import { checkToken, getIds } from '../utils';
+import { createAuthError } from '../errors/authError';
+import { createNotFoundError } from '../errors/notFoundError';
+import { createCustomError } from '../errors/baseError';
 
 interface VideoResult {
   etag: string;
@@ -32,58 +35,76 @@ const knex = Knex(config.development);
 // // // Give the knex instance to Objection
 Model.knex(knex);
 
-export const getAllVideos = asyncWrap(async (req: Request, res: Response) => {
+export const getAllVideos = asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
     const { token, username } = req.body;
 
     const user = await checkToken(token, username);
 
-    if (user) {
-        const videos = await Video.query();
-        const resVideos = videos.map((video) => ({
-            etag: video.etag,
-            id: {
-                videoId: video.videoId,
-                name: video.name,
-            },
-        }));
+    if (!user) {
+        return next(createAuthError());
+    }
 
-        return res.status(200).json({ resVideos });
-    } // else: error handler
+    const videos = await Video.query();
+    const resVideos = videos.map((video) => ({
+        etag: video.etag,
+        id: {
+            videoId: video.videoId,
+            name: video.name,
+        },
+    }));
+
+    res.status(200).json({ resVideos });
+    
 });
 
-export const addFavorite = asyncWrap(async (req: Request, res: Response) => {
+export const addFavorite = asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
     const { username, videoId, token } = req.body;
 
     const user = await checkToken(token, username);
 
-    if(user) {
-        const { userId, vidId } = await getIds(username, videoId);
-
-        await Favorites.query().insert({user_id: userId, video_id: vidId});
-
-        return res.json({ message: 'Favorite added' });
+    if(!user) {
+        return next(createAuthError());
     }
-    // } catch (err) {
-    //     console.log(err);
-    //     return res.status(400).json({ err, message: 'Something went wrong' });
-    // }
-});
-
-export const deleteFavorite = asyncWrapper(async (req: Request, res: Response) => {
-    const { username, videoId } = req.body;
 
     const { userId, vidId } = await getIds(username, videoId);
 
-    await Favorites.query().delete().where({user_id: userId, video_id: vidId});
+    if(!vidId) {
+        return next(createNotFoundError('Video'));
+    }
 
-    return res.json({ message: 'Favorite removed' });
+    await Favorites.query().insert({user_id: userId, video_id: vidId});
+
+    res.json({ message: 'Favorite added' });
 });
 
-export const getAllFavorites = asyncWrapper(async (req: Request, res: Response) => {
-    const { username } = req.body;
+export const deleteFavorite = asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
+    const { username, videoId, token } = req.body;
 
-    const user = await knex.select('id').from<User>('users').where('username', username);
-    const userId = user[0].id;
+    const user = await checkToken(token, username);
+    if(!user) {
+        return next(createAuthError());
+    }
+
+    const { userId, vidId } = await getIds(username, videoId);
+    if(!vidId) {
+        return next(createNotFoundError('Video'));
+    }
+
+    await Favorites.query().delete().where({user_id: userId, video_id: vidId});
+
+    res.json({ message: 'Favorite removed' });
+});
+
+export const getAllFavorites = asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
+    const { username, token } = req.body;
+
+    const user = await checkToken(token, username);
+    if(!user) {
+        return next(createAuthError());
+    }
+
+    const useR = await knex.select('id').from<User>('users').where('username', username);
+    const userId = useR[0].id;
 
     const likedIds = await Favorites.query().where({user_id: userId});
 
@@ -101,13 +122,18 @@ export const getAllFavorites = asyncWrapper(async (req: Request, res: Response) 
     });
     const favorites = await Promise.all(promises);
       
-    return res.status(200).json({ favorites });
+    res.status(200).json({ favorites });
 });
 
-export const search = asyncWrapper(async (req: Request, res: Response) => {
-    const { q } = req.body;
+export const search = asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
+    const { q, token, username } = req.body;
 
-    // Search the db. If not found, api call. ==> res either with what is in db or response from youtube.
+    const user = await checkToken(token, username);
+    if(!user) {
+        return next(createAuthError());
+    }
+
+    // Search the db
     const resultDb = await Video.query().where('name', 'like', `%${q}%`);
 
     // API connection to Youtube
@@ -167,15 +193,17 @@ export const signup = asyncWrapper(async (req: Request, res: Response) => {
 
     await User.query().insert(newUser);
   
-    return res.status(200).json({ token: newUser.token, username });
+    res.status(200).json({ token: newUser.token, username });
 });
 
-export const login = asyncWrap(async (req: Request, res: Response) => {
+export const login = asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
     const { username, password } = req.body;
 
     const user = await User.query().findOne({ username });
 
-    if (user && bcrypt.compareSync(password, user.password)) {
+    if(!user || !bcrypt.compareSync(password, user.password)) {
+        return next(createCustomError(401, 'Incorrect username or password.'));
+    } else if (user && bcrypt.compareSync(password, user.password)) {
         const token = jwt.sign({ email: user.email, username }, secret, {
             expiresIn: 60 * 10,
         });
@@ -184,18 +212,16 @@ export const login = asyncWrap(async (req: Request, res: Response) => {
 
         return res.status(200).json({ token, message: 'Login successfull' });
     }
-    // } catch (err) {
-    //     console.log(err);
-    // }
-    // return res.status(401).json({ message: 'Incorrect username or password' });
 });
 
-export const logout = asyncWrap(async (req: Request, res: Response) => {
+export const logout = asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
     const { username } = req.body;
 
     const user = await User.query().update({ token: '' }).where('username', username);
 
-    if (user) {
-        return res.status(200).json({ message: 'Logout successfull' });
+    if(!user) {
+        return next(createAuthError());
     }
+
+    res.status(200).json({ message: 'Logout successfull' });
 });

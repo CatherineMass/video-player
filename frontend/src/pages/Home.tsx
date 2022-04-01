@@ -71,7 +71,7 @@ const Home = () => {
         'Content-Type': 'application/json' 
       },
       credentials: 'include',
-      body: JSON.stringify({'q': `${searchWord}`, token})
+      body: JSON.stringify({'q': `${searchWord}`, token, username})
     });
     const searchRes = await response.json();    
     const searchResult = searchRes.videos;
