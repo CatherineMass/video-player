@@ -120,10 +120,12 @@ const Home = () => {
         body: JSON.stringify({ username }),
         credentials: 'include',
       });
-      await response.json();
-
+      const data = await response.json();
+      if (response.status === 401) {
+        console.error(data);
+        navigate('/login');
+      }
       signout(() => navigate('/login'));
-
     } catch (err) {
       console.log(err);
     }

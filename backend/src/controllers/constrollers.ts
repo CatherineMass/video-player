@@ -72,10 +72,6 @@ export const addFavorite = asyncWrap(async (req: Request, res: Response, next: N
 
     const { userId, vidId } = await getIds(username, videoId);
 
-    if(!vidId) {
-        return next(createNotFoundError('Video'));
-    }
-
     await Favorites.query().insert({user_id: userId, video_id: vidId});
 
     res.status(200).json({
@@ -92,9 +88,6 @@ export const deleteFavorite = asyncWrap(async (req: Request, res: Response, next
     }
 
     const { userId, vidId } = await getIds(username, videoId);
-    if(!vidId) {
-        return next(createNotFoundError('Video'));
-    }
 
     await Favorites.query().delete().where({user_id: userId, video_id: vidId});
 

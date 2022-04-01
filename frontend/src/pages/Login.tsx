@@ -47,8 +47,9 @@ const Login = () => {
 
         const data = await response.json();
         if (response.status === 401) {
-          setError(data.data.message);
-          throw new Error(data.data.message);
+          setError(data.error.message);
+          console.error(data);
+          throw new Error(data.error.message);
         }
 
         signin(data.data.token, user, () => navigate('/', { replace: true }));
@@ -70,7 +71,7 @@ const Login = () => {
   return (
     <form className="form login">
       <h1 className="form-title">Login</h1>
-      {error && alert({error})}
+      {error && <p className='invalid-input'>{`${error}`}</p>}
       <label className="form-label">Username</label>
       <input
         style= {nameValidation.style}
