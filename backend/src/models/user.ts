@@ -7,7 +7,7 @@ class User extends Model {
     email!: string;
     password!: string;
     token!: string;
-	
+
     static get tableName() {
         return 'users';
     }

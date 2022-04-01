@@ -17,5 +17,5 @@ app.use(errorResponse);
 app.use(errorLogging);
 
 app.listen(3005, () => {
-    console.log('App is listening at http://localhost:3005/api/v1...');  
+    console.log('App is listening at http://localhost:3005/api/v1...');
 });

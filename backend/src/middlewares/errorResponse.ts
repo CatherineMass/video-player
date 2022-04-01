@@ -1,7 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
 
-const errorResponse = (error: any, req: Request, res: Response, next: NextFunction) => {
-    const customError: boolean = error.constructor.name === 'NodeError' || error.constructor.name === 'SyntaxError' ? false : true;
+const errorResponse = (
+    error: any,
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    const customError = !(
+        error.constructor.name === 'NodeError' ||
+    error.constructor.name === 'SyntaxError'
+    );
 
     res.status(error.statusCode || 500).json({
         response: 'Error',
@@ -9,8 +17,8 @@ const errorResponse = (error: any, req: Request, res: Response, next: NextFuncti
             type: customError === false ? 'UnhandledError' : error.constructor.name,
             path: req.path,
             statusCode: error.statusCode || 500,
-            message: error.message
-        }
+            message: error.message,
+        },
     });
     next(error);
 };

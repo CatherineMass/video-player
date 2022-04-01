@@ -5,7 +5,7 @@ class Video extends Model {
     videoId!: string;
     name!: string;
     user_id!: string;
-	
+
     static get tableName() {
         return 'videos';
     }
