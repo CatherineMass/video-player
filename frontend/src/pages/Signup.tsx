@@ -48,7 +48,7 @@ const Signup = () => {
 
         const data = await response.json();
 
-        signin(data.token, newUser, () => navigate('/', { replace: true }));
+        signin(data.data.token, newUser, () => navigate('/', { replace: true }));
         
       } catch (err) {
         console.log(err);

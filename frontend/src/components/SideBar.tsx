@@ -42,7 +42,7 @@ const SideBar: React.FC<Props> = ({
         credentials: 'include',
       });
       const data = await response.json();
-      setFavVideos(data.favorites);
+      setFavVideos(data.data.favorites);
     } catch (err) {
       console.log(err);
     }

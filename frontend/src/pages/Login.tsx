@@ -47,11 +47,11 @@ const Login = () => {
 
         const data = await response.json();
         if (response.status === 401) {
-          setError(data.message);
-          throw new Error(data.message);
+          setError(data.data.message);
+          throw new Error(data.data.message);
         }
 
-        signin(data.token, user, () => navigate('/', { replace: true }));
+        signin(data.data.token, user, () => navigate('/', { replace: true }));
         
       } catch (err) {
         console.log(err);

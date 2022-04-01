@@ -53,8 +53,12 @@ export const getAllVideos = asyncWrap(async (req: Request, res: Response, next: 
         },
     }));
 
-    res.status(200).json({ resVideos });
-    
+    res.status(200).json({ 
+        response: 'successfull',
+        data: {
+            resVideos
+        }
+    });
 });
 
 export const addFavorite = asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
@@ -74,7 +78,9 @@ export const addFavorite = asyncWrap(async (req: Request, res: Response, next: N
 
     await Favorites.query().insert({user_id: userId, video_id: vidId});
 
-    res.json({ message: 'Favorite added' });
+    res.status(200).json({
+        response: 'successfull' 
+    });
 });
 
 export const deleteFavorite = asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
@@ -92,7 +98,7 @@ export const deleteFavorite = asyncWrap(async (req: Request, res: Response, next
 
     await Favorites.query().delete().where({user_id: userId, video_id: vidId});
 
-    res.json({ message: 'Favorite removed' });
+    res.status(200).json({ response: 'successfull' });
 });
 
 export const getAllFavorites = asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
@@ -122,7 +128,10 @@ export const getAllFavorites = asyncWrapper(async (req: Request, res: Response, 
     });
     const favorites = await Promise.all(promises);
       
-    res.status(200).json({ favorites });
+    res.status(200).json({ 
+        response: 'successfull',
+        data: {favorites} 
+    });
 });
 
 export const search = asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
@@ -145,7 +154,12 @@ export const search = asyncWrapper(async (req: Request, res: Response, next: Nex
                 name: video.name,
             },
         }));
-        return res.status(200).json({ videos: searchResult });
+        return res.status(200).json({ 
+            response: 'successfull',
+            data: {
+                videos: searchResult
+            }
+        });
     } else {
         const response = await fetch(
             `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${q}&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`
@@ -175,7 +189,12 @@ export const search = asyncWrapper(async (req: Request, res: Response, next: Nex
         });
         const searchResult = await Promise.all(promises);
 
-        return res.status(201).json({ videos: searchResult });
+        return res.status(201).json({ 
+            response: 'successfull',
+            data: {
+                videos: searchResult 
+            }
+        });
     }
 });
 
@@ -193,7 +212,13 @@ export const signup = asyncWrapper(async (req: Request, res: Response) => {
 
     await User.query().insert(newUser);
   
-    res.status(200).json({ token: newUser.token, username });
+    res.status(200).json({ 
+        response: 'successfull',
+        data: {
+            token: newUser.token, 
+            username
+        }
+    });
 });
 
 export const login = asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
@@ -210,7 +235,10 @@ export const login = asyncWrapper(async (req: Request, res: Response, next: Next
 
         await User.query().update({'token': token}).where({username});
 
-        return res.status(200).json({ token, message: 'Login successfull' });
+        return res.status(200).json({ 
+            response: 'successfull',
+            data: {token}
+        });
     }
 });
 
@@ -223,5 +251,5 @@ export const logout = asyncWrap(async (req: Request, res: Response, next: NextFu
         return next(createAuthError());
     }
 
-    res.status(200).json({ message: 'Logout successfull' });
+    res.status(200).json({ response: 'successfull' });
 });

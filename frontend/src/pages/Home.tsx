@@ -28,7 +28,7 @@ const Home = () => {
 
     const data = await response.json();
 
-    setVideoIds(data.resVideos);
+    setVideoIds(data.data.resVideos);
     // setDefaultVideo(data.videos[0]);
   };
 
@@ -73,8 +73,8 @@ const Home = () => {
       credentials: 'include',
       body: JSON.stringify({'q': `${searchWord}`, token, username})
     });
-    const searchRes = await response.json();    
-    const searchResult = searchRes.videos;
+    const data = await response.json();    
+    const searchResult = data.data.videos;
 
     setFilteredList([...searchResult]);
   };
