@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import Video from './Video';
 import BtnGroup from './BtnGroup';
@@ -6,6 +6,7 @@ import logo from '../logo.svg';
 import { AppProps } from '../AppProps';
 
 interface Props {
+  q: string;
 	currentVideo: AppProps['video'];
 	filteredList: AppProps['arrayOfVideos'];
 	handleFilter: AppProps['handleFilter'];
@@ -16,8 +17,9 @@ interface Props {
 }
 
 const MainContainer: React.FC<Props> = ({
-  handleFilter,	filteredList,	handleSearch, currentVideo, nextClick,	prevClick, sendVideoToSidebar,
+  q, handleFilter,	filteredList,	handleSearch, currentVideo, nextClick,	prevClick, sendVideoToSidebar,
 }) => {
+
   return (
     <div className="main-container">
       <img src={logo} alt="logo" className="logo" />
@@ -26,6 +28,7 @@ const MainContainer: React.FC<Props> = ({
         filteredList={filteredList}
         handleSearch={handleSearch}
       />
+      {q.toLowerCase() === 'covid' && <p className='warning'>Warning!</p>}
       <div className="video-and-btn-container">
         <Video
           currentVideo={currentVideo}

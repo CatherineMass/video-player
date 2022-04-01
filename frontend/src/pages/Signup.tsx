@@ -10,13 +10,17 @@ const Signup = () => {
   };
   const invalidState = {
     style: {
-      border: '3px solid red'
+      border: '3px solid red',
     },
     invalid: true,
   };
   const [nameValidation, setNameValidation] = useState(initialValidationState);
-  const [emailValidation, setEmailValidation] = useState(initialValidationState);
-  const [passwordValidation, setPasswordValidation] = useState(initialValidationState);
+  const [emailValidation, setEmailValidation] = useState(
+    initialValidationState
+  );
+  const [passwordValidation, setPasswordValidation] = useState(
+    initialValidationState
+  );
 
   const [newUser, setNewUser] = useState({
     username: '',
@@ -33,26 +37,37 @@ const Signup = () => {
     const { username, email, password } = newUser;
 
     // Validation
-    !username ? setNameValidation(invalidState) : setNameValidation(initialValidationState);
-    !email ? setEmailValidation(invalidState) : setEmailValidation(initialValidationState);
-    !password ? setPasswordValidation(invalidState) : setPasswordValidation(initialValidationState);
+    !username
+      ? setNameValidation(invalidState)
+      : setNameValidation(initialValidationState);
+    !email
+      ? setEmailValidation(invalidState)
+      : setEmailValidation(initialValidationState);
+    !password
+      ? setPasswordValidation(invalidState)
+      : setPasswordValidation(initialValidationState);
 
     if (username && email && password) {
       try {
-        const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/signup`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newUser),
-          credentials: 'include',
-        });
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER}/api/v1/signup`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newUser),
+            credentials: 'include',
+          }
+        );
 
         const data = await response.json();
 
-        signin(data.data.token, newUser, () => navigate('/', { replace: true }));
-        
+        signin(data.data.token, newUser, () =>
+          navigate('/', { replace: true })
+        );
       } catch (err) {
         console.log(err);
-      }}
+      }
+    }
   };
 
   useEffect(() => {
@@ -82,7 +97,9 @@ const Signup = () => {
             });
           }}
         />
-        { nameValidation.invalid && <p className='invalid-input'>This field is required.</p> }
+        {nameValidation.invalid && (
+          <p className="invalid-input">This field is required.</p>
+        )}
         <label className="form-label">Email</label>
         <input
           style={emailValidation.style}
@@ -97,7 +114,9 @@ const Signup = () => {
             });
           }}
         />
-        { emailValidation.invalid && <p className='invalid-input'>This field is required.</p> }
+        {emailValidation.invalid && (
+          <p className="invalid-input">This field is required.</p>
+        )}
         <label className="form-label">Password</label>
         <input
           style={passwordValidation.style}
@@ -112,9 +131,13 @@ const Signup = () => {
             });
           }}
         />
-        { passwordValidation.invalid && <p className='invalid-input'>This field is required.</p> }
+        {passwordValidation.invalid && (
+          <p className="invalid-input">This field is required.</p>
+        )}
         <div className="form-footer">
-          <button className="form-btn" type='submit'>Submit</button>
+          <button className="form-btn" type="submit">
+            Submit
+          </button>
           <a href="/login">Already have an account? Login!</a>
         </div>
       </form>

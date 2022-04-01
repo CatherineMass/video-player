@@ -8,23 +8,26 @@ import { useAuth } from '../providers/AuthProvider';
 
 const Home = () => {
   const navigate = useNavigate();
-  const {signout} = useAuth();
+  const { signout } = useAuth();
   const [videoIds, setVideoIds] = useState<AppProps['arrayOfVideos']>([]);
   // const [defaultVideo, setDefaultVideo] = useState<AppProps['video']>({} as AppProps['video']);
 
   const token = sessionStorage.getItem('token');
   const username = sessionStorage.getItem('username');
 
-  const getVideos = async () => {    
-    const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/videos`, {
-      method: 'POST',
-      headers: { 
-        'Accept': 'application/json',
-        'Content-Type': 'application/json' 
-      },
-      credentials: 'include',
-      body: JSON.stringify({ token, username })
-    });
+  const getVideos = async () => {
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER}/api/v1/videos`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ token, username }),
+      }
+    );
 
     const data = await response.json();
 
@@ -60,20 +63,25 @@ const Home = () => {
   );
 
   let searchWord = '';
+  const [q, setQ] = useState('');
 
   const handleFilter: AppProps['handleFilter'] = async (e) => {
     searchWord = e.target.value;
+    setQ(searchWord);
 
-    const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/search`, {
-      method: 'POST',
-      headers: { 
-        'Accept': 'application/json',
-        'Content-Type': 'application/json' 
-      },
-      credentials: 'include',
-      body: JSON.stringify({'q': `${searchWord}`, token, username})
-    });
-    const data = await response.json();    
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER}/api/v1/search`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ q: `${searchWord}`, token, username }),
+      }
+    );
+    const data = await response.json();
     const searchResult = data.data.videos;
 
     setFilteredList([...searchResult]);
@@ -114,12 +122,15 @@ const Home = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/logout`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username }),
-        credentials: 'include',
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_SERVER}/api/v1/logout`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username }),
+          credentials: 'include',
+        }
+      );
       const data = await response.json();
       if (response.status === 401) {
         console.error(data);
@@ -133,12 +144,15 @@ const Home = () => {
 
   return (
     <div className="App">
-      <div className='header'>
-        <p className='username'>{sessionStorage.username}</p>
-        <button className='logout-btn' type='button' onClick={logoutHandler}>Logout</button>
+      <div className="header">
+        <p className="username">{sessionStorage.username}</p>
+        <button className="logout-btn" type="button" onClick={logoutHandler}>
+          Logout
+        </button>
       </div>
-      <div className='main'>
+      <div className="main">
         <MainContainer
+          q={q}
           handleFilter={handleFilter}
           handleSearch={handleSearch}
           nextClick={nextClick}

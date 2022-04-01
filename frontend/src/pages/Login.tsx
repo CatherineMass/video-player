@@ -10,12 +10,14 @@ const Login = () => {
   };
   const invalidState = {
     style: {
-      border: '3px solid red'
+      border: '3px solid red',
     },
     invalid: true,
   };
   const [nameValidation, setNameValidation] = useState(initialValidationState);
-  const [passwordValidation, setPasswordValidation] = useState(initialValidationState);
+  const [passwordValidation, setPasswordValidation] = useState(
+    initialValidationState
+  );
 
   const [user, setUser] = useState({
     username: '',
@@ -26,24 +28,31 @@ const Login = () => {
   const navigate = useNavigate();
   const { signin } = useAuth();
   const [error, setError] = useState();
-  
+
   const loginHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     const { username, password } = user;
 
     // Validation
-    !username ? setNameValidation(invalidState) : setNameValidation(initialValidationState);
-    !password ? setPasswordValidation(invalidState) : setPasswordValidation(initialValidationState);
+    !username
+      ? setNameValidation(invalidState)
+      : setNameValidation(initialValidationState);
+    !password
+      ? setPasswordValidation(invalidState)
+      : setPasswordValidation(initialValidationState);
 
     if (username && password) {
       try {
-        const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(user),
-          credentials: 'include',
-        });
+        const response = await fetch(
+          `${process.env.REACT_APP_SERVER}/api/v1/login`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user),
+            credentials: 'include',
+          }
+        );
 
         const data = await response.json();
         if (response.status === 401) {
@@ -53,10 +62,10 @@ const Login = () => {
         }
 
         signin(data.data.token, user, () => navigate('/', { replace: true }));
-        
       } catch (err) {
         console.log(err);
-      }}
+      }
+    }
   };
 
   useEffect(() => {
@@ -71,10 +80,10 @@ const Login = () => {
   return (
     <form className="form login">
       <h1 className="form-title">Login</h1>
-      {error && <p className='invalid-input'>{`${error}`}</p>}
+      {error && <p className="invalid-input">{`${error}`}</p>}
       <label className="form-label">Username</label>
       <input
-        style= {nameValidation.style}
+        style={nameValidation.style}
         title="username"
         placeholder="Username"
         type="text"
@@ -86,7 +95,9 @@ const Login = () => {
           });
         }}
       />
-      { nameValidation.invalid && <p className='invalid-input'>This field is required.</p> }
+      {nameValidation.invalid && (
+        <p className="invalid-input">This field is required.</p>
+      )}
       <label className="form-label">Password</label>
       <input
         style={passwordValidation.style}
@@ -101,9 +112,13 @@ const Login = () => {
           });
         }}
       />
-      { passwordValidation.invalid && <p className='invalid-input'>This field is required.</p> }
+      {passwordValidation.invalid && (
+        <p className="invalid-input">This field is required.</p>
+      )}
       <div className="form-footer">
-        <button className="form-btn" type='submit' onClick={loginHandler}>Submit</button>
+        <button className="form-btn" type="submit" onClick={loginHandler}>
+          Submit
+        </button>
         <a href="/signup">No account yet? Sign up!</a>
       </div>
     </form>
