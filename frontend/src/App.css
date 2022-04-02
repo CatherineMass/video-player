@@ -232,3 +232,24 @@
   background-color: #ffbb0045;
   border: 2px solid #EDE04D;
 }
+
+.modal {
+  /* border: 2px solid black; */
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  margin: 2em 2em 0;
+  padding: 1em;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-content {
+  display: flex;
+}
+
+.map {
+  height: 70vh;
+  width: 50vw;
+}
