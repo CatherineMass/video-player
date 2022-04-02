@@ -13,8 +13,8 @@ const Video: React.FC<Props> = ({ currentVideo, sendVideoToSidebar }) => {
     <iframe
       className="video"
       onLoad={() => sendVideoToSidebar}
-      width="500"
-      height="300"
+      width="600"
+      height="400"
       src={`https://www.youtube-nocookie.com/embed/${youtubeVideoId}`}
       title="YouTube video player"
       frameBorder="0"

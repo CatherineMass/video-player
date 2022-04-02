@@ -39,7 +39,6 @@
 }
 
 .video-and-btn-container {
-  margin-top: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -138,7 +137,7 @@
   position: relative;
   overflow: hidden;
   overflow-y: auto;
-  width: 28em;
+  width: 20vw;
   height: 80vh;
   float: right;
   margin-top: 1em;
@@ -226,10 +225,10 @@
 }
 
 .warning {
-  margin: 0 2em;
-  width: 15vw;
-  height: 20vh;
-  font-size: xx-large;
+  margin-bottom: 1em;
+  width: 31vw;
+  height: 5vh;
+  font-size: large;
   background-color: #ffbb0045;
   border: 2px solid #EDE04D;
 }

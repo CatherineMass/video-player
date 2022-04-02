@@ -7,6 +7,7 @@ import { AppProps } from '../AppProps';
 
 interface Props {
   q: string;
+  handleModalOn: AppProps['noParamVoid'];
 	currentVideo: AppProps['video'];
 	filteredList: AppProps['arrayOfVideos'];
 	handleFilter: AppProps['handleFilter'];
@@ -17,8 +18,9 @@ interface Props {
 }
 
 const MainContainer: React.FC<Props> = ({
-  q, handleFilter,	filteredList,	handleSearch, currentVideo, nextClick,	prevClick, sendVideoToSidebar,
+  q, handleModalOn, handleFilter,	filteredList,	handleSearch, currentVideo, nextClick,	prevClick, sendVideoToSidebar,
 }) => {
+
 
   return (
     <div className="main-container">
@@ -28,8 +30,8 @@ const MainContainer: React.FC<Props> = ({
         filteredList={filteredList}
         handleSearch={handleSearch}
       />
-      {q.toLowerCase() === 'covid' && <p className='warning'>Warning!</p>}
       <div className="video-and-btn-container">
+        {q.toLowerCase() === 'covid' && <p className='warning'><span>&#9888;</span> If you wish to get the vaccin you can book a time <button className='btn-open-modal' onClick={handleModalOn}>here</button>.</p>}
         <Video
           currentVideo={currentVideo}
           sendVideoToSidebar={sendVideoToSidebar}

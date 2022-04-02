@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import { AppProps } from '../AppProps';
 import MainContainer from '../components/MainContainer';
+import Modal from '../components/Modal';
 import SideBar from '../components/SideBar';
 import { useAuth } from '../providers/AuthProvider';
 
@@ -117,6 +118,17 @@ const Home = () => {
     setCurrentIndex(indexVideoSearched);
   };
 
+  // Modal
+  const [modal, setModal] = useState(false);
+
+  const handleModalOn = () => {
+    setModal(true);
+  };
+
+  const handleModalOff = () => {
+    setModal(false);
+  };
+
   // Logout:
   const logoutHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -150,9 +162,10 @@ const Home = () => {
           Logout
         </button>
       </div>
-      <div className="main">
+      {!modal && <div className="main">
         <MainContainer
           q={q}
+          handleModalOn={handleModalOn}
           handleFilter={handleFilter}
           handleSearch={handleSearch}
           nextClick={nextClick}
@@ -166,7 +179,8 @@ const Home = () => {
           defaultList={defaultList}
           videoIds={videoIds}
         />
-      </div>
+      </div>}
+      {modal && <Modal handleModalOff={handleModalOff} />}
     </div>
   );
 };
