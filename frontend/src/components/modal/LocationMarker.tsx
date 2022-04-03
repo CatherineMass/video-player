@@ -3,10 +3,8 @@ import { Marker, Popup, useMap } from 'react-leaflet';
 import { Icon, LatLng } from 'leaflet';
 import homeMarker from './marker-home.svg';
 
-
 const LocationMarker = () => {
   const [position, setPosition] = useState<LatLng | null>(null);
-
   const map = useMap();
 
   useEffect(() => {

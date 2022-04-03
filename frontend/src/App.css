@@ -262,7 +262,6 @@
 
 .modal-form-container {
   display: flex;
-  align-items: center;
 }
 
 .modal-form {
@@ -272,12 +271,22 @@
 }
 
 .modal-form label {
-  margin-top: 1em;
-  font-size: xx-large;
+  margin-top: .8em;
+  font-size: x-large;
 }
 
 .modal-form input {
-  height: 3em;
-  font-size: xx-large;
+  height: 1.5em;
+  font-size: x-large;
   margin-top: .5em;
+}
+
+.modal-form-footer {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-form-footer button {
+  font-size: x-large;
 }

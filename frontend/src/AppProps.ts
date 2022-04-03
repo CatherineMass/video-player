@@ -8,11 +8,19 @@ type Video = {
   }
 };
 
+type Facility = {
+  name: string;
+  phone: string;
+  website: string;
+  lat: string;
+  lng: string;
+}
 
 export interface AppProps {
   video: Video;
   arrayOfVideos: Video[];
   arrayOfIds: string[];
+  facilities: Facility[];
 
   handleFilter: (e: React.ChangeEvent<HTMLInputElement>) => void;
   stringVoid: (id: string) => void;

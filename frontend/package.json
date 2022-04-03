@@ -18,6 +18,7 @@
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-leaflet": "^3.2.5",
+    "react-leaflet-markercluster": "^3.0.0-rc1",
     "react-player": "^2.9.0",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
@@ -53,6 +54,7 @@
   },
   "devDependencies": {
     "@types/react-leaflet": "^2.8.2",
+    "@types/react-leaflet-markercluster": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
     "babel-eslint": "^10.1.0",
