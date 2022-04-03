@@ -1,6 +1,7 @@
 import React from 'react';
-import Map from '../components/Map';
-import { AppProps } from '../AppProps';
+import Map from './Map';
+import { AppProps } from '../../AppProps';
+import Form from './Form';
 
 
 interface Props {
@@ -11,7 +12,7 @@ const Modal: React.FC<Props> = ({ handleModalOff }) => {
   return (
     <div className='modal'>
       <div className="modal-header">
-        Find a vaccine shot facility near you
+        <h1>Find a vaccine shot facility near you</h1>
         <button onClick={handleModalOff}>
           <span className='close'>&times;</span>
         </button>
@@ -20,8 +21,8 @@ const Modal: React.FC<Props> = ({ handleModalOff }) => {
         <div className="map">
           <Map />
         </div>
-        <div className="modal-form">
-          Form
+        <div className="modal-form-container">
+          <Form />
         </div>
       </div>
     </div>

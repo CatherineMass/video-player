@@ -2,7 +2,7 @@ import React from 'react';
 import ListAllVideos from './ListAllVideos';
 import ListFavorites from './ListFavorites';
 import DefaultList from './DefaultList';
-import { AppProps } from '../AppProps';
+import { AppProps } from '../../AppProps';
 
 interface Props {
 	clickHeart: AppProps['stringVoid'];

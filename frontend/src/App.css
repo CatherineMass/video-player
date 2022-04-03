@@ -245,11 +245,39 @@
   justify-content: space-between;
 }
 
+.modal-header h1 {
+  font-size: xx-large;
+  margin-bottom: .5em;
+}
+
 .modal-content {
   display: flex;
 }
 
 .map {
-  height: 70vh;
-  width: 50vw;
+  height: 80vh;
+  width: 70vw;
+  margin-right: 2em;
+}
+
+.modal-form-container {
+  display: flex;
+  align-items: center;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+}
+
+.modal-form label {
+  margin-top: 1em;
+  font-size: xx-large;
+}
+
+.modal-form input {
+  height: 3em;
+  font-size: xx-large;
+  margin-top: .5em;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppProps } from '../AppProps';
+import { AppProps } from '../../AppProps';
 
 interface Props {
   onNextClick: AppProps['noParamVoid'];

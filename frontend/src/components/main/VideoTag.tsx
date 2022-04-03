@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaHeart } from 'react-icons/fa';
-import { AppProps } from '../AppProps';
+import { AppProps } from '../../AppProps';
 import BtnVideoName from './BtnVideoName';
 
 interface Props {

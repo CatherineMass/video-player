@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ListOfVideosSidebar from './ListOfVideosSidebar';
 import LinksSidebar from './LinksSidebar';
-import { AppProps } from '../AppProps';
+import { AppProps } from '../../AppProps';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {

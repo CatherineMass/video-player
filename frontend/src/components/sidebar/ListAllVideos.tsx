@@ -1,6 +1,6 @@
 import React from 'react';
-import { AppProps } from '../AppProps';
-import VideoTag from './VideoTag';
+import { AppProps } from '../../AppProps';
+import VideoTag from '../main/VideoTag';
 
 interface Props {
 	clickHeart: AppProps['stringVoid'];

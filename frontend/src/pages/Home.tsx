@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import '../App.css';
 import { AppProps } from '../AppProps';
 import MainContainer from '../components/MainContainer';
-import Modal from '../components/Modal';
-import SideBar from '../components/SideBar';
+import Modal from '../components/modal/Modal';
+import SideBar from '../components/sidebar/SideBar';
 import { useAuth } from '../providers/AuthProvider';
 
 const Home = () => {

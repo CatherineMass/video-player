@@ -1,7 +1,7 @@
 import React from 'react';
 import PreviousBtn from './PreviousBtn';
 import NextBtn from './NextBtn';
-import { AppProps } from '../AppProps';
+import { AppProps } from '../../AppProps';
 
 interface Props {
 	onNextClick: AppProps['noParamVoid'];

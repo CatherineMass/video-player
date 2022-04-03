@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import SearchBar from './SearchBar';
-import Video from './Video';
-import BtnGroup from './BtnGroup';
+import React from 'react';
+import SearchBar from './main/SearchBar';
+import Video from './main/Video';
+import BtnGroup from './main/BtnGroup';
 import logo from '../logo.svg';
 import { AppProps } from '../AppProps';
 
@@ -20,8 +20,6 @@ interface Props {
 const MainContainer: React.FC<Props> = ({
   q, handleModalOn, handleFilter,	filteredList,	handleSearch, currentVideo, nextClick,	prevClick, sendVideoToSidebar,
 }) => {
-
-
   return (
     <div className="main-container">
       <img src={logo} alt="logo" className="logo" />

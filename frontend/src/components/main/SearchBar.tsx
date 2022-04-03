@@ -1,6 +1,6 @@
 import React from 'react';
 import { BiSearchAlt } from 'react-icons/bi';
-import { AppProps } from '../AppProps';
+import { AppProps } from '../../AppProps';
 
 interface Props {
 	filteredList: AppProps['arrayOfVideos'];

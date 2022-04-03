@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppProps } from '../AppProps';
+import { AppProps } from '../../AppProps';
 import BtnAllVideos from './BtnAllVideos';
 import BtnFavorites from './BtnFavorites';
 
