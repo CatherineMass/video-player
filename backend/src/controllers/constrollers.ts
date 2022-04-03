@@ -12,6 +12,7 @@ import { asyncWrap, asyncWrapper } from '../middlewares/async';
 import { checkToken, getIds } from '../utils';
 import { createAuthError } from '../errors/authError';
 import { createCustomError } from '../errors/baseError';
+import Facility from '../models/facility';
 
 interface VideoResult {
   etag: string;
@@ -264,5 +265,23 @@ export const logout = asyncWrap(
         }
 
         res.status(200).json({ response: 'successfull' });
+    }
+);
+
+export const getAllFacilities = asyncWrap(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const { username, token } = req.body;
+
+        const user = await checkToken(token, username);
+        if (!user) {
+            return next(createAuthError());
+        }
+
+        const facilities = await Facility.query();
+
+        res.status(200).json({
+            response: 'successfull',
+            data: { facilities },
+        });
     }
 );

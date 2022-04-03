@@ -3,6 +3,7 @@ import express, { Application, Router } from 'express';
 import {
     addFavorite,
     deleteFavorite,
+    getAllFacilities,
     getAllFavorites,
     getAllVideos,
     login,
@@ -38,5 +39,7 @@ router.route('/signup').post(signup);
 router.route('/login').post(login);
 
 router.route('/logout').post(logout);
+
+router.route('/vaccine').post(getAllFacilities);
 
 export default router;
