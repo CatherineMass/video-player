@@ -275,7 +275,7 @@
   font-size: x-large;
 }
 
-.modal-form input {
+.modal-form input, .modal-form select {
   height: 1.5em;
   font-size: x-large;
   margin-top: .5em;
@@ -289,4 +289,9 @@
 
 .modal-form-footer button {
   font-size: x-large;
+}
+
+.modal-select {
+  display: flex;
+  flex-direction: column;
 }

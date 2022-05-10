@@ -6,6 +6,7 @@ import {
     getAllFacilities,
     getAllFavorites,
     getAllVideos,
+    getDays,
     login,
     logout,
     search,
@@ -41,5 +42,7 @@ router.route('/login').post(login);
 router.route('/logout').post(logout);
 
 router.route('/vaccine').post(getAllFacilities);
+
+router.route('/days').post(getDays);
 
 export default router;

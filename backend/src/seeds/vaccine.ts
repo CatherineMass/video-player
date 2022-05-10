@@ -12,6 +12,7 @@ export async function seed(knex: Knex): Promise<void> {
             website: 'vaccindirekt.se',
             lat: '59.32189',
             lng: '18.0737124',
+            day_id: '1',
         },
         {
             name: 'Min Doktor',
@@ -19,6 +20,7 @@ export async function seed(knex: Knex): Promise<void> {
             website: 'mindoktor.se',
             lat: '59.3549516',
             lng: '17.9532463',
+            day_id: '2',
         },
         {
             name: 'Svea Vaccin',
@@ -26,6 +28,7 @@ export async function seed(knex: Knex): Promise<void> {
             website: 'sveavaccin.se',
             lat: '59.2428846',
             lng: '18.093324',
+            day_id: '3',
         },
         {
             name: 'Capio Vårdcentral',
@@ -33,6 +36,7 @@ export async function seed(knex: Knex): Promise<void> {
             website: 'capio.se',
             lat: '59.2968',
             lng: '18.0313',
+            day_id: '4',
         },
         {
             name: 'Kry',
@@ -40,6 +44,7 @@ export async function seed(knex: Knex): Promise<void> {
             website: 'kry.se',
             lat: '59.3329396',
             lng: '18.0758679',
+            day_id: '5',
         },
     ]);
 }

@@ -16,6 +16,7 @@ const Modal: React.FC<Props> = ({ handleModalOff }) => {
 
   const [facilities, setFacilities] = useState<AppProps['facilities']>([]); 
 
+  // Get facilities
   const getFacilities = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/vaccine`, {
@@ -42,6 +43,28 @@ const Modal: React.FC<Props> = ({ handleModalOff }) => {
     getFacilities();
   }, []);
 
+  // Get right day and time based on user's selection
+  const handleDay: AppProps['stringVoid'] = async (facName) => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_SERVER}/api/v1/days`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ username, facility: facName }),
+        credentials: 'include',
+      }
+      );
+      const data = await response.json();
+      console.log(data);
+
+      if (response.status === 401) {
+        console.error(data);
+        navigate('/login');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className='modal'>
       <div className="modal-header">
@@ -55,7 +78,7 @@ const Modal: React.FC<Props> = ({ handleModalOff }) => {
           <Map facilities={facilities} />
         </div>
         <div className="modal-form-container">
-          <Form handleModalOff={handleModalOff} />
+          <Form handleModalOff={handleModalOff} facilities={facilities} handleDay={handleDay} />
         </div>
       </div>
     </div>

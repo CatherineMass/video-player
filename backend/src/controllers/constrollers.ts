@@ -169,7 +169,7 @@ export const search = asyncWrapper(
             });
         } else {
             const response = await fetch(
-                `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=${q}&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`
+                `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${q}&relevanceLanguage=en&type=video&videoEmbeddable=true&key=${process.env.API_KEY}`
             );
             const data = await response.json();
             const items: VideoResult[] = data.items;
@@ -283,5 +283,14 @@ export const getAllFacilities = asyncWrap(
             response: 'successfull',
             data: { facilities },
         });
+    }
+);
+
+export const getDays = asyncWrap(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const { facility } = req.body;
+        const token = req.headers.authorization?.split(' ').pop();
+        console.log(token);
+        res.send({facility});
     }
 );
